@@ -1,8 +1,11 @@
 [![Work in Repl.it](https://classroom.github.com/assets/work-in-replit-14baed9a392b3a25080506f3b7b6d57f295ec2978f6f33ec97e36a161684cbe9.svg)](https://classroom.github.com/online_ide?assignment_repo_id=405439&assignment_repo_type=GroupAssignmentRepo)
 
 Group No.: 7
+
 Title: Edge of the Abyss
+
 Features: A 2-D obstacle avoiding game with the following features:
+
 *Normal mode where you jump over obstacles
 *Reverse gravity mode where gravity is towards the ceiling
 *Plane mode where you fly above or below the obstacles
