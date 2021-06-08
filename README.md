@@ -6,9 +6,9 @@ Title: Edge of the Abyss
 
 Features: A 2-D obstacle avoiding game with the following features:
 
-*Normal mode where you jump over obstacles
-*Reverse gravity mode where gravity is towards the ceiling
-*Plane mode where you fly above or below the obstacles
+* Normal mode where you jump over obstacles
+* Reverse gravity mode where gravity is towards the ceiling
+* Plane mode where you fly above or below the obstacles
 
 
 To compile the project, clone it and build it using "make" command. The project uses SFML library, so you must have it installed in your system before hand. (See (this for linux)[https://www.sfml-dev.org/tutorials/2.5/start-linux.php] and (this for others)[https://www.sfml-dev.org/download.php]). The Makefile needs to be modified if you install to a non standard path on linux, or if you are using Windows or MacOS.
