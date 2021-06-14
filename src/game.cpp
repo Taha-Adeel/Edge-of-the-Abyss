@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game(): m_window(sf::VideoMode(720, 480), "Edge of the Abyss", 
+Game::Game(): m_window(sf::VideoMode(720, 480), "Edge of the Abyss",
 							sf::Style::Titlebar | sf::Style::Close){
 	m_window.setFramerateLimit(60);
 }
@@ -12,18 +12,18 @@ void Game::run(){
 
 	while(m_window.isOpen()){
 		auto time = timer.getElapsedTime();
-		lastTime = time;
 		timer.restart();
 
 		//elapsedTime is used to update our physics properly, so that gameplay is independent of FPS
 		auto elapsedTime = time - lastTime;
+		lastTime = time;
 
+		handleEvent();
 
 		m_window.clear(sf::Color::Blue);
 		//render stuff
         m_window.display();
 
-		handleEvent();
 	}
 }
 
