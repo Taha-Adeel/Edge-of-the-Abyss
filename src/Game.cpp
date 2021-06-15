@@ -74,8 +74,8 @@ void Game::handleEvent()
                 m_window.close();
                 break;
 			case sf::Event::KeyPressed:
-			if(e.key.code == sf::Keyboard::Escape)
-				m_window.close();
+				if(e.key.code == sf::Keyboard::Escape)
+					m_window.close();
 
             default:
 				m_currentState->handleEvent(e);
