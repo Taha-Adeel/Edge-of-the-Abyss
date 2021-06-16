@@ -18,7 +18,7 @@ private:
 	float gravity;
 
 	//Core
-
+    PLAYER_STATES playerState;
 	void initVariables();
 	void initTexture();
 	void initSprite();
