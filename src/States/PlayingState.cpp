@@ -5,7 +5,7 @@
  * 
  * @param ev sf::Event
  */
-void PlayingState::handleEvent(sf::Event ev){
+void PlayingState::handleEvent(sf::Event& ev){
 	//Event handeling to change state can be done here.
 	
 	// m_player.handleEvent(ev);

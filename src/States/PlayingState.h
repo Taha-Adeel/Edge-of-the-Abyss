@@ -25,7 +25,7 @@ public:
 	 */
 	PlayingState(Game& pGame): StateBase(pGame){}
 
-	void handleEvent(sf::Event) override ;
+	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
 };

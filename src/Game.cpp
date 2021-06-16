@@ -37,15 +37,13 @@ Game& Game::getGameInstance(){
  */
 void Game::run(){
 	sf::Clock timer;
-	auto lastTime = sf::Time::Zero;
+	sf::Time elapsedTime;
 
 	while(m_window.isOpen()){
-		auto time = timer.getElapsedTime();
-		timer.restart();
-
+		//sf::Clock::restart() returns the elapsed time since it was started, 
+		 									//i.e elapsedTime holds the frame time of the last frame 
 		//elapsedTime is used to update our physics properly, so that gameplay is independent of FPS
-		auto elapsedTime = time - lastTime;
-		lastTime = time;
+		elapsedTime = timer.restart();
 
 		m_pCurrentState->update(elapsedTime);
 
@@ -66,19 +64,17 @@ void Game::run(){
  */
 void Game::handleEvent()
 {
-    sf::Event e;
-
-    while (m_window.pollEvent(e)) {
-        switch (e.type) {
+     while (m_window.pollEvent(m_ev)) {
+        switch (m_ev.type) {
             case sf::Event::Closed:
                 m_window.close();
                 break;
 			case sf::Event::KeyPressed:
-				if(e.key.code == sf::Keyboard::Escape)
+				if(m_ev.key.code == sf::Keyboard::Escape)
 					m_window.close();
 
             default:
-				m_pCurrentState->handleEvent(e);
+				m_pCurrentState->handleEvent(m_ev);
                 break;
         }
     }
