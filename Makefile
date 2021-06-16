@@ -3,15 +3,16 @@
 #LIBDIR = $(SFMLDIR)
 CC = g++
 CFLAGS = -g -Wall -Werror -pedantic -pedantic-errors -Wconversion -fsanitize=address #-I $(INCLUDEDIR)
-LFLAGS = -fsanitize=address -lsfml-graphics -lsfml-window -lsfml-system
+LFLAGS = -fsanitize=address -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # Final executable
 EXE = Edge_of_abyss
-# Put all auto generated stuff to this build dir.
+# Put all auto generated files to this build dir.
 BUILD_DIR = ./build
 
 # List of all .cpp source files.
-SRCS = $(wildcard src/*.cpp) $(wildcard src/States/*.cpp) $(wildcard src/Util/*.cpp)
+SRCS = $(wildcard src/*.cpp) $(wildcard src/States/*.cpp) $(wildcard src/Util/*.cpp) \
+$(wildcard src/ResourceManager/*.cpp)
 
 # All .o files go to build dir.
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
