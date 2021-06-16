@@ -1,7 +1,8 @@
 <map id="PlayingState" name="PlayingState">
-<area shape="rect" id="node1" title="Main game play state." alt="" coords="73,247,177,273"/>
-<area shape="rect" id="node2" href="$classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="81,171,169,197"/>
-<area shape="rect" id="node3" href="$classGame.html" title="Main game class." alt="" coords="95,81,156,108"/>
-<area shape="rect" id="node4" href="$structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
-<area shape="rect" id="node5" href="$structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="139,5,243,32"/>
+<area shape="rect" id="node1" title="Main game play state." alt="" coords="5,95,109,121"/>
+<area shape="rect" id="node2" href="$classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="197,5,285,32"/>
+<area shape="rect" id="node6" title=" " alt="" coords="134,95,349,121"/>
+<area shape="rect" id="node3" href="$classGame.html" title="Main game class." alt="" coords="441,184,503,211"/>
+<area shape="rect" id="node4" href="$structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="493,95,603,121"/>
+<area shape="rect" id="node5" href="$structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="627,95,731,121"/>
 </map>

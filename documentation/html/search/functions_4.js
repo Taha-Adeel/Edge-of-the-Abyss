@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['noncopyable_49',['NonCopyable',['../structNonCopyable.html#a809b6e4ade7ae32f6d248f2a3b783d45',1,'NonCopyable::NonCopyable()=default'],['../structNonCopyable.html#a501d34ffcc34b30de6d541887a901057',1,'NonCopyable::NonCopyable(const NonCopyable &amp;)=delete']]],
-  ['nonmovable_50',['NonMovable',['../structNonMovable.html#a62e361162929b0caaf35e1927e5b9ce6',1,'NonMovable::NonMovable()=default'],['../structNonMovable.html#aa306201204ffc6b4f3097c7508e811c9',1,'NonMovable::NonMovable(NonMovable &amp;&amp;)=delete']]]
+  ['render_27',['render',['../classPlayingState.html#a6d08a5f109d89985bed001ac8a379de2',1,'PlayingState']]],
+  ['run_28',['run',['../classGame.html#a1ab78f5ed0d5ea879157357cf2fb2afa',1,'Game']]]
 ];

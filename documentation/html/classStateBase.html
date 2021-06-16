@@ -89,24 +89,27 @@ Collaboration diagram for StateBase:</div>
 <div class="dyncontent">
 <div class="center"><img src="classStateBase__coll__graph.png" border="0" usemap="#StateBase_coll__map" alt="Collaboration graph"/></div>
 <map name="StateBase_coll__map" id="StateBase_coll__map">
-<area shape="rect" title="Defines an interface through which Game class interacts with current state." alt="" coords="81,171,169,197"/>
-<area shape="rect" href="classGame.html" title="Main game class." alt="" coords="95,81,156,108"/>
-<area shape="rect" href="structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
-<area shape="rect" href="structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="139,5,243,32"/>
+<area shape="rect" title="Defines an interface through which Game class interacts with current state." alt="" coords="147,5,235,32"/>
+<area shape="rect" title=" " alt="" coords="5,95,220,121"/>
+<area shape="rect" href="classGame.html" title="Main game class." alt="" coords="313,184,374,211"/>
+<area shape="rect" href="structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="365,95,474,121"/>
+<area shape="rect" href="structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="498,95,602,121"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aec62fc3aa8b1d603f9a6f88bc6572283"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateBase.html#aec62fc3aa8b1d603f9a6f88bc6572283">StateBase</a> (<a class="el" href="classGame.html">Game</a> &amp;game)</td></tr>
+<tr class="memitem:aec62fc3aa8b1d603f9a6f88bc6572283"><td class="memItemLeft" align="right" valign="top"><a id="aec62fc3aa8b1d603f9a6f88bc6572283"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StateBase</b> (<a class="el" href="classGame.html">Game</a> &amp;game)</td></tr>
 <tr class="separator:aec62fc3aa8b1d603f9a6f88bc6572283"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf0379f2d1cc16623aa512f56c437165"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateBase.html#abf0379f2d1cc16623aa512f56c437165">~StateBase</a> ()=default</td></tr>
-<tr class="separator:abf0379f2d1cc16623aa512f56c437165"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a7ce270c71da004950b0c4cb60edb93"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateBase.html#a5a7ce270c71da004950b0c4cb60edb93">handleEvent</a> (sf::Event)=0</td></tr>
+<tr class="memitem:a5a7ce270c71da004950b0c4cb60edb93"><td class="memItemLeft" align="right" valign="top"><a id="a5a7ce270c71da004950b0c4cb60edb93"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>handleEvent</b> (sf::Event)=0</td></tr>
 <tr class="separator:a5a7ce270c71da004950b0c4cb60edb93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1131e3784952e3dee0e2d845231adaa4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateBase.html#a1131e3784952e3dee0e2d845231adaa4">update</a> (sf::Time)=0</td></tr>
+<tr class="memitem:a1131e3784952e3dee0e2d845231adaa4"><td class="memItemLeft" align="right" valign="top"><a id="a1131e3784952e3dee0e2d845231adaa4"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (sf::Time)=0</td></tr>
 <tr class="separator:a1131e3784952e3dee0e2d845231adaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae12c589b8047626dabd8df76ad48fa6d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateBase.html#ae12c589b8047626dabd8df76ad48fa6d">render</a> (sf::RenderTarget &amp;renderer)=0</td></tr>
+<tr class="memitem:ae12c589b8047626dabd8df76ad48fa6d"><td class="memItemLeft" align="right" valign="top"><a id="ae12c589b8047626dabd8df76ad48fa6d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> (sf::RenderTarget &amp;renderer)=0</td></tr>
 <tr class="separator:ae12c589b8047626dabd8df76ad48fa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -116,145 +119,8 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines an interface through which <a class="el" href="classGame.html" title="Main game class.">Game</a> class interacts with current state. </p>
-<p>Implementation of "state" design pattern. The functions <a class="el" href="classStateBase.html#a5a7ce270c71da004950b0c4cb60edb93">handleEvent()</a>, <a class="el" href="classStateBase.html#a1131e3784952e3dee0e2d845231adaa4">update()</a>, <a class="el" href="classStateBase.html#ae12c589b8047626dabd8df76ad48fa6d">render()</a>, etc can be called based on what state the game is in. In the future, states like Main Menu, Practice mode, Level editor, etc. can be easily added by inheriting from this class. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aec62fc3aa8b1d603f9a6f88bc6572283"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec62fc3aa8b1d603f9a6f88bc6572283">&#9670;&nbsp;</a></span>StateBase()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">StateBase::StateBase </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classGame.html">Game</a> &amp;&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abf0379f2d1cc16623aa512f56c437165"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf0379f2d1cc16623aa512f56c437165">&#9670;&nbsp;</a></span>~StateBase()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual StateBase::~StateBase </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5a7ce270c71da004950b0c4cb60edb93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a7ce270c71da004950b0c4cb60edb93">&#9670;&nbsp;</a></span>handleEvent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void StateBase::handleEvent </td>
-          <td>(</td>
-          <td class="paramtype">sf::Event&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classPlayingState.html#a7f162b8f3938b2d85314db10c5341552">PlayingState</a>.</p>
-
-</div>
-</div>
-<a id="ae12c589b8047626dabd8df76ad48fa6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae12c589b8047626dabd8df76ad48fa6d">&#9670;&nbsp;</a></span>render()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void StateBase::render </td>
-          <td>(</td>
-          <td class="paramtype">sf::RenderTarget &amp;&#160;</td>
-          <td class="paramname"><em>renderer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classPlayingState.html#a6d08a5f109d89985bed001ac8a379de2">PlayingState</a>.</p>
-
-</div>
-</div>
-<a id="a1131e3784952e3dee0e2d845231adaa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1131e3784952e3dee0e2d845231adaa4">&#9670;&nbsp;</a></span>update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void StateBase::update </td>
-          <td>(</td>
-          <td class="paramtype">sf::Time&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classPlayingState.html#a39df1d0ce8d5f5103fdcd887792220c4">PlayingState</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
+<p>Implementation of "state" design pattern. The functions handleEvent(), update(), render(), etc can be called based on what state the game is in. In the future, states like Main Menu, Practice mode, Level editor, etc. can be easily added by inheriting from this class. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="abf2614a7d9f84600f2d7d4363d0e5da9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf2614a7d9f84600f2d7d4363d0e5da9">&#9670;&nbsp;</a></span>m_pGame</h2>
 

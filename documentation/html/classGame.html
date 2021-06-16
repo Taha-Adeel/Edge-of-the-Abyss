@@ -92,9 +92,11 @@ Collaboration diagram for Game:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGame__coll__graph.png" border="0" usemap="#Game_coll__map" alt="Collaboration graph"/></div>
 <map name="Game_coll__map" id="Game_coll__map">
-<area shape="rect" title="Main game class." alt="" coords="95,80,156,107"/>
+<area shape="rect" title="Main game class." alt="" coords="95,81,156,108"/>
+<area shape="rect" href="classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="36,171,124,197"/>
 <area shape="rect" href="structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
 <area shape="rect" href="structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="139,5,243,32"/>
+<area shape="rect" title=" " alt="" coords="19,260,234,287"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -106,22 +108,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1ab78f5ed0d5ea879157357cf2fb2afa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a1ab78f5ed0d5ea879157357cf2fb2afa">run</a> ()</td></tr>
 <tr class="memdesc:a1ab78f5ed0d5ea879157357cf2fb2afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the main loop.  <a href="classGame.html#a1ab78f5ed0d5ea879157357cf2fb2afa">More...</a><br /></td></tr>
 <tr class="separator:a1ab78f5ed0d5ea879157357cf2fb2afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1945c922f49185fe91abdfb9faa4c07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#ad1945c922f49185fe91abdfb9faa4c07">exitGame</a> ()</td></tr>
-<tr class="memdesc:ad1945c922f49185fe91abdfb9faa4c07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can be used from inside the code to exit the game *.  <a href="classGame.html#ad1945c922f49185fe91abdfb9faa4c07">More...</a><br /></td></tr>
+<tr class="memitem:ad1945c922f49185fe91abdfb9faa4c07"><td class="memItemLeft" align="right" valign="top"><a id="ad1945c922f49185fe91abdfb9faa4c07"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#ad1945c922f49185fe91abdfb9faa4c07">exitGame</a> ()</td></tr>
+<tr class="memdesc:ad1945c922f49185fe91abdfb9faa4c07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can be used from inside the code to exit the game *. <br /></td></tr>
 <tr class="separator:ad1945c922f49185fe91abdfb9faa4c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structNonCopyable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structNonCopyable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structNonCopyable.html">NonCopyable</a></td></tr>
-<tr class="memitem:a809b6e4ade7ae32f6d248f2a3b783d45 inherit pub_methods_structNonCopyable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNonCopyable.html#a809b6e4ade7ae32f6d248f2a3b783d45">NonCopyable</a> ()=default</td></tr>
-<tr class="separator:a809b6e4ade7ae32f6d248f2a3b783d45 inherit pub_methods_structNonCopyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae6391564aa27ce3e54de788f5b33bad inherit pub_methods_structNonCopyable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structNonCopyable.html">NonCopyable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNonCopyable.html#aae6391564aa27ce3e54de788f5b33bad">operator=</a> (const <a class="el" href="structNonCopyable.html">NonCopyable</a> &amp;)=delete</td></tr>
+<tr class="memitem:aae6391564aa27ce3e54de788f5b33bad inherit pub_methods_structNonCopyable"><td class="memItemLeft" align="right" valign="top"><a id="aae6391564aa27ce3e54de788f5b33bad"></a>
+<a class="el" href="structNonCopyable.html">NonCopyable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="structNonCopyable.html">NonCopyable</a> &amp;)=delete</td></tr>
 <tr class="separator:aae6391564aa27ce3e54de788f5b33bad inherit pub_methods_structNonCopyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a501d34ffcc34b30de6d541887a901057 inherit pub_methods_structNonCopyable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNonCopyable.html#a501d34ffcc34b30de6d541887a901057">NonCopyable</a> (const <a class="el" href="structNonCopyable.html">NonCopyable</a> &amp;)=delete</td></tr>
+<tr class="memitem:a501d34ffcc34b30de6d541887a901057 inherit pub_methods_structNonCopyable"><td class="memItemLeft" align="right" valign="top"><a id="a501d34ffcc34b30de6d541887a901057"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>NonCopyable</b> (const <a class="el" href="structNonCopyable.html">NonCopyable</a> &amp;)=delete</td></tr>
 <tr class="separator:a501d34ffcc34b30de6d541887a901057 inherit pub_methods_structNonCopyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structNonMovable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structNonMovable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structNonMovable.html">NonMovable</a></td></tr>
-<tr class="memitem:a62e361162929b0caaf35e1927e5b9ce6 inherit pub_methods_structNonMovable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNonMovable.html#a62e361162929b0caaf35e1927e5b9ce6">NonMovable</a> ()=default</td></tr>
-<tr class="separator:a62e361162929b0caaf35e1927e5b9ce6 inherit pub_methods_structNonMovable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af97e7e798f5998ca00988fd7d2a69b69 inherit pub_methods_structNonMovable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structNonMovable.html">NonMovable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNonMovable.html#af97e7e798f5998ca00988fd7d2a69b69">operator=</a> (<a class="el" href="structNonMovable.html">NonMovable</a> &amp;&amp;)=delete</td></tr>
+<tr class="memitem:af97e7e798f5998ca00988fd7d2a69b69 inherit pub_methods_structNonMovable"><td class="memItemLeft" align="right" valign="top"><a id="af97e7e798f5998ca00988fd7d2a69b69"></a>
+<a class="el" href="structNonMovable.html">NonMovable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="structNonMovable.html">NonMovable</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:af97e7e798f5998ca00988fd7d2a69b69 inherit pub_methods_structNonMovable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa306201204ffc6b4f3097c7508e811c9 inherit pub_methods_structNonMovable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNonMovable.html#aa306201204ffc6b4f3097c7508e811c9">NonMovable</a> (<a class="el" href="structNonMovable.html">NonMovable</a> &amp;&amp;)=delete</td></tr>
+<tr class="memitem:aa306201204ffc6b4f3097c7508e811c9 inherit pub_methods_structNonMovable"><td class="memItemLeft" align="right" valign="top"><a id="aa306201204ffc6b4f3097c7508e811c9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>NonMovable</b> (<a class="el" href="structNonMovable.html">NonMovable</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:aa306201204ffc6b4f3097c7508e811c9 inherit pub_methods_structNonMovable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -143,7 +146,8 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a22a61b5ea27c609be8cf2724c33d7ae5"><td class="memItemLeft" align="right" valign="top">sf::RenderWindow&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a22a61b5ea27c609be8cf2724c33d7ae5">m_window</a></td></tr>
 <tr class="separator:a22a61b5ea27c609be8cf2724c33d7ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a589483d709f9f29de5458b3625856a97"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a589483d709f9f29de5458b3625856a97">m_shouldExit</a> = false</td></tr>
+<tr class="memitem:a589483d709f9f29de5458b3625856a97"><td class="memItemLeft" align="right" valign="top"><a id="a589483d709f9f29de5458b3625856a97"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_shouldExit</b> = false</td></tr>
 <tr class="separator:a589483d709f9f29de5458b3625856a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdfbf5ba03971b06872f47976d16c976"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classStateBase.html">StateBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#afdfbf5ba03971b06872f47976d16c976">m_pCurrentState</a></td></tr>
 <tr class="separator:afdfbf5ba03971b06872f47976d16c976"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,25 +185,6 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad1945c922f49185fe91abdfb9faa4c07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1945c922f49185fe91abdfb9faa4c07">&#9670;&nbsp;</a></span>exitGame()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Game::exitGame </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Can be used from inside the code to exit the game *. </p>
-
-</div>
-</div>
 <a id="a332bc04d925e82475f9b48dbc20fc1ce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a332bc04d925e82475f9b48dbc20fc1ce">&#9670;&nbsp;</a></span>getGameInstance()</h2>
 
@@ -321,28 +306,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a589483d709f9f29de5458b3625856a97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a589483d709f9f29de5458b3625856a97">&#9670;&nbsp;</a></span>m_shouldExit</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Game::m_shouldExit = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a22a61b5ea27c609be8cf2724c33d7ae5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a22a61b5ea27c609be8cf2724c33d7ae5">&#9670;&nbsp;</a></span>m_window</h2>
 
@@ -368,7 +331,7 @@ Private Attributes</h2></td></tr>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="Game_8h_source.html">Game.h</a></li>
-<li>src/<a class="el" href="Game_8cpp.html">Game.cpp</a></li>
+<li>src/Game.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

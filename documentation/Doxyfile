@@ -54,24 +54,26 @@ OUTPUT_DIRECTORY       = ./documentation
 RECURSIVE              = YES
 
 
-# If the EXTRACT_ALL tag is set to YES, doxygen will assume all entities in
-# documentation are documented, even if no documentation was available. Private
-# class members and static file members will be hidden unless the
-# EXTRACT_PRIVATE respectively EXTRACT_STATIC tags are set to YES.
-# Note: This will also disable the warnings about undocumented members that are
-# normally produced when WARNINGS is set to YES.
-# The default value is: NO.
-
-EXTRACT_ALL            = YES
-
 # If the EXTRACT_PRIVATE tag is set to YES, all private members of a class will
 # be included in the documentation.
 # The default value is: NO.
 
 EXTRACT_PRIVATE        = YES
 
+
 # If the EXTRACT_PRIV_VIRTUAL tag is set to YES, documented private virtual
 # methods of a class will be included in the documentation.
 # The default value is: NO.
 
 EXTRACT_PRIV_VIRTUAL   = YES
+
+
+# If you use STL classes (i.e. std::string, std::vector, etc.) but do not want
+# to include (a tag file for) the STL sources as input, then you should set this
+# tag to YES in order to let doxygen match functions declarations and
+# definitions whose arguments contain STL classes (e.g. func(std::string);
+# versus func(std::string) {}). This also make the inheritance and collaboration
+# diagrams that involve STL classes more complete and accurate.
+# The default value is: NO.
+
+BUILTIN_STL_SUPPORT    = YES
