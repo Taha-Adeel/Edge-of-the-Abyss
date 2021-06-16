@@ -33,9 +33,9 @@ private:
 	Game();
 
 	//private member variables
-	sf::RenderWindow m_window;
+	sf::RenderWindow m_window;/**<The window on which everything is rendered*/
 	bool m_shouldExit = false;
-	std::unique_ptr<StateBase> m_currentState;
+	std::unique_ptr<StateBase> m_pCurrentState;/**<Base class pointer to the current state*/
 
 	//private member function
 	void handleEvent();

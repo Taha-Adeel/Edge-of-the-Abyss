@@ -16,8 +16,8 @@ $(EXE)	: $(OBJS)
 		$(CC) -o $@ $(OBJS) $(LIBFLAGS)
 
 
-$(OBJS)	:	%.o	: %.cpp
-		$(CC) $(CFLAGS) $<
+# $(OBJS)	:	%.o	: %.cpp
+# 		$(CC) $(CFLAGS) $<
 
 clean :
 	rm $(OBJS) $(EXE)

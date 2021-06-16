@@ -1,0 +1,4 @@
+<map id="PlayingState" name="PlayingState">
+<area shape="rect" id="node1" title="Main game play state." alt="" coords="5,80,109,107"/>
+<area shape="rect" id="node2" href="$classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="13,5,101,32"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="StateBase" name="StateBase">
+<area shape="rect" id="node1" title="Defines an interface through which Game class interacts with current state." alt="" coords="81,171,169,197"/>
+<area shape="rect" id="node2" href="$classGame.html" title="Main game class." alt="" coords="95,81,156,108"/>
+<area shape="rect" id="node3" href="$structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
+<area shape="rect" id="node4" href="$structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="139,5,243,32"/>
+</map>

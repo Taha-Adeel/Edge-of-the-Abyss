@@ -6,6 +6,10 @@
 // #include "Level.h"
 // #include "Camera.h"
 
+/**
+ * @brief Main game play state.
+ * 
+ */
 class PlayingState: public StateBase{
 private:
 	// Player m_player;

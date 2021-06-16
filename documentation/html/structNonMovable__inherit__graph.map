@@ -1,0 +1,4 @@
+<map id="NonMovable" name="NonMovable">
+<area shape="rect" id="node1" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="5,5,109,32"/>
+<area shape="rect" id="node2" href="$classGame.html" title="Main game class." alt="" coords="27,80,88,107"/>
+</map>

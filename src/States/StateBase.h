@@ -9,7 +9,7 @@
 class Game;
 
 /**
- * @brief Defines an interface through which Game class interacts
+ * @brief Defines an interface through which Game class interacts with current state.
  * 
  * Implementation of "state" design pattern. The functions handleEvent(), update(), render(), etc
  * can be called based on what state the game is in. In the future, states like Main Menu, Practice mode,
@@ -27,7 +27,7 @@ class StateBase{
     virtual void render(sf::RenderTarget& renderer) = 0;
 
   protected:
-    Game* m_pGame;
+    Game* m_pGame;/**<Reference to the game object (context)*/
 };
 
 #endif	

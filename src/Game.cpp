@@ -2,14 +2,14 @@
 
 
 /**
- * @brief Construct a new Game:: Game object once when called through getGameInstance
+ * @brief Construct a new Game object once when called through getGameInstance()
  * 
- * Creates an sf::RenderWindow and sets max framerate to 60, and sets m_currentState to
+ * Creates an sf::RenderWindow and sets max framerate to 60, and sets m_pCurrentState to
  * PlayingState.
  */
 Game::Game(): m_window(sf::VideoMode(1280, 720), "Edge of the Abyss",
 							sf::Style::Titlebar | sf::Style::Close),
-							m_currentState(std::make_unique<PlayingState>(*this)){
+							m_pCurrentState(std::make_unique<PlayingState>(*this)){
 	m_window.setFramerateLimit(60);
 }
 
@@ -47,10 +47,10 @@ void Game::run(){
 		auto elapsedTime = time - lastTime;
 		lastTime = time;
 
-		m_currentState->update(elapsedTime);
+		m_pCurrentState->update(elapsedTime);
 
 		m_window.clear(sf::Color::Blue);
-		m_currentState->render(m_window);
+		m_pCurrentState->render(m_window);
         m_window.display();
 
 		handleEvent();
@@ -78,7 +78,7 @@ void Game::handleEvent()
 					m_window.close();
 
             default:
-				m_currentState->handleEvent(e);
+				m_pCurrentState->handleEvent(e);
                 break;
         }
     }
