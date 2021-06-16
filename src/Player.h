@@ -38,9 +38,9 @@ public:
 
 	//Functions	
 	void move(const float dir_x, const float dir_y);
-	void updatePhysics();
-	void updateMovement();
-	void update();
+	void updatePhysics(sf::Time elapsedTime);
+	void updateMovement(sf::Time elapsedTime);
+	void update(sf::Time elapsedTime);
 	void render(sf::RenderTarget& target);
 };
 #endif
