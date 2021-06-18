@@ -21,10 +21,14 @@ public:
 
 	//public functions
 	//Define similar setTexture functions as constructors
+	void changeTexture(std::string name) ;
+	void changeTexture(std::string name , int index) ;
+	void changeTexture(std::string name ,sf::IntRect rect) ;
+	
 
 private:
 	//private members
-	const sf::Texture& m_spritesheet;
+	sf::Texture& m_spritesheet;
 
 	//private constants
 	int m_tilewidth = 42;
