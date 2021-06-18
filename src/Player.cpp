@@ -4,12 +4,12 @@
 void Player::initVariables()
 {
     this->playerState = PLAYER_STATES::STAY;
-    this->groundHeight = 650;
-    this->setPosition( 44, 650);
+    this->groundHeight = 528;
+    this->setPosition( 44, groundHeight);
 }
 void Player::initPhysics()
 {
-    this->gravity = 10.f;
+    this->gravity = 20.f;
     this->velocity.x = 50.f;
     this->velocity.y = 0.f;
     this->timeAbove = 0.f;
