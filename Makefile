@@ -19,7 +19,7 @@ OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 # Gcc/Clang will create these .d files containing dependencies.
 DEPS = $(OBJS:%.o=%.d)
 
-.PHONY : clean all run
+.PHONY : clean all run documentation
 
 # Default target
 all : $(EXE)
@@ -47,6 +47,11 @@ $(BUILD_DIR)/%.o : %.cpp
 # Runs the executable after building it.
 run : all
 	$(BUILD_DIR)/$(EXE)
+
+# Creates and opens the doxygen documentation
+documentation :
+	doxygen ./documentation/Doxyfile
+	xdg-open ./documentation/html/index.html
 
 # This should remove all generated files.
 clean :

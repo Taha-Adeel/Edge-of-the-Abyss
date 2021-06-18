@@ -88,12 +88,11 @@ Collaboration diagram for PlayingState:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPlayingState__coll__graph.png" border="0" usemap="#PlayingState_coll__map" alt="Collaboration graph"/></div>
 <map name="PlayingState_coll__map" id="PlayingState_coll__map">
-<area shape="rect" title="Main game play state." alt="" coords="5,95,109,121"/>
-<area shape="rect" href="classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="197,5,285,32"/>
-<area shape="rect" title=" " alt="" coords="134,95,349,121"/>
-<area shape="rect" href="classGame.html" title="Main game class." alt="" coords="441,184,503,211"/>
-<area shape="rect" href="structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="493,95,603,121"/>
-<area shape="rect" href="structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="627,95,731,121"/>
+<area shape="rect" title="Main game play state." alt="" coords="73,247,177,273"/>
+<area shape="rect" href="classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="81,171,169,197"/>
+<area shape="rect" href="classGame.html" title="Main game class." alt="" coords="95,81,156,108"/>
+<area shape="rect" href="structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
+<area shape="rect" href="structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="139,5,243,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -102,9 +101,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a61463b48ae4ec9ec7c97555ffc97ee28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayingState.html#a61463b48ae4ec9ec7c97555ffc97ee28">PlayingState</a> (<a class="el" href="classGame.html">Game</a> &amp;pGame)</td></tr>
 <tr class="memdesc:a61463b48ae4ec9ec7c97555ffc97ee28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Playing State object.  <a href="classPlayingState.html#a61463b48ae4ec9ec7c97555ffc97ee28">More...</a><br /></td></tr>
 <tr class="separator:a61463b48ae4ec9ec7c97555ffc97ee28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f162b8f3938b2d85314db10c5341552"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayingState.html#a7f162b8f3938b2d85314db10c5341552">handleEvent</a> (sf::Event) override</td></tr>
-<tr class="memdesc:a7f162b8f3938b2d85314db10c5341552"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delegates event handeling to player, camera, etc.  <a href="classPlayingState.html#a7f162b8f3938b2d85314db10c5341552">More...</a><br /></td></tr>
-<tr class="separator:a7f162b8f3938b2d85314db10c5341552"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48dd523cf0414be79a4ec6c2385b77e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayingState.html#a48dd523cf0414be79a4ec6c2385b77e8">handleEvent</a> (sf::Event &amp;) override</td></tr>
+<tr class="memdesc:a48dd523cf0414be79a4ec6c2385b77e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delegates event handeling to player, camera, etc.  <a href="classPlayingState.html#a48dd523cf0414be79a4ec6c2385b77e8">More...</a><br /></td></tr>
+<tr class="separator:a48dd523cf0414be79a4ec6c2385b77e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39df1d0ce8d5f5103fdcd887792220c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayingState.html#a39df1d0ce8d5f5103fdcd887792220c4">update</a> (sf::Time) override</td></tr>
 <tr class="memdesc:a39df1d0ce8d5f5103fdcd887792220c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates player, camera(view), etc.  <a href="classPlayingState.html#a39df1d0ce8d5f5103fdcd887792220c4">More...</a><br /></td></tr>
 <tr class="separator:a39df1d0ce8d5f5103fdcd887792220c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,8 +159,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7f162b8f3938b2d85314db10c5341552"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f162b8f3938b2d85314db10c5341552">&#9670;&nbsp;</a></span>handleEvent()</h2>
+<a id="a48dd523cf0414be79a4ec6c2385b77e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48dd523cf0414be79a4ec6c2385b77e8">&#9670;&nbsp;</a></span>handleEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,7 +171,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void PlayingState::handleEvent </td>
           <td>(</td>
-          <td class="paramtype">sf::Event&#160;</td>
+          <td class="paramtype">sf::Event &amp;&#160;</td>
           <td class="paramname"><em>ev</em></td><td>)</td>
           <td></td>
         </tr>

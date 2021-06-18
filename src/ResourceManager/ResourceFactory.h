@@ -11,7 +11,7 @@
 /**
  * @brief Handles and responsible for our resource creation.
  * 
- * Internally maintains AssetPool of sf::Texture, sf::Fonts, sf::SoundBuffer,which actually
+ * Internally maintains AssetPool of sf::Texture, sf::Fonts, sf::SoundBuffer, which actually
  * handle the resource management. ResourceFactory is noncopyable and nonmovable(and a singleton).
  * 
  */

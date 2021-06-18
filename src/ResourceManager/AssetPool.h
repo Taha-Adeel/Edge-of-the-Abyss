@@ -13,10 +13,10 @@
 /**
  * @brief Template class that keeps track of assets of typename Resource.
  * 
- * AssetPool only loads a resource from a file if it hadn't loaded it in before.As processing 
+ * AssetPool only loads a resource from a file if it hadn't loaded it in before. As processing 
  * from a file takes time and consumes more memory it is an advantage.
  * 
- * @tparam Resource The type of resource that our AssetPool holds valid for sf::Texture,sf::Font,
+ * @tparam Resource The type of resource that our AssetPool holds. Valid for sf::Texture,sf::Font,
  * st::SoundBuffer.
  */
 
@@ -89,7 +89,7 @@ bool AssetPool<Resource>::exists(const std::string& name) const{
 /**
  * @brief Loads the resource from the file and adds it to m_resources.
  * 
- * Potentially throwing(Throws std::system_error if it fails to load from the file)
+ * Potentially throwing(Throws std::runtime_error if it fails to load from the file)
  * 
  * @tparam Resource 
  * @param name File name relative to m_folder.

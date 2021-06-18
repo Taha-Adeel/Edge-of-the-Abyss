@@ -92,11 +92,9 @@ Collaboration diagram for Game:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGame__coll__graph.png" border="0" usemap="#Game_coll__map" alt="Collaboration graph"/></div>
 <map name="Game_coll__map" id="Game_coll__map">
-<area shape="rect" title="Main game class." alt="" coords="95,81,156,108"/>
-<area shape="rect" href="classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="36,171,124,197"/>
+<area shape="rect" title="Main game class." alt="" coords="95,80,156,107"/>
 <area shape="rect" href="structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
 <area shape="rect" href="structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="139,5,243,32"/>
-<area shape="rect" title=" " alt="" coords="19,260,234,287"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -151,6 +149,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_shouldExit</b> = fa
 <tr class="separator:a589483d709f9f29de5458b3625856a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdfbf5ba03971b06872f47976d16c976"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classStateBase.html">StateBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#afdfbf5ba03971b06872f47976d16c976">m_pCurrentState</a></td></tr>
 <tr class="separator:afdfbf5ba03971b06872f47976d16c976"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bf9d3aa5445260e83c9fb5936729d7c"><td class="memItemLeft" align="right" valign="top">sf::Event&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGame.html#a1bf9d3aa5445260e83c9fb5936729d7c">m_ev</a></td></tr>
+<tr class="separator:a1bf9d3aa5445260e83c9fb5936729d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main game class. </p>
@@ -283,6 +283,29 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_shouldExit</b> = fa
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1bf9d3aa5445260e83c9fb5936729d7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bf9d3aa5445260e83c9fb5936729d7c">&#9670;&nbsp;</a></span>m_ev</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Event Game::m_ev</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Stores the events(KeyPress, WindowClose, etc) in it </p>
+
+</div>
+</div>
 <a id="afdfbf5ba03971b06872f47976d16c976"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afdfbf5ba03971b06872f47976d16c976">&#9670;&nbsp;</a></span>m_pCurrentState</h2>
 

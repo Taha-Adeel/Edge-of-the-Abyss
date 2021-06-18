@@ -1,4 +1,5 @@
 <map id="NonCopyable" name="NonCopyable">
-<area shape="rect" id="node1" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
-<area shape="rect" id="node2" href="$classGame.html" title="Main game class." alt="" coords="29,80,91,107"/>
+<area shape="rect" id="node1" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="41,5,151,32"/>
+<area shape="rect" id="node2" href="$classGame.html" title="Main game class." alt="" coords="5,80,67,107"/>
+<area shape="rect" id="node3" href="$classResourceFactory.html" title="Handles and responsible for our resource creation." alt="" coords="91,80,221,107"/>
 </map>

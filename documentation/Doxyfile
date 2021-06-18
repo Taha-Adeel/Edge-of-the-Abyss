@@ -76,4 +76,4 @@ EXTRACT_PRIV_VIRTUAL   = YES
 # diagrams that involve STL classes more complete and accurate.
 # The default value is: NO.
 
-BUILTIN_STL_SUPPORT    = YES
+#BUILTIN_STL_SUPPORT    = YES

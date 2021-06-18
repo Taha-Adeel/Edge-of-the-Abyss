@@ -1,4 +1,4 @@
-#include "ResourceFactory"
+#include "ResourceFactory.h"
 
 /**
  * @brief Returns a reference to the ResourceFactory.
