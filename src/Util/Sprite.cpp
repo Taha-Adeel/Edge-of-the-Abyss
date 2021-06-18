@@ -10,8 +10,8 @@
  */
 
 Sprite::Sprite(std::string name):
-	m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name)),
-	sf::Sprite(m_spritesheet){
+			m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name)){
+	sf::Sprite::setTexture(m_spritesheet);
 }
 
 /**
@@ -45,8 +45,9 @@ Sprite::Sprite(std::string spritesheet, int index):
  * @param rect 
  */
 Sprite::Sprite(std::string name, sf::IntRect rect):
-	m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name)),
-	sf::Sprite(m_spritesheet, rect){
+	m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name)){
+		sf::Sprite::setTexture(m_spritesheet);
+		sf::Sprite::setTextureRect(rect);
 }
 
 
