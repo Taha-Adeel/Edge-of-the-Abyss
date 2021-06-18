@@ -6,15 +6,25 @@
 
 #include "../ResourceManager/ResourceFactory.h"
 
+/**
+ * @brief class Sprite will load the sprite 
+ * 
+ */
+
 class Sprite: public sf::Sprite{
 public:
-	//public constructors
+	//public constructor 
+	
 	Sprite(std::string name);
-	Sprite(std::string spritesheet, int index);
+	Sprite(std::string name, int index);
 	Sprite(std::string name, sf::IntRect rect);
 
 	//public functions
 	//Define similar setTexture functions as constructors
+	void changeTexture(std::string name) ;
+	void changeTexture(std::string name , int index) ;
+	void changeTexture(std::string name ,sf::IntRect rect) ;
+	
 
 private:
 	//private members
