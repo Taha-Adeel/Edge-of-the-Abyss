@@ -2,8 +2,10 @@
 #define PLAYING_STATE_H
 
 #include "StateBase.h"
-
 #include "../Player.h"
+#include "../Levels/Background.h"
+#include "../Levels/Ground.h"
+// #include "Player.h"
 // #include "Level.h"
 // #include "Camera.h"
 
@@ -17,6 +19,8 @@ private:
 	Player m_player;
 	// Level m_level;
 	// Camera m_camera;
+	Background m_bg;
+	Ground m_ground;
 
 public:
 	/**
@@ -25,7 +29,7 @@ public:
 	 * @param pGame Reference to the game object (context), so that it can access its contents
 	 * 	and change its state(if neccesary).
 	 */
-	PlayingState(Game& pGame): StateBase(pGame){}
+	PlayingState(Game& pGame): StateBase(pGame), m_bg("bg01"), m_ground("ground01"){}
 
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;

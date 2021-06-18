@@ -2,7 +2,7 @@
 #INCLUDEDIR = $(SFMLDIR)
 #LIBDIR = $(SFMLDIR)
 CC = g++
-CFLAGS = -g -Wall -Werror -pedantic -pedantic-errors -Wconversion -fsanitize=address #-I $(INCLUDEDIR)
+CFLAGS = -g -Wall -Werror -pedantic -pedantic-errors -fsanitize=address #-I $(INCLUDEDIR)
 LFLAGS = -fsanitize=address -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # Final executable
@@ -12,7 +12,7 @@ BUILD_DIR = ./build
 
 # List of all .cpp source files.
 SRCS = $(wildcard src/*.cpp) $(wildcard src/States/*.cpp) $(wildcard src/Util/*.cpp) \
-$(wildcard src/ResourceManager/*.cpp)
+$(wildcard src/ResourceManager/*.cpp) $(wildcard src/Levels/*.cpp) 
 
 # All .o files go to build dir.
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)

@@ -21,6 +21,8 @@ void PlayingState::update(sf::Time dt){
 	//m_pGame->player.update(dt);
 	 m_player.update(dt);
 	// m_camera.update(dt);
+	m_bg.update(dt);
+	m_ground.update(dt);
 }
 
 /**
@@ -30,5 +32,8 @@ void PlayingState::update(sf::Time dt){
  */
 void PlayingState::render(sf::RenderTarget& renderer){
 	//m_pGame->player.render(renderer);
-	m_player.render(renderer);
+	m_bg.render(renderer);
+	m_ground.render(renderer);
+  m_player.render(renderer);
+
 }

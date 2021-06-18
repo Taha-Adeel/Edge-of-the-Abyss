@@ -10,7 +10,7 @@
 Game::Game(): m_window(sf::VideoMode(1280, 720), "Edge of the Abyss",
 							sf::Style::Titlebar | sf::Style::Close),
 							m_pCurrentState(std::make_unique<PlayingState>(*this)){
-	m_window.setFramerateLimit(60);
+	m_window.setFramerateLimit(30);
 }
 
 
@@ -47,7 +47,7 @@ void Game::run(){
 
 		m_pCurrentState->update(elapsedTime);
 
-		m_window.clear(sf::Color::Blue);
+		m_window.clear(sf::Color(121, 25, 255));
 		m_pCurrentState->render(m_window);
         m_window.display();
 
