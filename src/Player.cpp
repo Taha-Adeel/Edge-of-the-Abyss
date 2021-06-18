@@ -27,8 +27,8 @@ const sf::FloatRect Player::getGlobalBounds() const
 }
 
 // Constructors and Destructors
-//Player::Player():sprite("player/sprite", 15)
-Player::Player():sprite(sf::Vector2f(44.f, 44.f))
+Player::Player():sprite("player/sprite", 15)
+//Player::Player():sprite(sf::Vector2f(44.f, 44.f))
 {
     this->initVariables();
     this->initPhysics();
