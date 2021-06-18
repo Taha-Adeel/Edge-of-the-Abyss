@@ -5,7 +5,7 @@ void Player::initVariables()
 {
     this->playerState = PLAYER_STATES::STAY;
     this->groundHeight = 650;
-    this->setPosition( 500, 500);
+    this->setPosition( 500, 650);
 }
 void Player::initPhysics()
 {
@@ -27,7 +27,7 @@ const sf::FloatRect Player::getGlobalBounds() const
 }
 
 // Constructors and Destructors
-Player::Player():sprite("player/spritesheet", 15)
+Player::Player():sprite("player/spritesheet", 52)
 //Player::Player():sprite(sf::Vector2f(44.f, 44.f))
 {
     this->initVariables();
