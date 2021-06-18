@@ -5,7 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
-#include "../Player.h"
+//#include "../Player.h"
 class Game;
 
 /**

@@ -1,15 +1,16 @@
 #include "Player.h"
+#include<iostream>
 // Init Functions
 void Player::initVariables()
 {
     this->playerState = PLAYER_STATES::STAY;
     this->groundHeight = 650;
-    this->setPosition( 60, this->groundHeight);
+    this->setPosition( 500, 500);
 }
 void Player::initPhysics()
 {
     this->gravity = 1.f;
-    this->velocity.x = 5.f;
+    this->velocity.x = 50.f;
     this->velocity.y = 0.f;
     this->timeAbove = 0.f;
     this->maxTimeAbove = 60.f; // 1 second (60 frames)
@@ -36,9 +37,10 @@ Player::~Player(){}
 
 // Functions
 void Player::setPosition(const float x, const float y){
-    float boundx = static_cast<float>(Game::getGameInstance().getWindow().getPosition().x);
+    /*float boundx = static_cast<float>(Game::getGameInstance().getWindow().getPosition().x);
     float boundy = static_cast<float>(Game::getGameInstance().getWindow().getPosition().y);
-    if(x<= boundx&&y<=boundy && x>=0&&y>=0) this->sprite.setPosition(x, y);
+    if(x<= boundx&&y<=boundy && x>=0&&y>=0) this->sprite.setPosition(x, y);*/
+    this->sprite.setPosition(x, y);
 }
 void Player::resetVelocityY()
 {
@@ -59,9 +61,10 @@ void Player::updateMovement(sf::Time elapsedTime)
     float eTime = elapsedTime.asSeconds();
     float dx = eTime* this->velocity.x;
     float dy = eTime* this->velocity.y;
-    this->move(dx, 0);
-    if(this->sprite.getPosition().y >= groundHeight)
-    this->move(0, dy); // Just move with the velocity in that instant
+    std::cout<<dx<<" "<<dy<<std::endl;
+    this->move(dx, dy);
+   // if(this->sprite.getPosition().y >= groundHeight)
+    //this->move(0, dy); // Just move with the velocity in that instant
 }
 /**
  * @brief For updating and changing velocities
@@ -87,11 +90,12 @@ void Player::updatePhysics(sf::Time elapsedTime)
 }
 void Player::handleEvent(sf::Event ev)
 {
-    if(playerState == PLAYER_STATES::STAY && this->velocity.y == 0 ) // Cannot control player midair
+    if(playerState == PLAYER_STATES::STAY) // Cannot control player midair
     {
         if(ev.key.code == sf::Keyboard::W)
         {
-            this->velocity.y = 5.f;
+            std::cout<<"Pressed W"<<std::endl;
+            this->velocity.y = 50.f;
             playerState = PLAYER_STATES::JUMPING;
         }
     }

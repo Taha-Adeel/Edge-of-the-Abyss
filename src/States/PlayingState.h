@@ -2,6 +2,7 @@
 #define PLAYING_STATE_H
 
 #include "StateBase.h"
+
 #include "../Player.h"
 // #include "Level.h"
 // #include "Camera.h"
@@ -10,9 +11,10 @@
  * @brief Main game play state.
  * 
  */
+//class Player;
 class PlayingState: public StateBase{
 private:
-	 Player m_player;
+	Player m_player;
 	// Level m_level;
 	// Camera m_camera;
 

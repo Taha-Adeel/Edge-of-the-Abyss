@@ -5,7 +5,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 //#include "Sprite.h"
-#include "Game.h"
+//#include "Game.h"
 
 enum class PLAYER_STATES {STAY,JUMPING};
 
