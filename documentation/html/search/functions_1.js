@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['game_22',['Game',['../classGame.html#ad59df6562a58a614fda24622d3715b65',1,'Game']]],
-  ['getgameinstance_23',['getGameInstance',['../classGame.html#a332bc04d925e82475f9b48dbc20fc1ce',1,'Game']]],
-  ['getwindow_24',['getWindow',['../classGame.html#aa18721f98a70e1c8d3b0df51b4f493f9',1,'Game']]]
+  ['exists_44',['exists',['../classAssetPool.html#abb222920b4d956aa89f19d43e824f99e',1,'AssetPool']]],
+  ['exitgame_45',['exitGame',['../classGame.html#ad1945c922f49185fe91abdfb9faa4c07',1,'Game']]]
 ];

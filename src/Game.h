@@ -36,6 +36,7 @@ private:
 	sf::RenderWindow m_window;/**<The window on which everything is rendered*/
 	bool m_shouldExit = false;
 	std::unique_ptr<StateBase> m_pCurrentState;/**<Base class pointer to the current state*/
+	sf::Event m_ev;/**<Stores the events(KeyPress, WindowClose, etc) in it*/
 
 	//private member function
 	void handleEvent();

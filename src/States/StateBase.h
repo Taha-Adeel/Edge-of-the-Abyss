@@ -22,7 +22,7 @@ class StateBase{
 
     virtual ~StateBase() = default;
 
-    virtual void handleEvent(sf::Event) = 0;
+    virtual void handleEvent(sf::Event&) = 0;
     virtual void update(sf::Time) = 0;
     virtual void render(sf::RenderTarget& renderer) = 0;
 

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['playingstate_19',['PlayingState',['../classPlayingState.html',1,'']]]
+  ['noncopyable_36',['NonCopyable',['../structNonCopyable.html',1,'']]],
+  ['nonmovable_37',['NonMovable',['../structNonMovable.html',1,'']]]
 ];
