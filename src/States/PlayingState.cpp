@@ -19,6 +19,8 @@ void PlayingState::handleEvent(sf::Event& ev){
 void PlayingState::update(sf::Time dt){
 	// m_player.update(dt);
 	// m_camera.update(dt);
+	m_bg.update(dt);
+	m_ground.update(dt);
 }
 
 /**
@@ -27,5 +29,6 @@ void PlayingState::update(sf::Time dt){
  * @param renderer 
  */
 void PlayingState::render(sf::RenderTarget& renderer){
-
+	m_bg.render(renderer);
+	m_ground.render(renderer);
 }
