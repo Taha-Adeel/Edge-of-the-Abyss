@@ -4,7 +4,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-#include "../ResourceManager/ResourceFactory.h"
+#include "./ResourceManager/ResourceFactory.h"
 
 /**
  * @brief class Sprite will load the sprite 
@@ -24,7 +24,7 @@ public:
 
 private:
 	//private members
-	const sf::Texture& m_spritesheet;
+	sf::Texture& m_spritesheet;
 
 	//private constants
 	int m_tilewidth = 42;

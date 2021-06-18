@@ -8,7 +8,7 @@
 void PlayingState::handleEvent(sf::Event& ev){
 	//Event handeling to change state can be done here.
 	
-	// m_player.handleEvent(ev);
+	 m_player.handleEvent(ev);
 }
 
 /**
@@ -17,7 +17,7 @@ void PlayingState::handleEvent(sf::Event& ev){
  * @param dt Time for which the last frame ran
  */
 void PlayingState::update(sf::Time dt){
-	// m_player.update(dt);
+	 m_player.update(dt);
 	// m_camera.update(dt);
 }
 
@@ -27,5 +27,5 @@ void PlayingState::update(sf::Time dt){
  * @param renderer 
  */
 void PlayingState::render(sf::RenderTarget& renderer){
-
+	m_player.render(renderer);
 }
