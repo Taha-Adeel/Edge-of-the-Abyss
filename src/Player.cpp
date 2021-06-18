@@ -27,7 +27,7 @@ const sf::FloatRect Player::getGlobalBounds() const
 }
 
 // Constructors and Destructors
-Player::Player():sprite("player/sprite", 15)
+Player::Player():sprite("player/spritesheet", 15)
 //Player::Player():sprite(sf::Vector2f(44.f, 44.f))
 {
     this->initVariables();
@@ -61,7 +61,7 @@ void Player::updateMovement(sf::Time elapsedTime)
     float eTime = elapsedTime.asSeconds();
     float dx = eTime* this->velocity.x;
     float dy = eTime* this->velocity.y;
-    std::cout<<dx<<" "<<dy<<std::endl;
+    std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
    // if(this->sprite.getPosition().y >= groundHeight)
     //this->move(0, dy); // Just move with the velocity in that instant
