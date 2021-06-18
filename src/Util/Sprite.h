@@ -10,7 +10,7 @@ class Sprite: public sf::Sprite{
 public:
 	//public constructors
 	Sprite(std::string name);
-	Sprite(std::string name, int index);
+	Sprite(std::string spritesheet, int index);
 	Sprite(std::string name, sf::IntRect rect);
 
 	//public functions
@@ -18,7 +18,7 @@ public:
 
 private:
 	//private members
-	const sf::Texture& m_spritesheet;
+	sf::Texture& m_spritesheet;
 
 	//private constants
 	int m_tilewidth = 42;

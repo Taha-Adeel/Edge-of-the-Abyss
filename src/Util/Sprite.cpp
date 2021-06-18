@@ -3,6 +3,7 @@
 
 Sprite::Sprite(std::string name):
 	m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name)){
+		m_spritesheet.setRepeated(true);
 		sf::Sprite::setTexture(m_spritesheet);
 }
 
