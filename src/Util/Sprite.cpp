@@ -1,6 +1,5 @@
 #include "Sprite.h"
 #include <assert.h>
-#include <iostream>
 
 /**
  * @brief Construct a new Sprite:: Sprite object
@@ -30,12 +29,11 @@ Sprite::Sprite(std::string spritesheet, int index):
 	assert(index >= 0);
 	assert(size.x % 44 == 0 && size.y % 44 == 0);
 	assert(static_cast<unsigned>(index) < size.x * size.y);
-		
+
 	rect.width = m_tilewidth;
 	rect.height = m_tileheight;
 	rect.left = ((index % (size.x/44)) * (m_tilewidth + m_tilespacing)) + m_tilespacing/2;
 	rect.top = (index / (size.x/44)) * (m_tileheight + m_tilespacing) + m_tilespacing/2;
-	std::cout << rect.left << ' ' << rect.top << '\n';
 	sf::Sprite::setTextureRect(rect);
 	sf::Sprite::setTexture(m_spritesheet);
 }
