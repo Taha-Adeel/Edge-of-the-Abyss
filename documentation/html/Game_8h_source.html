@@ -88,38 +88,37 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">//public accessors</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">static</span> <a class="code" href="classGame.html">Game</a>&amp; <a class="code" href="classGame.html#a332bc04d925e82475f9b48dbc20fc1ce">getGameInstance</a>();</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    sf::RenderWindow&amp; <a class="code" href="classGame.html#aa18721f98a70e1c8d3b0df51b4f493f9">getWindow</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">//public functions</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGame.html#a1ab78f5ed0d5ea879157357cf2fb2afa">run</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGame.html#ad1945c922f49185fe91abdfb9faa4c07">exitGame</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; <span class="comment">// void changeState(std::unique_ptr&lt;StateBase&gt;){};</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">//private constructor</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classGame.html#ad59df6562a58a614fda24622d3715b65">Game</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">//private member variables</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classGame.html#a22a61b5ea27c609be8cf2724c33d7ae5">   36</a></span>&#160;    sf::RenderWindow <a class="code" href="classGame.html#a22a61b5ea27c609be8cf2724c33d7ae5">m_window</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span> m_shouldExit = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classGame.html#afdfbf5ba03971b06872f47976d16c976">   38</a></span>&#160;    std::unique_ptr&lt;StateBase&gt; <a class="code" href="classGame.html#afdfbf5ba03971b06872f47976d16c976">m_pCurrentState</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classGame.html#a1bf9d3aa5445260e83c9fb5936729d7c">   39</a></span>&#160;    sf::Event <a class="code" href="classGame.html#a1bf9d3aa5445260e83c9fb5936729d7c">m_ev</a>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//private member function</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGame.html#ab02f595246481ecb5812b4d42c0abfd7">handleEvent</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">//public functions</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGame.html#a1ab78f5ed0d5ea879157357cf2fb2afa">run</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGame.html#ad1945c922f49185fe91abdfb9faa4c07">exitGame</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="comment">// void changeState(std::unique_ptr&lt;StateBase&gt;){};</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">//private constructor</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classGame.html#ad59df6562a58a614fda24622d3715b65">Game</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">//private member variables</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classGame.html#a22a61b5ea27c609be8cf2724c33d7ae5">   35</a></span>&#160;    sf::RenderWindow <a class="code" href="classGame.html#a22a61b5ea27c609be8cf2724c33d7ae5">m_window</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> m_shouldExit = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classGame.html#afdfbf5ba03971b06872f47976d16c976">   37</a></span>&#160;    std::unique_ptr&lt;StateBase&gt; <a class="code" href="classGame.html#afdfbf5ba03971b06872f47976d16c976">m_pCurrentState</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classGame.html#a1bf9d3aa5445260e83c9fb5936729d7c">   38</a></span>&#160;    sf::Event <a class="code" href="classGame.html#a1bf9d3aa5445260e83c9fb5936729d7c">m_ev</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">//private member function</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classGame.html#ab02f595246481ecb5812b4d42c0abfd7">handleEvent</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassGame_html_ad1945c922f49185fe91abdfb9faa4c07"><div class="ttname"><a href="classGame.html#ad1945c922f49185fe91abdfb9faa4c07">Game::exitGame</a></div><div class="ttdeci">void exitGame()</div><div class="ttdoc">Can be used from inside the code to exit the game *.</div><div class="ttdef"><b>Definition:</b> Game.cpp:99</div></div>
 <div class="ttc" id="aclassGame_html_ad59df6562a58a614fda24622d3715b65"><div class="ttname"><a href="classGame.html#ad59df6562a58a614fda24622d3715b65">Game::Game</a></div><div class="ttdeci">Game()</div><div class="ttdoc">Construct a new Game object once when called through getGameInstance()</div><div class="ttdef"><b>Definition:</b> Game.cpp:10</div></div>
 <div class="ttc" id="astructNonCopyable_html"><div class="ttname"><a href="structNonCopyable.html">NonCopyable</a></div><div class="ttdoc">Utility class. Inheriting from it deletes the copy constructor and copy assignment.</div><div class="ttdef"><b>Definition:</b> NonCopyable.h:7</div></div>
 <div class="ttc" id="aclassGame_html_a1ab78f5ed0d5ea879157357cf2fb2afa"><div class="ttname"><a href="classGame.html#a1ab78f5ed0d5ea879157357cf2fb2afa">Game::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Runs the main loop.</div><div class="ttdef"><b>Definition:</b> Game.cpp:38</div></div>
 <div class="ttc" id="aclassGame_html_a332bc04d925e82475f9b48dbc20fc1ce"><div class="ttname"><a href="classGame.html#a332bc04d925e82475f9b48dbc20fc1ce">Game::getGameInstance</a></div><div class="ttdeci">static Game &amp; getGameInstance()</div><div class="ttdoc">Returns a reference to the Game object.</div><div class="ttdef"><b>Definition:</b> Game.cpp:25</div></div>
-<div class="ttc" id="aclassGame_html_a22a61b5ea27c609be8cf2724c33d7ae5"><div class="ttname"><a href="classGame.html#a22a61b5ea27c609be8cf2724c33d7ae5">Game::m_window</a></div><div class="ttdeci">sf::RenderWindow m_window</div><div class="ttdef"><b>Definition:</b> Game.h:36</div></div>
-<div class="ttc" id="aclassGame_html_a1bf9d3aa5445260e83c9fb5936729d7c"><div class="ttname"><a href="classGame.html#a1bf9d3aa5445260e83c9fb5936729d7c">Game::m_ev</a></div><div class="ttdeci">sf::Event m_ev</div><div class="ttdef"><b>Definition:</b> Game.h:39</div></div>
+<div class="ttc" id="aclassGame_html_a22a61b5ea27c609be8cf2724c33d7ae5"><div class="ttname"><a href="classGame.html#a22a61b5ea27c609be8cf2724c33d7ae5">Game::m_window</a></div><div class="ttdeci">sf::RenderWindow m_window</div><div class="ttdef"><b>Definition:</b> Game.h:35</div></div>
+<div class="ttc" id="aclassGame_html_a1bf9d3aa5445260e83c9fb5936729d7c"><div class="ttname"><a href="classGame.html#a1bf9d3aa5445260e83c9fb5936729d7c">Game::m_ev</a></div><div class="ttdeci">sf::Event m_ev</div><div class="ttdef"><b>Definition:</b> Game.h:38</div></div>
 <div class="ttc" id="aclassGame_html_aa18721f98a70e1c8d3b0df51b4f493f9"><div class="ttname"><a href="classGame.html#aa18721f98a70e1c8d3b0df51b4f493f9">Game::getWindow</a></div><div class="ttdeci">sf::RenderWindow &amp; getWindow()</div><div class="ttdoc">Returns a reference to the game window.</div><div class="ttdef"><b>Definition:</b> Game.cpp:91</div></div>
 <div class="ttc" id="aclassGame_html_ab02f595246481ecb5812b4d42c0abfd7"><div class="ttname"><a href="classGame.html#ab02f595246481ecb5812b4d42c0abfd7">Game::handleEvent</a></div><div class="ttdeci">void handleEvent()</div><div class="ttdoc">Handles window events, called every frame.</div><div class="ttdef"><b>Definition:</b> Game.cpp:65</div></div>
 <div class="ttc" id="aclassGame_html"><div class="ttname"><a href="classGame.html">Game</a></div><div class="ttdoc">Main game class.</div><div class="ttdef"><b>Definition:</b> Game.h:20</div></div>
-<div class="ttc" id="aclassGame_html_afdfbf5ba03971b06872f47976d16c976"><div class="ttname"><a href="classGame.html#afdfbf5ba03971b06872f47976d16c976">Game::m_pCurrentState</a></div><div class="ttdeci">std::unique_ptr&lt; StateBase &gt; m_pCurrentState</div><div class="ttdef"><b>Definition:</b> Game.h:38</div></div>
+<div class="ttc" id="aclassGame_html_afdfbf5ba03971b06872f47976d16c976"><div class="ttname"><a href="classGame.html#afdfbf5ba03971b06872f47976d16c976">Game::m_pCurrentState</a></div><div class="ttdeci">std::unique_ptr&lt; StateBase &gt; m_pCurrentState</div><div class="ttdef"><b>Definition:</b> Game.h:37</div></div>
 <div class="ttc" id="astructNonMovable_html"><div class="ttname"><a href="structNonMovable.html">NonMovable</a></div><div class="ttdoc">Utility class. Inheriting from it deletes the move constructor and move assignment.</div><div class="ttdef"><b>Definition:</b> NonMoveable.h:8</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

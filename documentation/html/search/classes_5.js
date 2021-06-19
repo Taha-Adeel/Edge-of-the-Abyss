@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sprite_40',['Sprite',['../classSprite.html',1,'']]],
-  ['statebase_41',['StateBase',['../classStateBase.html',1,'']]]
+  ['resourcefactory_48',['ResourceFactory',['../classResourceFactory.html',1,'']]]
 ];
