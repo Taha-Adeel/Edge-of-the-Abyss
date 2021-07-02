@@ -2,7 +2,7 @@
 #INCLUDEDIR = $(SFMLDIR)
 #LIBDIR = $(SFMLDIR)
 CC = g++
-CFLAGS = -g -Wall -Werror -pedantic -pedantic-errors -fsanitize=address #-I $(INCLUDEDIR)
+CFLAGS = -g -std=c++17 -Wall -Werror -pedantic -pedantic-errors -fsanitize=address #-I $(INCLUDEDIR)
 LFLAGS = -fsanitize=address -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # Final executable

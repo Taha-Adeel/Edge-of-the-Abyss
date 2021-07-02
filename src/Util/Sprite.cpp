@@ -1,11 +1,11 @@
 #include "Sprite.h"
+#include "Constants.h"
+
 #include <assert.h>
 
 /**
  * @brief Construct a new Sprite:: Sprite object
- * 
- * 
- * 
+ *   
  * @param name 
  */
 
@@ -27,13 +27,15 @@ Sprite::Sprite(std::string spritesheet, int index):
 	sf::IntRect rect;
 
 	assert(index >= 0);
-	assert(size.x % 44 == 0 && size.y % 44 == 0);
+	assert(size.x % (CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING) == 0 && size.y % (CONSTANTS::TILE_HEIGHT + CONSTANTS::TILE_SPACING) == 0);
 	assert(static_cast<unsigned>(index) < size.x * size.y);
 
-	rect.width = m_tilewidth;
-	rect.height = m_tileheight;
-	rect.left = ((index % (size.x/44)) * (m_tilewidth + m_tilespacing)) + m_tilespacing/2;
-	rect.top = (index / (size.x/44)) * (m_tileheight + m_tilespacing) + m_tilespacing/2;
+	rect.width = CONSTANTS::TILE_WIDTH;
+	rect.height = CONSTANTS::TILE_HEIGHT;
+	rect.left = (index%(size.x/(CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING)))
+					* (CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING) + CONSTANTS::TILE_SPACING/2;
+	rect.top = (index/(size.x/(CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING)))
+					* (CONSTANTS::TILE_HEIGHT + CONSTANTS::TILE_SPACING) + CONSTANTS::TILE_SPACING/2;
 	sf::Sprite::setTextureRect(rect);
 	sf::Sprite::setTexture(m_spritesheet);
 }
@@ -67,25 +69,28 @@ void Sprite::changeTexture(std::string spritesheet , int index)
 	sf::IntRect rect;
 
 	assert(index >= 0);
-	assert(size.x % 44 == 0 && size.y % 44 == 0);
+	assert(size.x % (CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING) == 0 && size.y % (CONSTANTS::TILE_HEIGHT + CONSTANTS::TILE_SPACING) == 0);
 	assert(static_cast<unsigned>(index) < size.x * size.y);
-		
-	rect.width = m_tilewidth;
-	rect.height = m_tileheight;
-	rect.left = ((index % size.x) * (m_tilewidth + m_tilespacing)) + m_tilespacing/2;
-	rect.top = (index % size.y) * (m_tileheight + m_tilespacing) + m_tilespacing/2;
+
+	rect.width = CONSTANTS::TILE_WIDTH;
+	rect.height = CONSTANTS::TILE_HEIGHT;
+	rect.left = (index%(size.x/(CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING)))
+					* (CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING) + CONSTANTS::TILE_SPACING/2;
+	rect.top = (index/(size.x/(CONSTANTS::TILE_WIDTH + CONSTANTS::TILE_SPACING)))
+					* (CONSTANTS::TILE_HEIGHT + CONSTANTS::TILE_SPACING) + CONSTANTS::TILE_SPACING/2;
 
 	sf::Sprite::setTexture(m_spritesheet);
 	sf::Sprite::setTextureRect(rect);
 
 }
+
+
 /**
  * @brief change the  texture
  * 		
  * @param name  relative file path to resource from asset
  * @param rect  part to texture 
  */
-
 void Sprite::changeTexture(std::string name ,sf::IntRect rect) 
 {
 	m_spritesheet = (ResourceFactory::getResourceFactory().textures.get(name));

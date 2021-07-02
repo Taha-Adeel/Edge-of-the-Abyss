@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Util/Constants.h"
 
 
 /**
@@ -7,7 +8,8 @@
  * Creates an sf::RenderWindow and sets max framerate to 60, and sets m_pCurrentState to
  * PlayingState.
  */
-Game::Game(): m_window(sf::VideoMode(1280, 720), "Edge of the Abyss",
+Game::Game(): m_window(sf::VideoMode(CONSTANTS::WINDOW_WIDTH, CONSTANTS::WINDOW_HEIGHT),
+							CONSTANTS::WINDOW_TITLE,
 							sf::Style::Titlebar | sf::Style::Close),
 							m_pCurrentState(std::make_unique<PlayingState>(*this)){
 	m_window.setFramerateLimit(30);
@@ -40,9 +42,9 @@ void Game::run(){
 	sf::Time elapsedTime;
 
 	while(m_window.isOpen()){
-		//sf::Clock::restart() returns the elapsed time since it was started, 
-		 									//i.e elapsedTime holds the frame time of the last frame 
-		//elapsedTime is used to update our physics properly, so that gameplay is independent of FPS
+		// sf::Clock::restart() returns the elapsed time since it was started, i.e elapsedTime holds
+		// the frame time of the last frame.
+		// elapsedTime is used to update our physics properly, so that gameplay is independent of FPS
 		elapsedTime = timer.restart();
 
 		m_pCurrentState->update(elapsedTime);

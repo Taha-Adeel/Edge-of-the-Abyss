@@ -30,10 +30,10 @@ private:
 	//private members
 	sf::Texture& m_spritesheet;
 
-	//private constants
-	int m_tilewidth = 42;
-	int m_tileheight = 42;
-	int m_tilespacing = 2;
+	// //private constants
+	// int m_tilewidth = 42;
+	// int m_tileheight = 42;
+	// int m_tilespacing = 2;
 };
 
 

@@ -5,7 +5,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include "Util/Sprite.h"
-//#include "Game.h"
 
 enum class PLAYER_STATES {STAY,JUMPING};
 
@@ -13,14 +12,11 @@ class Player
 {
 private:
 	Sprite sprite;
-	//sf::RectangleShape sprite;
 
 	//Physics
 	sf::Vector2f velocity;
-	float gravity;
 	float timeAbove;
 	float maxTimeAbove;
-	float groundHeight;
 
 	//Core
     PLAYER_STATES playerState;
