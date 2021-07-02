@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="5,5,115,32"/>
-<area shape="rect" id="node2" href="$classGame.html" title="Main game class." alt="" coords="197,5,259,32"/>
-<area shape="rect" id="node3" href="$classResourceFactory.html" title="Handles and responsible for our resource creation." alt="" coords="163,56,293,83"/>
-<area shape="rect" id="node4" href="$structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="8,56,112,83"/>
-</map>

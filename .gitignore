@@ -36,3 +36,6 @@
 
 #binaries
 build
+
+#Documentation
+documentation/html
