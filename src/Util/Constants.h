@@ -12,6 +12,8 @@ namespace CONSTANTS{
 
 	constexpr float GRAVITY = 2500.f;
 
+	constexpr float SPAWNPOINT_X = 200.f;
+	constexpr float SPAWNPOINT_Y = GROUNDHEIGHT;
 	constexpr float PLAYER_SPEED_X = 0.f;
 	constexpr float PLAYER_SPEED_Y = 0.f;
 	constexpr float PLAYER_JUMP_BOOST = -700.f;

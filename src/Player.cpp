@@ -6,7 +6,7 @@
 void Player::initVariables()
 {
     this->playerState = PLAYER_STATES::STAY;
-    this->setPosition( 200, CONSTANTS::GROUNDHEIGHT);
+    this->setPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
 }
 void Player::initPhysics()
 {
