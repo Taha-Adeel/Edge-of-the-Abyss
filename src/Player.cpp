@@ -60,7 +60,7 @@ void Player::updateMovement(sf::Time elapsedTime)
     float eTime = elapsedTime.asSeconds();
     float dx = eTime* this->velocity.x;
     float dy = eTime* this->velocity.y;
-    std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
+    // std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
 }
 

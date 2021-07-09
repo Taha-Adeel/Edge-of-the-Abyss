@@ -4,22 +4,26 @@
 #include <assert.h>
 
 /**
- * @brief Construct a new Sprite:: Sprite object
+ * @brief Construct a new Sprite object with the texture from file "name.png".
  *   
- * @param name 
+ * @param name File path of texture relative to AssetPool::m_folder (=./assets/)
  */
 
 Sprite::Sprite(std::string name):
-			m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name)){
+	m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name))
+{
 	m_spritesheet.setRepeated(true);
 	sf::Sprite::setTexture(m_spritesheet);
 }
 
 /**
- * @brief Construct a new Sprite:: Sprite object
+ * @brief Construct a new Sprite:: Sprite object with a part of the texture
  * 
- * @param spritesheet 
- * @param index 
+ * Sets the texture of the Sprite object to the sprite/tile at index "index" from 
+ * a larger spritesheet/tileset from file "spritesheet.png"
+ * 
+ * @param spritesheet File path of texture relative to AssetPool::m_folder (=./assets/)
+ * @param index Index of the sprite/tile in the spritesheet/tileset.
  */
 Sprite::Sprite(std::string spritesheet, int index):
 	m_spritesheet(ResourceFactory::getResourceFactory().textures.get(spritesheet)){
@@ -41,10 +45,10 @@ Sprite::Sprite(std::string spritesheet, int index):
 }
 
 /**
- * @brief Construct a new Sprite:: Sprite object
+ * @brief Construct a new Sprite:: Sprite object with a specified part of a texture
  * 
- * @param name 
- * @param rect 
+ * @param name File path of texture relative to AssetPool::m_folder (=./assets/)
+ * @param rect The region in the texture with which to iniialize our sprite
  */
 Sprite::Sprite(std::string name, sf::IntRect rect):
 	m_spritesheet(ResourceFactory::getResourceFactory().textures.get(name)){
@@ -52,7 +56,11 @@ Sprite::Sprite(std::string name, sf::IntRect rect):
 		sf::Sprite::setTextureRect(rect);
 }
 
-
+/**
+ * @brief Changes the Sprite object's texture to texture from file "name.png".
+ *   
+ * @param name File path of texture relative to AssetPool::m_folder (=./assets/)
+ */
 void Sprite::changeTexture(std::string name)
 {
 	//sf::Texture m_spritesheet ;
@@ -61,7 +69,15 @@ void Sprite::changeTexture(std::string name)
 	
 }
 
-
+/**
+ * @brief Changes the Sprite object's texture to part of the texture from file "name.png".
+ * 
+ * Sets the texture of the Sprite object to the sprite/tile at index "index" from 
+ * a larger spritesheet/tileset from file "spritesheet.png"
+ * 
+ * @param spritesheet File path of texture relative to AssetPool::m_folder (=./assets/)
+ * @param index Index of the sprite/tile in the spritesheet/tileset.
+ */
 void Sprite::changeTexture(std::string spritesheet , int index) 
 {
 	m_spritesheet = (ResourceFactory::getResourceFactory().textures.get(spritesheet)) ;
@@ -86,10 +102,10 @@ void Sprite::changeTexture(std::string spritesheet , int index)
 
 
 /**
- * @brief change the  texture
- * 		
- * @param name  relative file path to resource from asset
- * @param rect  part to texture 
+ * @brief Changes the Sprite object's texture to part of the texture from file "name.png".
+ * 
+ * @param name File path of texture relative to AssetPool::m_folder (=./assets/)
+ * @param rect The region in the texture with which to set the texture of our sprite
  */
 void Sprite::changeTexture(std::string name ,sf::IntRect rect) 
 {

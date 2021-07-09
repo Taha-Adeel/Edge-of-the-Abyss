@@ -22,6 +22,7 @@ public:
 	//public accessors
 	static Game& getGameInstance();
 	sf::RenderWindow& getWindow();
+	
 	//public functions
 	void run();
 	void exitGame();
