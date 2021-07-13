@@ -1,6 +1,10 @@
 #ifndef NORMAL_PLAYER_H
 #define NORMAL_PLAYER_H
 #include "Player.h"
+/**
+ * @brief Player class for the normal game mode
+ * 
+ */
 class NormalPlayer : public Player
 {
 private:

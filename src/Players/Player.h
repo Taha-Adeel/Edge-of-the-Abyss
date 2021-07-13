@@ -9,6 +9,10 @@
 
 enum class PLAYER_STATES {ON_AIR, ON_GROUND, ON_AIR_TERMINAL};
 
+/**
+ * @brief Defines an interface for Player classes. Player class manages the physics.
+ * 
+ */
 class Player
 {
 protected:
