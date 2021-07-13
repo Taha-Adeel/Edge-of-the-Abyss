@@ -24,7 +24,7 @@ public:
 	 * @param pGame Reference to the game object (context), so that it can access its contents
 	 * 	and change its state(if neccesary).
 	 */
-	PlayingState(Game& pGame): StateBase(pGame), m_level("Test"){}
+	PlayingState(Game& pGame): StateBase(pGame), m_level("testmap"){}
 
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;

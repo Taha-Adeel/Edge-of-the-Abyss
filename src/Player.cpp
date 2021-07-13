@@ -79,10 +79,10 @@ void Player::updatePhysics(sf::Time elapsedTime)
     else if(this->playerState == PLAYER_STATES::JUMPING)
     {   
         this->velocity.y += eTime * CONSTANTS::GRAVITY;
-        if(this->sprite.getPosition().y>=CONSTANTS::GROUNDHEIGHT)
+        if(this->sprite.getPosition().y+42>=CONSTANTS::GROUNDHEIGHT)
         {
             this->resetVelocityY();
-            this->sprite.setPosition(Player::getPosition().x, CONSTANTS::GROUNDHEIGHT);
+            this->sprite.setPosition(Player::getPosition().x, CONSTANTS::GROUNDHEIGHT-42);
             this->playerState = PLAYER_STATES::STAY;
         }
 
@@ -95,7 +95,7 @@ void Player::handleEvent(sf::Event ev)
     {
         if(ev.key.code == sf::Keyboard::W)
         {
-            std::cout<<"Pressed W"<<std::endl;
+            // std::cout<<"Pressed W"<<std::endl;
             this->velocity.y += CONSTANTS::PLAYER_JUMP_BOOST;
             playerState = PLAYER_STATES::JUMPING;
         }
