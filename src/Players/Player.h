@@ -7,7 +7,7 @@
 #include "../Util/Sprite.h"
 #include "../Util/Constants.h"
 
-enum class PLAYER_STATES {ON_AIR, ON_GROUND};
+enum class PLAYER_STATES {ON_AIR, ON_GROUND, ON_AIR_TERMINAL};
 
 class Player
 {

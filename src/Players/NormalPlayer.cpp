@@ -82,7 +82,7 @@ void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
     float dy = eTime* this->velocity.y;
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
-    if(this->playerState == PLAYER_STATES::ON_AIR)
+    if(this->playerState != PLAYER_STATES::ON_GROUND)
     this->sprite.rotate(CONSTANTS::PLAYER_ANGULAR_VELOCITY);
     std::cout<<this->getRotation()<<std::endl;
 }
@@ -97,20 +97,33 @@ void NormalPlayer::updatePhysics(sf::Time elapsedTime)
     float eTime = elapsedTime.asSeconds();
     if(this->playerState == PLAYER_STATES::ON_GROUND){
         // do nothing
+        return ;
     }
     else if(this->playerState == PLAYER_STATES::ON_AIR)
     {   
         this->timeAbove +=eTime;
         this->velocity.y += eTime * CONSTANTS::GRAVITY;
-        if(this->sprite.getPosition().y>=CONSTANTS::SPAWNPOINT_Y)
+        if(this->velocity.y >= CONSTANTS::TERMINAL_SPEED)
         {
-            this->resetVelocityY();
-            this->resetPositionY();
-            this->resetNearestOrientation(); 
-            std::cout<<"On air for : "<<this->timeAbove<<std::endl;
-            this->resetPlayerState();
+            this->playerState = PLAYER_STATES::ON_AIR_TERMINAL;
+            std::cout<<"Terminal velocity achieved"<<std::endl;
         }
+    }
+    else if(this->playerState == PLAYER_STATES::ON_AIR_TERMINAL)
+    {
+        this->timeAbove +=eTime;
+        this->velocity.y = CONSTANTS::TERMINAL_SPEED;
 
+    }
+    // checking for hitting the ground
+    if(this->sprite.getPosition().y>=CONSTANTS::SPAWNPOINT_Y) // to be replaced with checking the height at that x coordinate
+    {
+        std::cout<<"Touching ground at "<<this->velocity.y<<" speed"<<std::endl;
+        this->resetVelocityY();
+        this->resetPositionY();
+        this->resetNearestOrientation(); 
+        std::cout<<"On air for : "<<this->timeAbove<<std::endl;
+        this->resetPlayerState();
     }
 }
 /**
