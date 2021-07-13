@@ -6,8 +6,6 @@
 // Constructors and Destructors
 Player::Player():sprite("player/spritesheet", 29)
 {
-    this->initVariables();
-    this->initPhysics();
 }
 Player::~Player(){}
 // Accessors
@@ -19,9 +17,28 @@ const sf::FloatRect Player::getGlobalBounds() const
 {
     return this->sprite.getGlobalBounds();
 }
+const sf::Vector2f Player::getOrigin() const
+{
+    return this->sprite.getOrigin();
+}
+const float Player::getRotation() const
+{
+    return this->sprite.getRotation();
+}
 // Modifier
 void Player::setPosition(const float x, const float y){
     this->sprite.setPosition(x, y);
+}
+void Player::setOrigin(const float x, const float y){
+    this->sprite.setOrigin(x, y);
+}
+void Player::setRotation(const float angle)
+{
+    this->sprite.setRotation(angle);
+}
+void Player::rotate(const float angle)
+{
+    this->sprite.rotate(angle);
 }
 
 //Movement

@@ -31,7 +31,7 @@ public:
 	 * @param pGame Reference to the game object (context), so that it can access its contents
 	 * 	and change its state(if neccesary).
 	 */
-	PlayingState(Game& pGame): StateBase(pGame), m_bg("bg01"), m_ground("ground01"), m_player(std::make_unique<NormalPlayer>()){}
+	PlayingState(Game& pGame): StateBase(pGame), m_player(std::make_unique<NormalPlayer>()), m_bg("bg01"), m_ground("ground01"){}
 
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;

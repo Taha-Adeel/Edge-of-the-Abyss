@@ -16,8 +16,11 @@ public:
 
 	//Modifiers
 	void resetVelocityY();
-
+    void resetPositionY();
+    void resetNearestOrientation();
+    void resetPlayerState();
 	//Functions
+    void updateMovement(sf::Time elapsedTime) override;
 	void updatePhysics(sf::Time elapsedTime) override;
 	void handleEvent(sf::Event ev) override;
 };
