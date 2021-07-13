@@ -1,55 +1,101 @@
 #include "Player.h"
 #include <iostream>
 
-// Functions for class Player
-
 // Constructors and Destructors
-Player::Player():sprite("player/spritesheet", 29)
-{
-}
+Player::Player():sprite("player/spritesheet", 29){}
 Player::~Player(){}
+
 // Accessors
+/**
+ * @brief Returns the position of the player sprite
+ * 
+ * @return const sf::Vector2f 
+ */
 const sf::Vector2f Player::getPosition() const
 {
     return this->sprite.getPosition();
 }
+/**
+ * @brief Get the global bounds to check for collision
+ * 
+ * @return const sf::FloatRect 
+ */
 const sf::FloatRect Player::getGlobalBounds() const
 {
     return this->sprite.getGlobalBounds();
 }
+/**
+ * @brief Returns the position of the Origin of the player sprite
+ * 
+ * @return const sf::Vector2f 
+ */
 const sf::Vector2f Player::getOrigin() const
 {
     return this->sprite.getOrigin();
 }
+/**
+ * @brief Returns the angle of rotation (0 <= angle <360)
+ * 
+ * @return const float 
+ */
 const float Player::getRotation() const
 {
     return this->sprite.getRotation();
 }
 // Modifier
+/**
+ * @brief Set the new absolute position of the Player Sprite
+ * 
+ * @param x new x coordinate
+ * @param y new y coordinate
+ */
 void Player::setPosition(const float x, const float y){
     this->sprite.setPosition(x, y);
 }
+/**
+ * @brief Set the new absolute position of the origin of the Player Sprite
+ * 
+ * @param x new x coordinate
+ * @param y new y coordinate
+ */
 void Player::setOrigin(const float x, const float y){
     this->sprite.setOrigin(x, y);
 }
+/**
+ * @brief Sets the absolute angle of rotation in clockwise direction
+ * 
+ * @param angle absolute angle of the final orientation
+ */
 void Player::setRotation(const float angle)
 {
     this->sprite.setRotation(angle);
 }
+/**
+ * @brief Rotates the sprite by given angle clockwise
+ * 
+ * @param angle angle to rotate the sprite by (clockwise)
+ */
 void Player::rotate(const float angle)
 {
     this->sprite.rotate(angle);
 }
 
 //Movement
+/**
+ * @brief Moves the sprite by given amount
+ * 
+ * @param dir_x 
+ * @param dir_y 
+ */
 void Player::move(const float dir_x, const float dir_y)
 {
     this->sprite.move(dir_x, dir_y);
 }
 /**
- * @brief For moving the sprite as per velocity in that instant
+ * @brief For moving the sprite as per velocity in that instant if no rotation is present.
+ * Derived classes will override this if rotation or some other new mechanishm is required 
  * 
- * @param elapsedTime 
+ * @param elapsedTime Time elapsed between the current and last frame in sf::Time
  */
 void Player::updateMovement(sf::Time elapsedTime)
 {
@@ -60,11 +106,22 @@ void Player::updateMovement(sf::Time elapsedTime)
     this->move(dx, dy);
 }
 //Update and Render
+/**
+ * @brief Updates the new position of the player. Calls updateMovement() to move it and 
+ * updatePhysics() to change the velocities as per the acceleration.
+ * 
+ * @param elapsedTime Time elapsed between the current and last frame in sf::Time
+ */
 void Player::update(sf::Time elapsedTime)
 {
     this->updateMovement(elapsedTime);
     this->updatePhysics(elapsedTime);
 }
+/**
+ * @brief Renders the player sprite for each frame
+ * 
+ * @param target 
+ */
 void Player::render(sf::RenderTarget& target)
 {
     target.draw(this->sprite);

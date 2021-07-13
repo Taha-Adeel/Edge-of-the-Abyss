@@ -8,6 +8,10 @@ NormalPlayer::NormalPlayer()
 }
 NormalPlayer::~NormalPlayer(){}
 //Init Functions
+/**
+ * @brief Places the player at the initial position required
+ * 
+ */
 void NormalPlayer::initVariables()
 {
     this->playerState = PLAYER_STATES::ON_GROUND;
@@ -15,6 +19,10 @@ void NormalPlayer::initVariables()
     this->setOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
     this->setRotation(0.f);
 }
+/**
+ * @brief Initialises the required variables for physics calculation and movement
+ * 
+ */
 void NormalPlayer::initPhysics()
 {
     this->velocity.x = CONSTANTS::PLAYER_SPEED_X;
@@ -23,19 +31,35 @@ void NormalPlayer::initPhysics()
     this->maxTimeAbove = 60.f; // 1 second (60 frames)
 }
 //Functions
+/**
+ * @brief Resets the velocity in y direction back to 0
+ * 
+ */
 void NormalPlayer::resetVelocityY()
 {
     this->velocity.y = 0.f;
 }
+/**
+ * @brief Resets the position of the player so that it touches the ground
+ * 
+ */
 void NormalPlayer::resetPositionY()
 {
     this->sprite.setPosition(Player::getPosition().x, CONSTANTS::SPAWNPOINT_Y);
 }
+/**
+ * @brief Resets the playerState to PLAYER_STATES::ON_GROUND to indicate that it is on ground
+ * 
+ */
 void NormalPlayer::resetPlayerState()
 {
     this->timeAbove = 0.f;
     this->playerState = PLAYER_STATES::ON_GROUND;
 }
+/**
+ * @brief Sets the player sprite orientation to the nearest 90 degree angle so that it is touching the ground
+ * 
+ */
 void NormalPlayer::resetNearestOrientation()
 {
    const float angle = this->getRotation(); // get the angle between 0 and 360
@@ -44,9 +68,13 @@ void NormalPlayer::resetNearestOrientation()
    else if(angle<=225) this->setRotation(180.f);
    else if(angle<=315) this->setRotation(270.f);
    else this->setRotation(0.f);
-
 }
-
+/**
+ * @brief Moving and rotating the sprite each frame as per the velocity and angular velocity
+ *         Overridded to implement rotation
+ * 
+ * @param elapsedTime Time elapsed between the current and last frame in sf::Time
+ */
 void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
 {
     float eTime = elapsedTime.asSeconds();
@@ -60,9 +88,9 @@ void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
 }
 
 /**
- * @brief For updating and changing velocities in normal mode
+ * @brief For updating and changing velocities in normal mode and checking when the player reaches the ground
  * 
- * @param elapsedTime 
+ * @param elapsedTime Time elapsed between the current and last frame in sf::Time
  */
 void NormalPlayer::updatePhysics(sf::Time elapsedTime)
 {
@@ -85,6 +113,11 @@ void NormalPlayer::updatePhysics(sf::Time elapsedTime)
 
     }
 }
+/**
+ * @brief Handling the key presses for jumping
+ * 
+ * @param ev 
+ */
 void NormalPlayer::handleEvent(sf::Event ev)
 {
     if(playerState == PLAYER_STATES::ON_GROUND) // Cannot control player midair
