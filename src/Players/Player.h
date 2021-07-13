@@ -4,8 +4,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
-#include "Sprite.h"
-#include "Constants.h"
+#include "../Util/Sprite.h"
+#include "../Util/Constants.h"
 
 enum class PLAYER_STATES {ON_AIR, ON_GROUND};
 

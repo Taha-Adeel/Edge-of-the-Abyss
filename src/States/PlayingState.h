@@ -2,8 +2,7 @@
 #define PLAYING_STATE_H
 
 #include "StateBase.h"
-#include "../Util/Player.h"
-#include "../Util/NormalPlayer.h"
+#include "../Players/NormalPlayer.h"
 #include "../Levels/Background.h"
 #include "../Levels/Ground.h"
 // #include "Player.h"
