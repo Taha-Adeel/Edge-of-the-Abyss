@@ -21,6 +21,13 @@ namespace CONSTANTS{
 	constexpr int TILE_WIDTH = 42;
 	constexpr int TILE_HEIGHT = 42;
 	constexpr int TILE_SPACING = 2;
+
+	constexpr int GROUND_HEIGHT =  0 ;//3 * TILE_WIDTH;
+    constexpr int CAMERA_OFFSET_Y = -385;
+    constexpr int CAMERA_OFFSET_X = 0 ;//-400;
+    constexpr int CAMERA_BOX_TOP_Y = 250;
+    constexpr int CAMERA_BOX_BOTTOM_Y = 450;
+
 }
 
 #endif
