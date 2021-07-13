@@ -7,6 +7,7 @@
 #include "Tile.h"
 #include "Background.h"
 #include "Ground.h"
+#include "../Util/tinyxml2.h"
 
 /**
  * @brief Defines the level to be played
@@ -29,11 +30,18 @@ private:
 	Ground m_ground;
 	std::string m_mapName;
 	sf::Vector2i m_mapSize;
+	sf::Vector2i m_tileSize;
 	std::vector<TileSet> m_tilesets;
 	std::vector<Tile> m_tilemap;
 
 	// private member functions
 	void loadMap(std::string mapName);
+	void loadMapData(tinyxml2::XMLElement* pMapNode);
+	TileSet loadTileSet(tinyxml2::XMLElement* pTileSet);
+	Tile loadTile(long long int tile_data, int tile_counter);
 };
+
+// Utility functions
+std::vector<long long int> parse_csv_data_to_ints(const char* data);
 
 #endif
