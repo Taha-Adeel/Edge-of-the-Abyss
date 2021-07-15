@@ -15,6 +15,11 @@ const sf::Vector2f Player::getTopLeftPosition() const
 {
     return this->sprite.getPosition() - this->sprite.getOrigin();
 }
+/**
+ * @brief Returns the position propery from sprite
+ * 
+ * @return const sf::Vector2f 
+ */
 const sf::Vector2f Player::getSpritePosition() const
 {
     return this->sprite.getPosition();
@@ -37,6 +42,11 @@ const sf::Vector2f Player::getCenter() const
 {
     return this->sprite.getPosition()+ this->sprite.getOrigin();
 }
+/**
+ * @brief get the relative position of origin from the top left corner
+ * 
+ * @return const sf::Vector2f 
+ */
 const sf::Vector2f Player::getSpriteOrigin() const
 {
     return this->sprite.getOrigin();
@@ -60,6 +70,12 @@ const float Player::getRotation() const
 void Player::setTopLeftPosition(const float x, const float y){
     this->sprite.setPosition(x + this->sprite.getOrigin().x , y + this->sprite.getOrigin().y);
 }
+/**
+ * @brief sets the Position property of sprite
+ * 
+ * @param x 
+ * @param y 
+ */
 void Player::setSpritePosition(const float x, const float y)
 {
     this->sprite.setPosition(x, y);
@@ -73,6 +89,12 @@ void Player::setSpritePosition(const float x, const float y)
 void Player::setCenter(const float x, const float y){
     this->sprite.setOrigin(x - this->sprite.getPosition().x, y- this->sprite.getPosition().y);
 }
+/**
+ * @brief sets the relative position of origin from the top left corner of the sprite
+ * 
+ * @param x 
+ * @param y 
+ */
 void Player::setSpriteOrigin(const float x, const float y)
 {
     this->sprite.setOrigin(x, y);
