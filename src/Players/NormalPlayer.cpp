@@ -130,7 +130,7 @@ void NormalPlayer::handleEvent(sf::Event ev)
 {
     if(playerState == PLAYER_STATES::ON_GROUND) // Cannot control player midair
     {
-        if(ev.key.code == sf::Keyboard::Up || ev.key.code == sf::Keyboard::Space)
+        if(ev.key.code == sf::Keyboard::Up || ev.key.code == sf::Keyboard::Space || sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             //std::cout<<"Pressed Jump"<<std::endl;
             this->velocity.y += CONSTANTS::PLAYER_JUMP_BOOST;
