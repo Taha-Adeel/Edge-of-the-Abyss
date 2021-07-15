@@ -14,18 +14,23 @@ namespace CONSTANTS{
 
 	constexpr float PLAYER_WIDTH = 42.f;
 	constexpr float PLAYER_HEIGHT = 42.f;
-	constexpr float SPAWNPOINT_X = 200.f;
+	constexpr float SPAWNPOINT_X = 0.f;
 	constexpr float SPAWNPOINT_Y = GROUNDHEIGHT - PLAYER_HEIGHT/2;
-	constexpr float PLAYER_SPEED_X = 20.f;
-	constexpr float PLAYER_SPEED_Y = 0.f;
-	constexpr float PLAYER_JUMP_BOOST = -700.f; //use -1400.f to check for terminal velocity
-	//constexpr float NORMAL_TIME_OF_FLIGHT = 0.603f;
-	constexpr float PLAYER_ANGULAR_VELOCITY = 298.6f;//298.61f/8;
-	constexpr float TERMINAL_SPEED = 720.f;// reaches ground at ~715.f for normal jumps. 
 
+	constexpr float PLAYER_SPEED_X = 100.f;
+	constexpr float PLAYER_SPEED_Y = 0.f;
+	constexpr float PLAYER_JUMP_BOOST = -700.f;
+	constexpr float TERMINAL_SPEED = 750.f; 
+	constexpr float PLAYER_ANGULAR_VELOCITY = 290.f;
+	
 	constexpr int TILE_WIDTH = 42;
 	constexpr int TILE_HEIGHT = 42;
 	constexpr int TILE_SPACING = 2;
+
+    constexpr int CAMERA_OFFSET_X_LEFT = 300;
+    constexpr int CAMERA_OFFSET_Y_TOP = 300;
+    constexpr int CAMERA_OFFSET_Y_BOTTOM = 400;
+    constexpr int CAMERA_OFFSET_GROUND_Y = 0;
 }
 
 #endif

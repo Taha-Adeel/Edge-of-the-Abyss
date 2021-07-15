@@ -3,38 +3,37 @@
 
 #include "StateBase.h"
 #include "../Players/NormalPlayer.h"
+#include "../Camera.h"
 #include "../Levels/Background.h"
 #include "../Levels/Ground.h"
-// #include "Player.h"
-// #include "Level.h"
-// #include "Camera.h"
+
 
 /**
  * @brief Main game play state.
  * 
  */
-//class Player;
 class PlayingState: public StateBase{
 private:
-	//Player m_player;
+	// private member variables
 	std::unique_ptr<Player> m_player;
+	Camera m_camera;
 	// Level m_level;
-	// Camera m_camera;
 	Background m_bg;
 	Ground m_ground;
 
 public:
-	/**
-	 * @brief Construct a new Playing State object
-	 * 
-	 * @param pGame Reference to the game object (context), so that it can access its contents
-	 * 	and change its state(if neccesary).
-	 */
-	PlayingState(Game& pGame): StateBase(pGame), m_player(std::make_unique<NormalPlayer>()), m_bg("bg01"), m_ground("ground01"){}
+	// constructors
+	PlayingState(Game& pGame) ;
 
+	// public functions
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
+
+	// public accessors
+	const Player& getPlayer() const ;
+	const Camera& getCamera() const ;
+	// const Level& getCurrentLevel() const ;
 };
 
 #endif
