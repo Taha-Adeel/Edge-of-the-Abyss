@@ -2,6 +2,7 @@
 #include <sstream>
 #include <exception>
 
+#include "../States/PlayingState.h"
 #include "Level.h"
 #include "../Util/Constants.h"
 #include "../Util/tinyxml2.h"
@@ -10,10 +11,12 @@
  * @brief Constructs a new Level::Level object
  * 
  * @param mapName Filename (relative to maps/) of the .tmx file from which the level is loaded.
+ * @param context Reference to the PlayingState level belongs to so that it can access its contents
  */
-Level::Level(std::string mapName):
-	m_bg("bg01"),
-	m_ground("ground01"),
+Level::Level(std::string mapName, PlayingState& context):
+	m_refPlayingState(context),
+	m_bg("bg01", sf::Color::Blue, context),
+	m_ground("ground01", sf::Color(65, 0, 156), context),
 	m_mapName(mapName)
 {	
 	try{

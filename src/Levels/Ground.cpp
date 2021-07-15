@@ -1,9 +1,12 @@
 #include "Ground.h"
+#include "../States/PlayingState.h"
 
-Ground::Ground(std::string name, sf::Color bg_color):
-							m_ground("grounds/"+name),
-							line(sf::Vector2f(1280.f, 1.f)),
-							ground(sf::Vector2f(1280.f, 150.f)){
+Ground::Ground(std::string name, sf::Color bg_color, PlayingState& context):
+	m_refPlayingState(context),
+	m_ground("grounds/"+name),
+	line(sf::Vector2f(1280.f, 1.f)),
+	ground(sf::Vector2f(1280.f, 150.f))
+{
 	m_ground.setColor(bg_color);
 	m_rect = {0,0,2000,256};
 	m_ground.setTextureRect(m_rect);

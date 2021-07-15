@@ -12,7 +12,7 @@ BUILD_DIR = ./build
 
 # List of all .cpp source files.
 SRCS = $(wildcard src/*.cpp) $(wildcard src/States/*.cpp) $(wildcard src/Util/*.cpp) \
-$(wildcard src/ResourceManager/*.cpp) $(wildcard src/Levels/*.cpp) 
+$(wildcard src/ResourceManager/*.cpp) $(wildcard src/Levels/*.cpp) $(wildcard src/Players/*.cpp) 
 
 # All .o files go to build dir.
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)

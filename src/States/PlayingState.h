@@ -2,33 +2,35 @@
 #define PLAYING_STATE_H
 
 #include "StateBase.h"
-#include "../Player.h"
+#include "../Players/NormalPlayer.h"
 #include "../Levels/Level.h"
-// #include "Camera.h"
+#include "../Camera.h"
+
 
 /**
  * @brief Main game play state.
- * 
+ *  
  */
-//class Player;
 class PlayingState: public StateBase{
 private:
-	Player m_player;
+	// private member variables
+	std::unique_ptr<Player> m_player;
 	Level m_level;
-	// Camera m_camera;
+	Camera m_camera;
 
 public:
-	/**
-	 * @brief Construct a new Playing State object
-	 * 
-	 * @param pGame Reference to the game object (context), so that it can access its contents
-	 * 	and change its state(if neccesary).
-	 */
-	PlayingState(Game& pGame): StateBase(pGame), m_level("testmap"){}
+	// constructors
+	PlayingState(Game& pGame) ;
 
+	// public functions
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
+
+	// public accessors
+	const Player& getPlayer() const ;
+	const Camera& getCamera() const ;
+	const Level& getCurrentLevel() const ;
 };
 
 #endif

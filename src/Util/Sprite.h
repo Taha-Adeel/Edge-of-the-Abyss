@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../ResourceManager/ResourceFactory.h"
+#include "Constants.h"
 
 /**
  * @brief class Sprite is a wrapper class for sf::sprite
@@ -17,21 +18,23 @@
 
 class Sprite: public sf::Sprite{
 public:
-	//public constructor 
+	//public constructor
+	Sprite() = default;
 	Sprite(std::string name);
-	Sprite(std::string spritesheet, int index);
+	Sprite(std::string spritesheet, int index, 
+		int tilewidth = CONSTANTS::TILE_WIDTH,
+			int tileheight = CONSTANTS::TILE_HEIGHT,
+				int tilespacing = CONSTANTS::TILE_SPACING);
 	Sprite(std::string name, sf::IntRect rect);
 
 	//public functions
 	//Define similar setTexture functions as constructors
-	void changeTexture(std::string name) ;
-	void changeTexture(std::string spritesheet , int index) ;
-	void changeTexture(std::string name ,sf::IntRect rect) ;
-	
-
-private:
-	//private members
-	sf::Texture& m_spritesheet;
+	void setTexture(std::string name);
+	void setTexture(std::string spritesheet, int index, 
+		int tilewidth = CONSTANTS::TILE_WIDTH,
+			int tileheight = CONSTANTS::TILE_HEIGHT,
+				int tilespacing = CONSTANTS::TILE_SPACING);
+	void setTexture(std::string name, sf::IntRect rect);
 };
 
 
