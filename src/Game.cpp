@@ -12,7 +12,7 @@ Game::Game(): m_window(sf::VideoMode(CONSTANTS::WINDOW_WIDTH, CONSTANTS::WINDOW_
 							CONSTANTS::WINDOW_TITLE,
 							sf::Style::Titlebar | sf::Style::Close),
 							m_pCurrentState(std::make_unique<PlayingState>(*this)){
-	m_window.setFramerateLimit(30);
+	//m_window.setFramerateLimit(30);
 }
 
 
@@ -40,13 +40,15 @@ Game& Game::getGameInstance(){
 void Game::run(){
 	sf::Clock timer;
 	sf::Time elapsedTime;
-
+	sf::View view(sf::FloatRect(0, 0, 1280, 720));
 	while(m_window.isOpen()){
 		// sf::Clock::restart() returns the elapsed time since it was started, i.e elapsedTime holds
 		// the frame time of the last frame.
 		// elapsedTime is used to update our physics properly, so that gameplay is independent of FPS
 		elapsedTime = timer.restart();
 
+		view.move(CONSTANTS::PLAYER_SPEED_X*elapsedTime.asSeconds(), 0);
+		m_window.setView(view);
 		m_pCurrentState->update(elapsedTime);
 
 		m_window.clear(sf::Color(121, 25, 255));
