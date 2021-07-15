@@ -15,8 +15,8 @@ NormalPlayer::~NormalPlayer(){}
 void NormalPlayer::initVariables()
 {
     this->playerState = PLAYER_STATES::ON_GROUND;
-    this->setPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
-    this->setCenter(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
+    this->setSpritePosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+    this->setSpriteOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
     this->setRotation(0.f);
 }
 /**
@@ -44,7 +44,7 @@ void NormalPlayer::resetVelocityY()
  */
 void NormalPlayer::resetPositionY()
 {
-    this->sprite.setPosition(Player::getPosition().x, CONSTANTS::SPAWNPOINT_Y);
+    this->sprite.setPosition(Player::getSpritePosition().x, CONSTANTS::SPAWNPOINT_Y);
 }
 /**
  * @brief Resets the playerState to PLAYER_STATES::ON_GROUND to indicate that it is on ground
