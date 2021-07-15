@@ -9,6 +9,14 @@
 // Forward Declared Dependencies
 class PlayingState ; 
 
+/**
+ * @brief Camera class is wrapper for sf::view
+ * 
+ * This will just take care of what region  to be seen on the window.
+ * you can scroll, rotate or zoom the entire scene without altering the way 
+ * that your drawable objects are drawn.
+ * 
+ */
 class Camera:public sf::View{
 private:
     PlayingState& m_refPlayingState;
