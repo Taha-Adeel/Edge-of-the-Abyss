@@ -3,10 +3,10 @@
 
 #include "StateBase.h"
 #include "../Player.h"
-#include "../camera.h"
+#include "../Camera.h"
 #include "../Levels/Background.h"
 #include "../Levels/Ground.h"
-#include"../camera.h"
+#include"../Camera.h"
 // #include "Player.h"
 // #include "Level.h"
 
@@ -39,7 +39,7 @@ public:
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
 
-	Player getPlayer() ;
+	const Player& getPlayer() const ;
 };
 
 #endif
