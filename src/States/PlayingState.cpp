@@ -1,5 +1,9 @@
 #include "PlayingState.h"
 
+PlayingState::PlayingState(Game& pGame) :StateBase(pGame),m_camera(*(this)), m_bg("bg01"), m_ground("ground01")
+{}
+
+
 /**
  * @brief Delegates event handeling to player, camera, etc
  * 
@@ -34,6 +38,12 @@ void PlayingState::render(sf::RenderTarget& renderer){
 	//m_pGame->player.render(renderer);
 	m_bg.render(renderer);
 	m_ground.render(renderer);
-  m_player.render(renderer);
+  	m_player.render(renderer);
 
+}
+
+
+Player PlayingState :: getPlayer()
+{
+	return m_player ;
 }

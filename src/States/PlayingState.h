@@ -10,6 +10,7 @@
 // #include "Player.h"
 // #include "Level.h"
 
+//class Camera ;
 
 /**
  * @brief Main game play state.
@@ -20,6 +21,7 @@ class PlayingState: public StateBase{
 private:
 	Player m_player;
 	// Level m_level;
+
 	Camera m_camera;
 	Background m_bg;
 	Ground m_ground;
@@ -31,11 +33,13 @@ public:
 	 * @param pGame Reference to the game object (context), so that it can access its contents
 	 * 	and change its state(if neccesary).
 	 */
-	PlayingState(Game& pGame): StateBase(pGame),m_camera(m_player), m_bg("bg01"), m_ground("ground01"){}
+	PlayingState(Game& pGame) ;
 
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
+
+	Player getPlayer() ;
 };
 
 #endif
