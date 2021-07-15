@@ -9,7 +9,6 @@ class NormalPlayer : public Player
 {
 private:
 	float timeAbove;
-	float maxTimeAbove;
 
 	//Core logic
 	void initVariables() override;

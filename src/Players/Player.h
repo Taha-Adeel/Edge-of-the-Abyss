@@ -32,12 +32,14 @@ public:
 
 	//Accessors
 	virtual const sf::Vector2f getPosition() const;
+	virtual const sf::Vector2f getCenter() const;
 	virtual const sf::Vector2f getOrigin() const;
 	virtual const sf::FloatRect getGlobalBounds() const;
 	virtual const float getRotation() const;
 
 	//Modifiers
 	virtual void setPosition(const float x, const float y);
+	virtual void setCenter(const float x, const float y);
 	virtual void setOrigin(const float x, const float y);
 	virtual void setRotation(const float angle);
 	virtual void rotate(const float angle);

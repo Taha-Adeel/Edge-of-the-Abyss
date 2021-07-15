@@ -12,7 +12,7 @@ Game::Game(): m_window(sf::VideoMode(CONSTANTS::WINDOW_WIDTH, CONSTANTS::WINDOW_
 							CONSTANTS::WINDOW_TITLE,
 							sf::Style::Titlebar | sf::Style::Close),
 							m_pCurrentState(std::make_unique<PlayingState>(*this)){
-	m_window.setFramerateLimit(30);
+	//m_window.setFramerateLimit(30);
 }
 
 

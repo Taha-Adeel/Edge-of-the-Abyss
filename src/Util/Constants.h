@@ -20,8 +20,8 @@ namespace CONSTANTS{
 	constexpr float PLAYER_SPEED_Y = 0.f;
 	constexpr float PLAYER_JUMP_BOOST = -700.f; //use -1400.f to check for terminal velocity
 	//constexpr float NORMAL_TIME_OF_FLIGHT = 0.603f;
-	constexpr float PLAYER_ANGULAR_VELOCITY = 10.f;//298.61f/8;
-	constexpr float TERMINAL_SPEED = 810.f;// reaches ground at ~805.f for normal jumps. 
+	constexpr float PLAYER_ANGULAR_VELOCITY = 298.6f;//298.61f/8;
+	constexpr float TERMINAL_SPEED = 720.f;// reaches ground at ~715.f for normal jumps. 
 
 	constexpr int TILE_WIDTH = 42;
 	constexpr int TILE_HEIGHT = 42;

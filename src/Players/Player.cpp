@@ -7,7 +7,7 @@ Player::~Player(){}
 
 // Accessors
 /**
- * @brief Returns the position of the player sprite
+ * @brief Returns the position of the top left corner of the player sprite
  * 
  * @return const sf::Vector2f 
  */
@@ -29,6 +29,10 @@ const sf::FloatRect Player::getGlobalBounds() const
  * 
  * @return const sf::Vector2f 
  */
+const sf::Vector2f Player::getCenter() const
+{
+    return this->sprite.getOrigin();
+}
 const sf::Vector2f Player::getOrigin() const
 {
     return this->sprite.getOrigin();
@@ -44,7 +48,7 @@ const float Player::getRotation() const
 }
 // Modifier
 /**
- * @brief Set the new absolute position of the Player Sprite
+ * @brief Set the new absolute position of the top left corner of the Player Sprite
  * 
  * @param x new x coordinate
  * @param y new y coordinate
@@ -58,7 +62,11 @@ void Player::setPosition(const float x, const float y){
  * @param x new x coordinate
  * @param y new y coordinate
  */
-void Player::setOrigin(const float x, const float y){
+void Player::setCenter(const float x, const float y){
+    this->sprite.setOrigin(x, y);
+}
+void Player::setOrigin(const float x, const float y)
+{
     this->sprite.setOrigin(x, y);
 }
 /**
@@ -102,7 +110,7 @@ void Player::updateMovement(sf::Time elapsedTime)
     float eTime = elapsedTime.asSeconds();
     float dx = eTime* this->velocity.x;
     float dy = eTime* this->velocity.y;
-    std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
+    //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
 }
 //Update and Render
