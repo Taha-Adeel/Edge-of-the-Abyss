@@ -18,9 +18,10 @@ private:
 	PlayingState& m_refPlayingState;
 	std::string m_bg_texture;
 	sf::Color m_bg_color;
-	float m_bg_velocity;
-	const float m_bg_top_y_coord;
-	const float m_bg_scale;
+	sf::Vector2f m_bg_velocity;
+
+	float m_bg_top_y_coord;
+	float m_bg_scale;
 
 	int m_num_of_bgSprites;
 	std::vector<Sprite> m_bgSprites;

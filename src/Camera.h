@@ -24,6 +24,9 @@ private:
     bool x_locked;
     bool y_locked;
 
+    sf::Vector2f m_velocity;
+    sf::Vector2f old_pos;
+
 public:
     // constructors
     Camera(PlayingState& context) ;         
@@ -34,6 +37,7 @@ public:
 
     // public accessors and setters
     const sf::Vector2f getPosition() const;
+    const sf::Vector2f getVelocity() const;
     void setPosition(sf::Vector2f);
     void setPosition(float x, float y);
 

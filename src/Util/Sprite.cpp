@@ -9,9 +9,10 @@
  * @param name File path of texture relative to AssetPool::m_folder (=./assets/)
  */
 
-Sprite::Sprite(std::string name):
-	sf::Sprite(ResourceFactory::getResourceFactory().textures.get(name))
-{
+Sprite::Sprite(std::string name){
+	sf::Texture& texture = ResourceFactory::getResourceFactory().textures.get(name);
+	texture.setSmooth(true);
+	sf::Sprite::setTexture(texture);
 }
 
 /**

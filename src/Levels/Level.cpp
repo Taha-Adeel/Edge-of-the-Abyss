@@ -15,7 +15,7 @@
  */
 Level::Level(std::string mapName, PlayingState& context):
 	m_refPlayingState(context),
-	m_bg("bg01", sf::Color::Blue, context),
+	m_bg("bg01-hd", sf::Color::Blue, context),
 	m_ground("ground01", sf::Color(65, 0, 156), context),
 	m_mapName(mapName)
 {	
