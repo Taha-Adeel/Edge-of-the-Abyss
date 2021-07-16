@@ -1,8 +1,9 @@
 #include "NormalPlayer.h"
 #include <iostream>
 //Constructor
-NormalPlayer::NormalPlayer()
+NormalPlayer::NormalPlayer(int index)
 {
+    this->sprite = Sprite("player/spritesheet", index);
     this->initVariables();
     this->initPhysics();
 }
@@ -17,6 +18,7 @@ void NormalPlayer::initVariables()
     this->playerState = PLAYER_STATES::ON_GROUND;
     this->setSpritePosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->setSpriteOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
+    //this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->setRotation(0.f);
 }
 /**

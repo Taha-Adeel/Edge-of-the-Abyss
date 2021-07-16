@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Constructors and Destructors
-Player::Player():sprite("player/spritesheet", 29){}
+Player::Player(){}
 Player::~Player(){}
 
 // Accessors
@@ -33,6 +33,14 @@ const sf::FloatRect Player::getGlobalBounds() const
 {
     return this->sprite.getGlobalBounds();
 }
+const float Player::getHeight() const
+{
+    return this->getGlobalBounds().height;
+}
+const float Player::getWidth() const
+{
+    return this->getGlobalBounds().width;
+}
 /**
  * @brief Returns the position of the center of the player sprite
  * 
@@ -40,7 +48,8 @@ const sf::FloatRect Player::getGlobalBounds() const
  */
 const sf::Vector2f Player::getCenter() const
 {
-    return sf::Vector2f(this->getTopLeftPosition().x+ this->sprite.getGlobalBounds().width/2, this->getTopLeftPosition().y + this->sprite.getGlobalBounds().height/2);
+    return sf::Vector2f(this->getTopLeftPosition().x+ this->getWidth()/2,
+                         this->getTopLeftPosition().y + this->getHeight()/2);
 }
 /**
  * @brief get the relative position of origin from the top left corner
@@ -68,7 +77,8 @@ const float Player::getRotation() const
  * @param y new y coordinate
  */
 void Player::setTopLeftPosition(const float x, const float y){
-    this->sprite.setPosition(x + this->sprite.getOrigin().x , y + this->sprite.getOrigin().y);
+    this->sprite.setPosition(x + this->sprite.getOrigin().x ,
+                             y + this->sprite.getOrigin().y);
 }
 /**
  * @brief sets the Position property of sprite
@@ -81,13 +91,16 @@ void Player::setSpritePosition(const float x, const float y)
     this->sprite.setPosition(x, y);
 }
 /**
- * @brief Set the new absolute position of the origin of the Player Sprite
+ * @brief Set the new absolute position of the center of the Player Sprite
  * 
  * @param x new x coordinate
  * @param y new y coordinate
  */
 void Player::setCenter(const float x, const float y){
-    this->sprite.setOrigin(x - this->sprite.getPosition().x, y- this->sprite.getPosition().y);
+    //this->sprite.setOrigin(x - this->sprite.getPosition().x, y- this->sprite.getPosition().y);
+    //this->setSpritePosition(x,y);
+    //this->setSpriteOrigin(this->sprite.getGlobalBounds().width/2,this->sprite.getGlobalBounds().height/2);
+    this->setTopLeftPosition(x-this->getWidth()/2, y-this->getHeight()/2);
 }
 /**
  * @brief sets the relative position of origin from the top left corner of the sprite

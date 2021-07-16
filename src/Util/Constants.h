@@ -7,6 +7,7 @@ namespace CONSTANTS{
 	constexpr unsigned int WINDOW_WIDTH = 1280; 
 	constexpr unsigned int WINDOW_HEIGHT = 720;
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
+	constexpr int DEFAULT_PLAYER_SPRITE_INDEX = 29;
 
 	constexpr float GROUNDHEIGHT = 571.f;
 

@@ -37,6 +37,8 @@ public:
 	virtual const sf::Vector2f getSpriteOrigin() const;
 	virtual const sf::FloatRect getGlobalBounds() const;
 	virtual const float getRotation() const;
+	virtual const float getWidth() const;
+	virtual const float getHeight() const;
 
 	//Modifiers
 	virtual void setTopLeftPosition(const float x, const float y);
