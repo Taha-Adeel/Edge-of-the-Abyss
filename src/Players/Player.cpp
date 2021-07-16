@@ -40,7 +40,7 @@ const sf::FloatRect Player::getGlobalBounds() const
  */
 const sf::Vector2f Player::getCenter() const
 {
-    return sf::Vector2f(this->sprite.getPosition().x+ this->sprite.getGlobalBounds().width/2, this->sprite.getPosition().y + this->sprite.getGlobalBounds().height/2);
+    return sf::Vector2f(this->getTopLeftPosition().x+ this->sprite.getGlobalBounds().width/2, this->getTopLeftPosition().y + this->sprite.getGlobalBounds().height/2);
 }
 /**
  * @brief get the relative position of origin from the top left corner
