@@ -11,12 +11,12 @@
  * @brief Constructs a new Level::Level object
  * 
  * @param mapName Filename (relative to maps/) of the .tmx file from which the level is loaded.
- * @param context Reference to the PlayingState level belongs to so that it can access its contents
+ * @param context Reference to the PlayingState object that level belongs to so that it can access its contents
  */
 Level::Level(std::string mapName, PlayingState& context):
 	m_refPlayingState(context),
-	m_bg("bg01-hd", sf::Color::Blue, context),
-	m_ground("ground01", sf::Color(65, 0, 156), context),
+	m_bg("bg01-hd", CONSTANTS::BG_COLOR, context),
+	m_ground("ground01", CONSTANTS::GROUND_BG_COLOR, context),
 	m_mapName(mapName)
 {	
 	try{

@@ -5,8 +5,17 @@
 
 #include "../Util/Sprite.h"
 
+// Forward Declared Dependencies
 class PlayingState;
 
+/**
+ * @brief Creates an "infinite" parallax background.
+ * 
+ * Has a vector of Sprites with the backgrouns texture, and shifts the sprites that
+ * go outside the view on the left to right of the background sprite furthest from the left,
+ * while moving the background sprites in such a way as to create a parallax effect.
+ * 
+ */
 class Background{
 public:
 	Background(std::string name, sf::Color bg_color, PlayingState& context);

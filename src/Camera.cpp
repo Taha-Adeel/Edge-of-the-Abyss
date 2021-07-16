@@ -6,7 +6,7 @@
 /**
  * @brief Construct a new Camera:: Camera object
  * 
- * @param context refrence to the PlayingState object 
+ * @param context Reference to the PlayingState object 
  * 			(to access the player object)
  */
 

@@ -49,7 +49,7 @@ void Game::run(){
 
 		m_pCurrentState->update(elapsedTime);
 		
-		m_window.clear(sf::Color(121, 25, 255));
+		m_window.clear(CONSTANTS::BG_COLOR);
 		m_pCurrentState->render(m_window);
         m_window.display();
 

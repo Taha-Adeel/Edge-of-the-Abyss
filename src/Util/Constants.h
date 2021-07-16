@@ -2,6 +2,8 @@
 #define CONSTANTS_H
 
 #include <string>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Vector2.hpp>
 
 namespace CONSTANTS{
 	constexpr unsigned int WINDOW_WIDTH = 1280; 
@@ -9,6 +11,9 @@ namespace CONSTANTS{
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
 	constexpr int DEFAULT_PLAYER_SPRITE_INDEX = 29;
 
+	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
+	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f, -30.f);
+	const sf::Color GROUND_BG_COLOR = sf::Color(65, 0, 156);
 	constexpr float GROUNDHEIGHT = 571.f;
 
 	constexpr float GRAVITY = 2500.f;

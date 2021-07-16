@@ -4,15 +4,26 @@
 #include "../States/PlayingState.h"
 #include "../Util/Constants.h"
 
-Ground::Ground(std::string name, sf::Color ground_ground_color, PlayingState& context):
+/**
+ * @brief Construct a new Ground::Ground object
+ * 
+ * @param name Filename (relative to ./assests/grounds/) of file containing the ground texture.
+ * @param ground_bg_color 
+ * @param context Reference to the PlayingState object (to access the camera object)
+ */
+Ground::Ground(std::string name, sf::Color ground_bg_color, PlayingState& context):
 	m_refPlayingState(context),
 	m_ground_texture("grounds/"+name),
-	m_ground_color(ground_ground_color),
+	m_ground_color(ground_bg_color),
 	m_ground_line(sf::Vector2f(CONSTANTS::WINDOW_WIDTH, 1.f))
 {
 	init_ground();
 }
 
+/**
+ * @brief Initialzes the ground background, outline(m_ground_line), and vector of ground tiles.
+ * 
+ */
 void Ground::init_ground(){
 	Sprite ground_tile(m_ground_texture);
 	m_ground_scale = 1.f;
@@ -30,6 +41,14 @@ void Ground::init_ground(){
 	}
 }
 
+/**
+ * @brief Updates the ground every frame.
+ * 
+ * If a ground tile goes outside the view on the left, its position is set to be the next tile
+ * that will be rendered on the right.
+ * 
+ * @param dt 
+ */
 void Ground::update(sf::Time dt){
 	const Camera& camera = m_refPlayingState.getCamera();
 
@@ -47,6 +66,11 @@ void Ground::update(sf::Time dt){
 	}
 }
 
+/**
+ * @brief Renders the ground on to the renderer.
+ * 
+ * @param renderer 
+ */
 void Ground::render(sf::RenderTarget& renderer){
 	renderer.draw(m_ground_bg);
 	for(auto& ground_tile: m_groundSprites){
