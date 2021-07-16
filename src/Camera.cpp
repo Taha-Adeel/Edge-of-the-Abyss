@@ -102,6 +102,8 @@ void Camera::reset(){
 	(*this).setPosition(0.f, 0.f);
 	(*this).unlock_x();
 	(*this).unlock_y();
+	old_pos.x = 0.f;
+	old_pos.y = 0.f;
 }
 
 /**
@@ -161,6 +163,11 @@ void Camera::update(sf::Time elapsedTime){
 // 		float camera_position_x = m_refPlayingState.getLevel().getMapSize().x - sf::View::getSize().x ;
 // 		(*this).setPosition(camera_position_x, (*this).getPosition().y);
 // 	}
+
+	//Velocity calculation and update
+	sf::Vector2f cur_pos = this->getPosition();
+	m_velocity = (cur_pos - old_pos)/(elapsedTime.asSeconds());
+	old_pos = cur_pos;
 }
 
 /**
@@ -172,20 +179,11 @@ void Camera::render(sf::RenderTarget& renderer){
 	renderer.setView(*this);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * @brief Get the camera's velocity
+ * 
+ * @return const sf::Vector2f 
+ */
+const sf::Vector2f Camera::getVelocity() const {
+	return m_velocity;
+}

@@ -9,9 +9,8 @@
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
 	m_player(std::make_unique<NormalPlayer>()),
-	m_camera(*(this)),
-	m_bg("bg01"),
-	m_ground("ground01")
+	m_level("checkmap", *this),
+	m_camera(*this)
 {
 }
 
@@ -22,7 +21,7 @@ PlayingState::PlayingState(Game& pGame):
  */
 void PlayingState::handleEvent(sf::Event& ev){
 	//Event handeling to change state can be done here.
-	 m_player->handleEvent(ev);
+	m_player->handleEvent(ev);
 }
 
 /**
@@ -33,8 +32,7 @@ void PlayingState::handleEvent(sf::Event& ev){
 void PlayingState::update(sf::Time dt){
 	m_player->update(dt);
 	m_camera.update(dt);
-	m_bg.update(dt);
-	m_ground.update(dt);
+	m_level.update(dt);
 }
 
 /**
@@ -44,8 +42,7 @@ void PlayingState::update(sf::Time dt){
  */
 void PlayingState::render(sf::RenderTarget& renderer){
 	m_camera.render(renderer);
-	m_bg.render(renderer);
-	m_ground.render(renderer);
+	m_level.render(renderer);
   	m_player->render(renderer);
 }
 
@@ -67,6 +64,11 @@ const Camera& PlayingState::getCamera() const {
 	return m_camera;
 }
 
-// const Level& PlayingState::getLevel() const {
-// 	return m_level;
-// }
+/**
+ * @brief Get the current Level
+ * 
+ * @return const Level& 
+ */
+const Level& PlayingState::getCurrentLevel() const {
+	return m_level;
+}

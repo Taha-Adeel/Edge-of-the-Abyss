@@ -3,23 +3,20 @@
 
 #include "StateBase.h"
 #include "../Players/NormalPlayer.h"
+#include "../Levels/Level.h"
 #include "../Camera.h"
-#include "../Levels/Background.h"
-#include "../Levels/Ground.h"
 
 
 /**
  * @brief Main game play state.
- * 
+ *  
  */
 class PlayingState: public StateBase{
 private:
 	// private member variables
 	std::unique_ptr<Player> m_player;
+	Level m_level;
 	Camera m_camera;
-	// Level m_level;
-	Background m_bg;
-	Ground m_ground;
 
 public:
 	// constructors
@@ -33,7 +30,7 @@ public:
 	// public accessors
 	const Player& getPlayer() const ;
 	const Camera& getCamera() const ;
-	// const Level& getCurrentLevel() const ;
+	const Level& getCurrentLevel() const ;
 };
 
 #endif

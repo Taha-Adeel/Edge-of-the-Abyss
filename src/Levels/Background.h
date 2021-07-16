@@ -1,19 +1,32 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
+#include <vector>
+
 #include "../Util/Sprite.h"
+
+class PlayingState;
 
 class Background{
 public:
-	Background(std::string name, sf::Color bg_color = sf::Color::Blue);
+	Background(std::string name, sf::Color bg_color, PlayingState& context);
 
 	void update(sf::Time dt);
 	void render(sf::RenderTarget& renderer);
 
 private:
-	Sprite m_bg;
-	int m_bgVelocity = 60;
-	sf::IntRect m_rect;
+	PlayingState& m_refPlayingState;
+	std::string m_bg_texture;
+	sf::Color m_bg_color;
+	sf::Vector2f m_bg_velocity;
+
+	float m_bg_top_y_coord;
+	float m_bg_scale;
+
+	int m_num_of_bgSprites;
+	std::vector<Sprite> m_bgSprites;
+
+	void init_bgSprites();
 };
 
 #endif
