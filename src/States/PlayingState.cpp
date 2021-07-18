@@ -8,8 +8,8 @@
  */
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
-	m_player(std::make_unique<NormalPlayer>()),
-	m_level("checkmap", *this),
+	m_player(std::make_unique<NormalPlayer>(*this)),
+	m_level("testmap", *this),
 	m_camera(*this)
 {
 }

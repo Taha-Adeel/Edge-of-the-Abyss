@@ -26,6 +26,14 @@ public:
 	void update(sf::Time elapsedTime);
 	void render(sf::RenderTarget& renderer);
 
+	//public accessors
+	const std::vector<Tile>& getTileMap() const ;
+	const sf::Vector2i getMapSize() const ;
+	const int getMapWidth() const ;
+	const int getMapHeight() const ;
+	const int getTileWidth() const ;
+	const int getTileHeight() const ;
+
 private:
 	// private member variables
 	PlayingState& m_refPlayingState;

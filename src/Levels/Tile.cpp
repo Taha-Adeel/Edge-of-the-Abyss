@@ -15,7 +15,8 @@ Tile::Tile(TileSet& tileset, int gid, float x, float y, sf::Vector2f scale, floa
 	m_position(x,y),
 	m_scale(scale),
 	m_rotation(rotation),
-	m_sprite(m_tileset.texture, m_gid - m_tileset.first_gid)
+	m_sprite(m_tileset.getTexturePath(), m_gid - m_tileset.first_gid, 
+		m_tileset.tilewidth, m_tileset.tileheight, m_tileset.tilespacing)
 {
 	m_sprite.setOrigin(CONSTANTS::TILE_WIDTH/2.f, CONSTANTS::TILE_HEIGHT/2.f);
 	m_sprite.setPosition(m_position);

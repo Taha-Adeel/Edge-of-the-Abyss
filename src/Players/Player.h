@@ -7,6 +7,11 @@
 #include "../Util/Sprite.h"
 #include "../Util/Constants.h"
 
+// Forward Declared Dependencies
+class PlayingState;
+// class Bound;
+// class BoxBound;
+
 // enum class GRAVITY_STATE {NORMAL = 1, FLIPPED = -1};
 
 /**
@@ -17,6 +22,8 @@ class Player
 {
 protected:
 	Sprite sprite;
+	// BoxBound m_bounds;
+	PlayingState& m_ref_PlayingState;
 
 	//Physics
     // GRAVITY_STATE gravity_state;
@@ -27,8 +34,12 @@ protected:
 	virtual void initVariables() = 0;
 	virtual void initPhysics() = 0;
 
+	// bool checkCollision(){};
+	// virtual void resolveCollision() = 0;
+
+
 public:
-	Player();
+	Player(PlayingState& context);
 	virtual ~Player();
 
 	//Accessors

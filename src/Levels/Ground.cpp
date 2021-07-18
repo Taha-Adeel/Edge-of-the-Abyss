@@ -14,8 +14,7 @@
 Ground::Ground(std::string name, sf::Color ground_bg_color, PlayingState& context):
 	m_refPlayingState(context),
 	m_ground_texture("grounds/"+name),
-	m_ground_color(ground_bg_color),
-	m_ground_line(sf::Vector2f(CONSTANTS::WINDOW_WIDTH, 1.f))
+	m_ground_color(ground_bg_color)
 {
 	init_ground();
 }
@@ -30,8 +29,10 @@ void Ground::init_ground(){
 	ground_tile.setScale(m_ground_scale, m_ground_scale);
 	m_num_of_groundSprites = floor(CONSTANTS::WINDOW_WIDTH / ground_tile.getGlobalBounds().width + 2);
 	
+	m_ground_line.setSize(sf::Vector2f(ground_tile.getGlobalBounds().width * m_num_of_groundSprites, 1.f));
 	m_ground_line.setPosition(0.f, CONSTANTS::GROUNDHEIGHT);
-	m_ground_bg.setSize(sf::Vector2f(CONSTANTS::WINDOW_WIDTH, ground_tile.getGlobalBounds().height));
+	m_ground_bg.setSize(sf::Vector2f(ground_tile.getGlobalBounds().width * m_num_of_groundSprites
+		,ground_tile.getGlobalBounds().height));
 	m_ground_bg.setPosition(0.f, CONSTANTS::GROUNDHEIGHT + m_ground_line.getGlobalBounds().height);
 	m_ground_bg.setFillColor(m_ground_color);
 

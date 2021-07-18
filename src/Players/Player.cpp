@@ -1,8 +1,17 @@
 #include "Player.h"
+#include "../States/PlayingState.h"
 #include <iostream>
 
 // Constructors and Destructors
-Player::Player(){}
+/**
+ * @brief Construct a new Player::Player object
+ * 
+ * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
+ */
+Player::Player(PlayingState& context):
+	m_ref_PlayingState(context)
+{
+}
 Player::~Player(){}
 
 // Accessors
@@ -224,6 +233,11 @@ void Player::handleEvent(sf::Event ev)
 void Player::update(sf::Time elapsedTime)
 {
     this->updateMovement(elapsedTime);
+	// for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
+	// 	if(checkCollision(tile.bounds())){
+	// 		resolveCollision(tile.bounds);
+	// 	}
+	// }
     this->updateVelocity(elapsedTime);
 }
 /**

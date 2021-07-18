@@ -27,6 +27,59 @@ Level::Level(std::string mapName, PlayingState& context):
 	}
 }
 
+/**
+ * @brief Return a const reference to the tile map.
+ * 
+ * @return const std::vector<Tile>& 
+ */
+const std::vector<Tile>& Level::getTileMap() const {
+	return m_tilemap;
+}
+
+/**
+ * @brief Get the width of the map in tile units
+ * 
+ * @return const int 
+ */
+const int Level::getMapWidth() const {
+	return m_mapSize.x;
+}
+
+/**
+ * @brief Get the height of the map in tile units
+ * 
+ * @return const int 
+ */
+const int Level::getMapHeight() const {
+	return m_mapSize.y;
+}
+
+/**
+ * @brief Get the map size in pixel x pixel
+ * 
+ */
+const sf::Vector2i Level::getMapSize() const {
+	return sf::Vector2i(m_mapSize.x*m_tileSize.x , m_mapSize.y*m_tileSize.y);
+}
+
+/**
+ * @brief Get the tile width in pixels
+ * 
+ * @return const int 
+ */
+const int Level::getTileWidth() const {
+	return m_tileSize.x;
+}
+
+/**
+ * @brief Get the tile height in pixels
+ * 
+ * @return const int 
+ */
+const int Level::getTileHeight() const {
+	return m_tileSize.y;
+}
+
 
 /**
  * @brief Updates the Level
@@ -124,9 +177,11 @@ void Level::loadMapData(tinyxml2::XMLElement* pMapNode){
 
 TileSet Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 	using namespace tinyxml2;
+
+	TileSet tileset;
+
 	// Get tileset firstgid
-	int firstgid;
-	pTileset->QueryIntAttribute("firstgid", &firstgid);
+	pTileset->QueryIntAttribute("firstgid", &tileset.first_gid);
 
 	// Get tileset data source.
 	std::stringstream tileset_source;
@@ -137,11 +192,36 @@ TileSet Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 	if(tileset_doc.LoadFile(tileset_source.str().c_str()) != XML_SUCCESS)
 		throw std::runtime_error("TileSet: " + tileset_source.str() + " not found");
 
-	// Get tileset texture path
-	std::string tileset_texture_path = 
-		tileset_doc.FirstChildElement()->FirstChildElement("image")->Attribute("source");
+	XMLElement* pTileSetNode = tileset_doc.FirstChildElement("tileset");
 
-	return TileSet(tileset_texture_path, firstgid);	
+	// Set the tileset texture path
+	std::string texture_path = pTileSetNode->FirstChildElement("image")->Attribute("source");
+	tileset.setTexturePath(texture_path);
+
+	// Get the tile width, height, spacing, tilecount, etc
+	pTileSetNode->QueryIntAttribute("tilewidth", &tileset.tilewidth);
+	pTileSetNode->QueryIntAttribute("tileheight", &tileset.tileheight);
+	pTileSetNode->QueryIntAttribute("spacing", &tileset.tilespacing);
+	pTileSetNode->QueryIntAttribute("tilecount", &tileset.tilecount);
+
+	// tileset.bounds.allocate(tilecount);
+
+	for(XMLElement* pTile = pTileSetNode->FirstChildElement("tile"); pTile != NULL;
+						pTile = pTile->NextSiblingElement("tile")){
+		int tile_id;
+		pTile->QueryIntAttribute("id", &tile_id);
+
+		// XMLElement* pTileBound = pTile->FirstChildElement("objectgroup")->FirstChildElement("object");
+
+		// bounds[tile_id].name = pTileBound->Attribute("name");
+		// bounds[tile_id].type = pTileBound->Attribute("type");
+		// pTileBound->QueryIntAttribute("x", &bounds[tile_id].x);
+		// pTileBound->QueryIntAttribute("y", &bounds[tile_id].y);
+		// pTileBound->QueryIntAttribute("width", &bounds[tile_id].width);
+		// pTileBound->QueryIntAttribute("height", &bounds[tile_id].height);
+	}
+
+	return tileset;	
 }
 
 
@@ -172,15 +252,17 @@ Tile Level::loadTile(long long int tile_data, int tile_counter){
 	sf::Vector2f scale(horizontalScale, verticalScale);
 
 	//Get the tileset for this specific tileID
-	TileSet t;
-	TileSet& tileset = t;
-	for(auto& tls: m_tilesets){
-		if(tls.first_gid > tileset.first_gid && tls.first_gid <= tileID){
-			tileset = tls;
+	int tileset_index = -1;
+	for(long unsigned int i=0; i<m_tilesets.size(); ++i){
+		if(tileID >= m_tilesets[i].first_gid 
+			&& tileID - m_tilesets[i].first_gid < m_tilesets[i].tilecount)
+		{
+			tileset_index = i;
+			break;
 		}
 	}
-	//No tileset was found for this tileID
-	if(tileset.first_gid == -1){
+	// No tileset was found for this tileID
+	if(tileset_index == -1){ 
 		std::stringstream err;
 		err << "No tileset found for tile with id: " << tileID << " and tile data: " << tile_data;
 		throw std::runtime_error(err.str());
@@ -189,11 +271,11 @@ Tile Level::loadTile(long long int tile_data, int tile_counter){
 	//Get the position of center of the tile in the level
 	int xx = m_tileSize.x/2;
 	int yy = m_tileSize.y/2;
-	xx += m_tileSize.x * (tile_counter % m_mapSize.x) + 1000;
-	yy += m_tileSize.y * (tile_counter / m_mapSize.x);
+	xx += getTileWidth() * (tile_counter % getMapWidth()) + 1000;
+	yy += getTileHeight() * (tile_counter / getMapWidth());
 	
-	int y_offset = (m_mapSize.y * m_tileSize.y) - CONSTANTS::GROUNDHEIGHT;
+	int y_offset = getMapSize().y - CONSTANTS::GROUNDHEIGHT;
 	yy -= y_offset;
 
-	return Tile(tileset, tileID, xx, yy, scale, rotation);
+	return Tile(m_tilesets[tileset_index], tileID, xx, yy, scale, rotation);
 }
