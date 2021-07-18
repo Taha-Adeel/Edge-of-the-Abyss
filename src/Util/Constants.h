@@ -25,7 +25,7 @@ namespace CONSTANTS{
 
 	constexpr float PLAYER_SPEED_X = 250.f;
 	constexpr float PLAYER_SPEED_Y = 0.f;
-	constexpr float PLAYER_JUMP_BOOST = -700.f;
+	constexpr float PLAYER_JUMP_BOOST = -750.f;
 	constexpr float TERMINAL_SPEED = 750.f; 
 	constexpr float PLAYER_ANGULAR_VELOCITY = 290.f;
 	

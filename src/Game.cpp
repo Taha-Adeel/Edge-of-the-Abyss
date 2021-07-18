@@ -46,6 +46,8 @@ void Game::run(){
 		// the frame time of the last frame.
 		// elapsedTime is used to update our physics properly, so that gameplay is independent of FPS
 		elapsedTime = timer.restart();
+		
+		handleEvent();
 
 		m_pCurrentState->update(elapsedTime);
 		
@@ -53,7 +55,6 @@ void Game::run(){
 		m_pCurrentState->render(m_window);
         m_window.display();
 
-		handleEvent();
 		// std::cout << "FPS: " << 1/elapsedTime.asSeconds() << '\n';
 	}
 }

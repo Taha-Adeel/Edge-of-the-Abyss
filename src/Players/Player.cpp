@@ -54,7 +54,7 @@ const sf::Vector2f Player::getCenter() const
 /**
  * @brief get the relative position of origin from the top left corner
  * 
- * @return const sf::Vector2f 
+ * @return const sf::Vector2f
  */
 const sf::Vector2f Player::getSpriteOrigin() const
 {
@@ -97,9 +97,6 @@ void Player::setSpritePosition(const float x, const float y)
  * @param y new y coordinate
  */
 void Player::setCenter(const float x, const float y){
-    //this->sprite.setOrigin(x - this->sprite.getPosition().x, y- this->sprite.getPosition().y);
-    //this->setSpritePosition(x,y);
-    //this->setSpriteOrigin(this->sprite.getGlobalBounds().width/2,this->sprite.getGlobalBounds().height/2);
     this->setTopLeftPosition(x-this->getWidth()/2, y-this->getHeight()/2);
 }
 /**
@@ -156,17 +153,78 @@ void Player::updateMovement(sf::Time elapsedTime)
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
 }
+/**
+ * @brief Sets keyHeld to true if space, up arrow, or left mouse button is held
+ * 
+ * @param ev 
+ */
+void Player::handleEvent(sf::Event ev)
+{
+    static bool spaceHeld{false}, upArrowHeld{false}, leftClickHeld{false};
+
+    switch(ev.type)
+    {
+        case sf::Event::KeyPressed:
+            switch (ev.key.code)
+            {
+                case sf::Keyboard::Space:
+                    spaceHeld = true;
+                    break;
+                case sf::Keyboard::Up:
+                    upArrowHeld = true;
+                    break;        
+                default:
+                    break;
+            }
+            break;
+        case sf::Event::KeyReleased:
+            switch (ev.key.code)
+            {
+                case sf::Keyboard::Space:
+                    spaceHeld = false;
+                    break;
+                case sf::Keyboard::Up:
+                    upArrowHeld = false;
+                    break;        
+                default:
+                    break;
+            }
+            break;
+        case sf::Event::MouseButtonPressed:
+            switch(ev.key.code)
+            {
+                case sf::Mouse::Left:
+                    leftClickHeld = true;
+                default:
+                    break;
+            }
+            break;
+        case sf::Event::MouseButtonReleased:
+            switch(ev.key.code)
+            {
+                case sf::Mouse::Left:
+                    leftClickHeld = false;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+
+    keyHeld = spaceHeld || upArrowHeld || leftClickHeld;
+}
 //Update and Render
 /**
  * @brief Updates the new position of the player. Calls updateMovement() to move it and 
- * updatePhysics() to change the velocities as per the acceleration.
+ * updateVelocity() to change the velocities as per the acceleration.
  * 
  * @param elapsedTime Time elapsed between the current and last frame in sf::Time
  */
 void Player::update(sf::Time elapsedTime)
 {
     this->updateMovement(elapsedTime);
-    this->updatePhysics(elapsedTime);
+    this->updateVelocity(elapsedTime);
 }
 /**
  * @brief Renders the player sprite for each frame

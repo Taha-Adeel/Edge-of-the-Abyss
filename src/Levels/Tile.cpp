@@ -6,8 +6,8 @@
  * 
  * @param tileset Tile set from which the tile gets its texture
  * @param gid gid of the tile in the tileset(Obtained on parsing the *.tmx files)
- * @param x x co-ordinate of the top left corner of the tile in the level
- * @param y y co-ordinate of the top left corner of the tile in the level
+ * @param x x co-ordinate of the center of the tile in the level
+ * @param y y co-ordinate of the center of the tile in the level
  */
 Tile::Tile(TileSet& tileset, int gid, float x, float y, sf::Vector2f scale, float rotation):
 	m_tileset(tileset),

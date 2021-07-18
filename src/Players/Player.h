@@ -7,7 +7,7 @@
 #include "../Util/Sprite.h"
 #include "../Util/Constants.h"
 
-enum class PLAYER_STATES {ON_AIR, ON_GROUND, ON_AIR_TERMINAL};
+// enum class GRAVITY_STATE {NORMAL = 1, FLIPPED = -1};
 
 /**
  * @brief Defines an interface for Player classes. Player class manages the physics.
@@ -19,10 +19,11 @@ protected:
 	Sprite sprite;
 
 	//Physics
+    // GRAVITY_STATE gravity_state;
 	sf::Vector2f velocity;
+	bool keyHeld = false;
 
 	//Core
-    PLAYER_STATES playerState;
 	virtual void initVariables() = 0;
 	virtual void initPhysics() = 0;
 
@@ -31,31 +32,32 @@ public:
 	virtual ~Player();
 
 	//Accessors
-	virtual const sf::Vector2f getTopLeftPosition() const;
-	virtual const sf::Vector2f getSpritePosition() const;
-	virtual const sf::Vector2f getCenter() const;
-	virtual const sf::Vector2f getSpriteOrigin() const;
-	virtual const sf::FloatRect getGlobalBounds() const;
-	virtual const float getRotation() const;
-	virtual const float getWidth() const;
-	virtual const float getHeight() const;
+	const sf::Vector2f getTopLeftPosition() const;
+	const sf::Vector2f getSpritePosition() const;
+	const sf::Vector2f getCenter() const;
+	const sf::Vector2f getSpriteOrigin() const;
+	const sf::FloatRect getGlobalBounds() const;
+	const float getRotation() const;
+	const float getWidth() const;
+	const float getHeight() const;
 
 	//Modifiers
-	virtual void setTopLeftPosition(const float x, const float y);
-	virtual void setSpritePosition(const float x, const float y);
-	virtual void setCenter(const float x, const float y);
-	virtual void setSpriteOrigin(const float x, const float y);
-	virtual void setRotation(const float angle);
-	virtual void rotate(const float angle);
+	void setTopLeftPosition(const float x, const float y);
+	void setSpritePosition(const float x, const float y);
+	void setCenter(const float x, const float y);
+	void setSpriteOrigin(const float x, const float y);
+	void setRotation(const float angle);
+	void rotate(const float angle);
+	// void flipGravity();
 
 	//Functions	
-	virtual void move(const float dir_x, const float dir_y);
+	void move(const float dir_x, const float dir_y);
 	virtual void updateMovement(sf::Time elapsedTime);
-	virtual void updatePhysics(sf::Time elapsedTime) = 0; // Physics may change on the mode of the game
-	//void updatePlayerState();
-	virtual void handleEvent(sf::Event ev)=0;// Different game modes have different controlls
-	virtual void update(sf::Time elapsedTime);
-	virtual void render(sf::RenderTarget& target);
+	virtual void updateVelocity(sf::Time elapsedTime) = 0; // Physics may change on the mode of the game
+	
+	void handleEvent(sf::Event ev);
+	void update(sf::Time elapsedTime);
+	void render(sf::RenderTarget& target);
 };
 
 

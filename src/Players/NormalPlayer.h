@@ -8,7 +8,8 @@
 class NormalPlayer : public Player
 {
 private:
-	float timeAbove;
+	// float timeAbove;
+	bool onGround;
 
 	//Core logic
 	void initVariables() override;
@@ -19,12 +20,11 @@ public:
 
 	//Modifiers
 	void resetVelocityY();
-    void resetPositionY();
+	void setOnGround(bool _onGround = true);
     void resetNearestOrientation();
-    void resetPlayerState();
+
 	//Functions
     void updateMovement(sf::Time elapsedTime) override;
-	void updatePhysics(sf::Time elapsedTime) override;
-	void handleEvent(sf::Event ev) override;
+	void updateVelocity(sf::Time elapsedTime) override;
 };
 #endif

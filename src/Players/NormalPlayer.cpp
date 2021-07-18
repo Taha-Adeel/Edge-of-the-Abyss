@@ -3,7 +3,7 @@
 //Constructor
 NormalPlayer::NormalPlayer(int index)
 {
-    this->sprite = Sprite("player/spritesheet", index);
+    this->sprite.setTexture("player/spritesheet", index);
     this->initVariables();
     this->initPhysics();
 }
@@ -15,10 +15,9 @@ NormalPlayer::~NormalPlayer(){}
  */
 void NormalPlayer::initVariables()
 {
-    this->playerState = PLAYER_STATES::ON_GROUND;
-    this->setSpritePosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+    this->onGround = false;
+    this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->setSpriteOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
-    //this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->setRotation(0.f);
 }
 /**
@@ -29,7 +28,7 @@ void NormalPlayer::initPhysics()
 {
     this->velocity.x = CONSTANTS::PLAYER_SPEED_X;
     this->velocity.y = CONSTANTS::PLAYER_SPEED_Y;
-    this->timeAbove = 0.f;
+    // this->timeAbove = 0.f;
 }
 //Functions
 /**
@@ -41,21 +40,16 @@ void NormalPlayer::resetVelocityY()
     this->velocity.y = 0.f;
 }
 /**
- * @brief Resets the position of the player so that it touches the ground
+ * @brief Sets the boolean onGround to true(as the default parameter) to indicate that it is on ground
  * 
  */
-void NormalPlayer::resetPositionY()
+void NormalPlayer::setOnGround(bool _onGround)
 {
-    this->sprite.setPosition(Player::getSpritePosition().x, CONSTANTS::SPAWNPOINT_Y);
-}
-/**
- * @brief Resets the playerState to PLAYER_STATES::ON_GROUND to indicate that it is on ground
- * 
- */
-void NormalPlayer::resetPlayerState()
-{
-    this->timeAbove = 0.f;
-    this->playerState = PLAYER_STATES::ON_GROUND;
+    if(_onGround){
+        // this->timeAbove = 0.f;
+        this->onGround = true;
+    }
+    else this->onGround = false;
 }
 /**
  * @brief Sets the player sprite orientation to the nearest 90 degree angle so that it is touching the ground
@@ -78,10 +72,26 @@ void NormalPlayer::resetNearestOrientation()
  */
 void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
 {
+
     this->Player::updateMovement(elapsedTime); // for translation
-    if(this->playerState != PLAYER_STATES::ON_GROUND)
-    this->sprite.rotate(CONSTANTS::PLAYER_ANGULAR_VELOCITY* elapsedTime.asSeconds());
+
     //std::cout<<this->getRotation()<<std::endl;
+
+    this->onGround = false;
+    // checking for hitting the ground
+    if(this->getCenter().y>=CONSTANTS::SPAWNPOINT_Y) // to be replaced with collision detection with tile map and ground
+    {
+       // std::cout<<"Touching ground at "<<this->velocity.y<<" speed"<<std::endl;
+        this->resetVelocityY();
+        this->setSpritePosition(getCenter().x, CONSTANTS::SPAWNPOINT_Y);
+        // std::cout<<"On air for : "<<this->timeAbove<<std::endl;
+        this->setOnGround();
+    }
+    if(!(this->onGround))
+        this->sprite.rotate(CONSTANTS::PLAYER_ANGULAR_VELOCITY* elapsedTime.asSeconds());
+
+    if(this->onGround)
+        this->resetNearestOrientation();
 }
 
 /**
@@ -89,54 +99,28 @@ void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
  * 
  * @param elapsedTime Time elapsed between the current and last frame in sf::Time
  */
-void NormalPlayer::updatePhysics(sf::Time elapsedTime)
+void NormalPlayer::updateVelocity(sf::Time elapsedTime)
 {
+    // Update velocity due to player input
+    if(this->keyHeld && this->onGround){
+        this->velocity.y += CONSTANTS::PLAYER_JUMP_BOOST;
+        onGround = false;
+    }
+
+    // Update velocity due to acceleration
     float eTime = elapsedTime.asSeconds();
-    if(this->playerState == PLAYER_STATES::ON_GROUND){
+    if(this->onGround){
         // do nothing
         return ;
     }
-    else if(this->playerState == PLAYER_STATES::ON_AIR)
+    else if(!(this->onGround))
     {   
-        this->timeAbove +=eTime;
+        // this->timeAbove +=eTime;
         this->velocity.y += eTime * CONSTANTS::GRAVITY;
-        if(this->velocity.y >= CONSTANTS::TERMINAL_SPEED)
-        {
-            this->playerState = PLAYER_STATES::ON_AIR_TERMINAL;
-            //std::cout<<"Terminal velocity achieved"<<std::endl;
-        }
     }
-    else if(this->playerState == PLAYER_STATES::ON_AIR_TERMINAL)
+    if(this->velocity.y > CONSTANTS::TERMINAL_SPEED)
     {
-        this->timeAbove +=eTime;
+        // this->timeAbove +=eTime;
         this->velocity.y = CONSTANTS::TERMINAL_SPEED;
-
-    }
-    // checking for hitting the ground
-    if(this->sprite.getPosition().y>=CONSTANTS::SPAWNPOINT_Y) // to be replaced with checking the height at that x coordinate
-    {
-       // std::cout<<"Touching ground at "<<this->velocity.y<<" speed"<<std::endl;
-        this->resetVelocityY();
-        this->resetPositionY();
-        this->resetNearestOrientation(); 
-        //std::cout<<"On air for : "<<this->timeAbove<<std::endl;
-        this->resetPlayerState();
-    }
-}
-/**
- * @brief Handling the key presses for jumping
- * 
- * @param ev 
- */
-void NormalPlayer::handleEvent(sf::Event ev)
-{
-    if(playerState == PLAYER_STATES::ON_GROUND) // Cannot control player midair
-    {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)||sf::Keyboard::isKeyPressed(sf::Keyboard::Up)||sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        {
-            //std::cout<<"Pressed Jump"<<std::endl;
-            this->velocity.y += CONSTANTS::PLAYER_JUMP_BOOST;
-            playerState = PLAYER_STATES::ON_AIR;
-        }
     }
 }

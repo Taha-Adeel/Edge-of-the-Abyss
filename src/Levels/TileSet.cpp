@@ -11,7 +11,7 @@ TileSet::TileSet(){
 }
 
 /**
- * @brief Construct a new Tile Set:: Tile Set object
+ * @brief Construct a new Tile Set::Tile Set object
  * 
  * @param filename File path of texture relative to ./maps
  * @param _first_gid gid (Obtained on parsing *.tmx files) of the first tile in the tileset.
@@ -19,7 +19,7 @@ TileSet::TileSet(){
 TileSet::TileSet(std::string filename, int _first_gid):
 	first_gid(_first_gid)
 {
-	std::string assets_path = "../assets/";
+	std::string assets_path = "../../assets/";
 	std::string texture_extension = ".png";
 	auto pos1 = filename.find(assets_path);
 	if(pos1 != std::string::npos)
