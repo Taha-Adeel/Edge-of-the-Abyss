@@ -1,8 +1,17 @@
 #include "Player.h"
+#include "../States/PlayingState.h"
 #include <iostream>
 
 // Constructors and Destructors
-Player::Player(){}
+/**
+ * @brief Construct a new Player::Player object
+ * 
+ * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
+ */
+Player::Player(PlayingState& context):
+	m_ref_PlayingState(context)
+{
+}
 Player::~Player(){}
 
 // Accessors
@@ -15,32 +24,22 @@ const sf::Vector2f Player::getTopLeftPosition() const
 {
     return this->sprite.getPosition() - this->sprite.getOrigin();
 }
-/**
- * @brief Returns the position propery from sprite
- * 
- * @return const sf::Vector2f 
- */
-const sf::Vector2f Player::getSpritePosition() const
+
+const BoxBound& Player::getplayerBounds() const
 {
-    return this->sprite.getPosition();
+    return this->playerBounds;
 }
-/**
- * @brief Get the global bounds to check for collision
- * 
- * @return const sf::FloatRect 
- */
-const sf::FloatRect Player::getGlobalBounds() const
-{
-    return this->sprite.getGlobalBounds();
-}
+
 const float Player::getHeight() const
 {
-    return this->getGlobalBounds().height;
+    return this->playerBounds.getHeight();
 }
+
 const float Player::getWidth() const
 {
-    return this->getGlobalBounds().width;
+    return this->playerBounds.getWidth();
 }
+
 /**
  * @brief Returns the position of the center of the player sprite
  * 
@@ -48,18 +47,11 @@ const float Player::getWidth() const
  */
 const sf::Vector2f Player::getCenter() const
 {
-    return sf::Vector2f(this->getTopLeftPosition().x+ this->getWidth()/2,
-                         this->getTopLeftPosition().y + this->getHeight()/2);
+    return sf::Vector2f(this->getTopLeftPosition().x + this->getWidth()/2.f,
+                         this->getTopLeftPosition().y + this->getHeight()/2.f);
 }
-/**
- * @brief get the relative position of origin from the top left corner
- * 
- * @return const sf::Vector2f
- */
-const sf::Vector2f Player::getSpriteOrigin() const
-{
-    return this->sprite.getOrigin();
-}
+
+
 /**
  * @brief Returns the angle of rotation (0 <= angle <360)
  * 
@@ -69,6 +61,7 @@ const float Player::getRotation() const
 {
     return this->sprite.getRotation();
 }
+
 // Modifier
 /**
  * @brief Set the new absolute position of the top left corner of the Player Sprite
@@ -79,17 +72,11 @@ const float Player::getRotation() const
 void Player::setTopLeftPosition(const float x, const float y){
     this->sprite.setPosition(x + this->sprite.getOrigin().x ,
                              y + this->sprite.getOrigin().y);
+    this->playerBounds.setPosition(x + this->playerBounds.getOrigin().x ,
+                             y + this->playerBounds.getOrigin().y);
 }
-/**
- * @brief sets the Position property of sprite
- * 
- * @param x 
- * @param y 
- */
-void Player::setSpritePosition(const float x, const float y)
-{
-    this->sprite.setPosition(x, y);
-}
+
+
 /**
  * @brief Set the new absolute position of the center of the Player Sprite
  * 
@@ -99,16 +86,7 @@ void Player::setSpritePosition(const float x, const float y)
 void Player::setCenter(const float x, const float y){
     this->setTopLeftPosition(x-this->getWidth()/2, y-this->getHeight()/2);
 }
-/**
- * @brief sets the relative position of origin from the top left corner of the sprite
- * 
- * @param x 
- * @param y 
- */
-void Player::setSpriteOrigin(const float x, const float y)
-{
-    this->sprite.setOrigin(x, y);
-}
+
 /**
  * @brief Sets the absolute angle of rotation in clockwise direction
  * 
@@ -118,6 +96,7 @@ void Player::setRotation(const float angle)
 {
     this->sprite.setRotation(angle);
 }
+
 /**
  * @brief Rotates the sprite by given angle clockwise
  * 
@@ -138,6 +117,7 @@ void Player::rotate(const float angle)
 void Player::move(const float dir_x, const float dir_y)
 {
     this->sprite.move(dir_x, dir_y);
+    this->playerBounds.move(dir_x, dir_y);
 }
 /**
  * @brief For moving the sprite as per velocity in that instant if no rotation is present.
@@ -152,7 +132,16 @@ void Player::updateMovement(sf::Time elapsedTime)
     float dy = eTime* this->velocity.y;
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
+    
 }
+
+// void Player::resolveTileCollision()
+// {
+//         //
+// }
+
+
+
 /**
  * @brief Sets keyHeld to true if space, up arrow, or left mouse button is held
  * 
@@ -214,6 +203,7 @@ void Player::handleEvent(sf::Event ev)
 
     keyHeld = spaceHeld || upArrowHeld || leftClickHeld;
 }
+
 //Update and Render
 /**
  * @brief Updates the new position of the player. Calls updateMovement() to move it and 
@@ -224,8 +214,14 @@ void Player::handleEvent(sf::Event ev)
 void Player::update(sf::Time elapsedTime)
 {
     this->updateMovement(elapsedTime);
+	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
+		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
+			std::cout << "Colliding!!" << std::endl;
+		}
+	}
     this->updateVelocity(elapsedTime);
 }
+
 /**
  * @brief Renders the player sprite for each frame
  * 
@@ -235,6 +231,3 @@ void Player::render(sf::RenderTarget& target)
 {
     target.draw(this->sprite);
 }
-// Functions for class NormalPlayer
-
-

@@ -1,7 +1,9 @@
 #include "NormalPlayer.h"
+#include "../States/PlayingState.h"
 #include <iostream>
 //Constructor
-NormalPlayer::NormalPlayer(int index)
+NormalPlayer::NormalPlayer(PlayingState& context, int index):
+    Player(context)
 {
     this->sprite.setTexture("player/spritesheet", index);
     this->initVariables();
@@ -15,9 +17,11 @@ NormalPlayer::~NormalPlayer(){}
  */
 void NormalPlayer::initVariables()
 {
-    this->onGround = false;
+    this->sprite.setOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
     this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
-    this->setSpriteOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
+    this->playerBounds.setWidth(CONSTANTS::PLAYER_WIDTH);
+    this->playerBounds.setHeight(CONSTANTS::PLAYER_HEIGHT);
+    this->onGround = false;
     this->setRotation(0.f);
 }
 /**
@@ -30,6 +34,7 @@ void NormalPlayer::initPhysics()
     this->velocity.y = CONSTANTS::PLAYER_SPEED_Y;
     // this->timeAbove = 0.f;
 }
+
 //Functions
 /**
  * @brief Resets the velocity in y direction back to 0
@@ -79,14 +84,16 @@ void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
 
     this->onGround = false;
     // checking for hitting the ground
-    if(this->getCenter().y>=CONSTANTS::SPAWNPOINT_Y) // to be replaced with collision detection with tile map and ground
+    if(this->getTopLeftPosition().y>=CONSTANTS::GROUNDHEIGHT - CONSTANTS::PLAYER_WIDTH) 
     {
        // std::cout<<"Touching ground at "<<this->velocity.y<<" speed"<<std::endl;
         this->resetVelocityY();
-        this->setSpritePosition(getCenter().x, CONSTANTS::SPAWNPOINT_Y);
+        this->setTopLeftPosition(this->getTopLeftPosition().x, 
+            CONSTANTS::GROUNDHEIGHT - CONSTANTS::PLAYER_WIDTH);
         // std::cout<<"On air for : "<<this->timeAbove<<std::endl;
         this->setOnGround();
     }
+    
     if(!(this->onGround))
         this->sprite.rotate(CONSTANTS::PLAYER_ANGULAR_VELOCITY* elapsedTime.asSeconds());
 
