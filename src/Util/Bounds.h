@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 //#include "BoxBounds.h"
 enum class BoundsType{Box, Triangle};
-class Bounds : public sf::IntRect
+class Bounds : sf::Transformable
 {
 protected:
     BoundsType type;
