@@ -15,7 +15,7 @@ private:
 	void initVariables() override;
 	void initPhysics() override;
 public:
-	NormalPlayer(int index = CONSTANTS::DEFAULT_PLAYER_SPRITE_INDEX);
+	NormalPlayer(PlayingState& context, int index = CONSTANTS::DEFAULT_PLAYER_SPRITE_INDEX);
 	virtual ~NormalPlayer();
 
 	//Modifiers
