@@ -9,8 +9,7 @@
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
 Player::Player(PlayingState& context):
-	m_ref_PlayingState(context),
-    playerBounds(CONSTANTS::PLAYER_CENTER, CONSTANTS::PLAYER_WIDTH, CONSTANTS::PLAYER_HEIGHT)
+	m_ref_PlayingState(context)
 {
 }
 Player::~Player(){}
@@ -121,7 +120,6 @@ void Player::setCenter(const float x, const float y){
 void Player::setSpriteOrigin(const float x, const float y)
 {
     this->sprite.setOrigin(x, y);
-    this->playerBounds.setOrigin(x, y);
 }
 /**
  * @brief Sets the absolute angle of rotation in clockwise direction
@@ -131,7 +129,6 @@ void Player::setSpriteOrigin(const float x, const float y)
 void Player::setRotation(const float angle)
 {
     this->sprite.setRotation(angle);
-    this->playerBounds.setRotation(angle);
 }
 /**
  * @brief Rotates the sprite by given angle clockwise
@@ -141,7 +138,6 @@ void Player::setRotation(const float angle)
 void Player::rotate(const float angle)
 {
     this->sprite.rotate(angle);
-    this->playerBounds.rotate(angle);
 }
 
 //Movement
@@ -172,10 +168,10 @@ void Player::updateMovement(sf::Time elapsedTime)
     
 }
 
-void Player::resolveTileCollision()
-{
-        //
-}
+// void Player::resolveTileCollision()
+// {
+//         //
+// }
 
 
 
@@ -250,11 +246,11 @@ void Player::handleEvent(sf::Event ev)
 void Player::update(sf::Time elapsedTime)
 {
     this->updateMovement(elapsedTime);
-	// for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
-	// 	if(checkCollision(tile.bounds())){
-	// 		resolveCollision(tile.bounds);
-	// 	}
-	// }
+	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
+		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
+			std::cout << "Colliding!! at position " << this->getTopLeftPosition().x << std::endl;
+		}
+	}
     this->updateVelocity(elapsedTime);
 }
 /**

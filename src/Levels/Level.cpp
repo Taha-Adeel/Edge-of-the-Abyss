@@ -1,10 +1,12 @@
 #include <iostream>
 #include <sstream>
 #include <exception>
+#include <assert.h>
 
 #include "../States/PlayingState.h"
 #include "Level.h"
 #include "../Util/Constants.h"
+#include "../Util/BoxBound.h"
 #include "../Util/tinyxml2.h"
 
 /**
@@ -131,8 +133,7 @@ void Level::loadMap(std::string mapName){
 	{
 		try{
 			// Load and add the tileset to m_tilesets
-			TileSet tls = loadTileSet(pTileset);
-			m_tilesets.push_back(tls);
+			loadTileSet(pTileset);
 		}
 		catch(std::exception& e){
 			std::cout << e.what() << std::endl;
@@ -153,8 +154,7 @@ void Level::loadMap(std::string mapName){
 			
 			try{
 				// Load and add the tile to m_tilemap
-				Tile tile = loadTile(tile_data[tile_counter], tile_counter);
-				m_tilemap.push_back(tile);
+				loadTile(tile_data[tile_counter], tile_counter);
 			}
 			catch(std::exception& e){
 				std::cout << e.what() << std::endl;
@@ -175,13 +175,14 @@ void Level::loadMapData(tinyxml2::XMLElement* pMapNode){
 }
 
 
-TileSet Level::loadTileSet(tinyxml2::XMLElement* pTileset){
+void Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 	using namespace tinyxml2;
 
+	m_tilesets.emplace_back(TileSet());
 	TileSet tileset;
 
 	// Get tileset firstgid
-	pTileset->QueryIntAttribute("firstgid", &tileset.first_gid);
+	pTileset->QueryIntAttribute("firstgid", &m_tilesets.back().first_gid);
 
 	// Get tileset data source.
 	std::stringstream tileset_source;
@@ -196,32 +197,39 @@ TileSet Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 
 	// Set the tileset texture path
 	std::string texture_path = pTileSetNode->FirstChildElement("image")->Attribute("source");
-	tileset.setTexturePath(texture_path);
+	m_tilesets.back().setTexturePath(texture_path);
 
 	// Get the tile width, height, spacing, tilecount, etc
-	pTileSetNode->QueryIntAttribute("tilewidth", &tileset.tilewidth);
-	pTileSetNode->QueryIntAttribute("tileheight", &tileset.tileheight);
-	pTileSetNode->QueryIntAttribute("spacing", &tileset.tilespacing);
-	pTileSetNode->QueryIntAttribute("tilecount", &tileset.tilecount);
-
-	// tileset.bounds.allocate(tilecount);
+	pTileSetNode->QueryIntAttribute("tilewidth", &m_tilesets.back().tilewidth);
+	pTileSetNode->QueryIntAttribute("tileheight", &m_tilesets.back().tileheight);
+	pTileSetNode->QueryIntAttribute("spacing", &m_tilesets.back().tilespacing);
+	pTileSetNode->QueryIntAttribute("tilecount", &m_tilesets.back().tilecount);
 
 	for(XMLElement* pTile = pTileSetNode->FirstChildElement("tile"); pTile != NULL;
 						pTile = pTile->NextSiblingElement("tile")){
 		int tile_id;
 		pTile->QueryIntAttribute("id", &tile_id);
 
-		// XMLElement* pTileBound = pTile->FirstChildElement("objectgroup")->FirstChildElement("object");
+		XMLElement* pTileBound = pTile->FirstChildElement("objectgroup")->FirstChildElement("object");
 
-		// bounds[tile_id].name = pTileBound->Attribute("name");
-		// bounds[tile_id].type = pTileBound->Attribute("type");
-		// pTileBound->QueryIntAttribute("x", &bounds[tile_id].x);
-		// pTileBound->QueryIntAttribute("y", &bounds[tile_id].y);
-		// pTileBound->QueryIntAttribute("width", &bounds[tile_id].width);
-		// pTileBound->QueryIntAttribute("height", &bounds[tile_id].height);
+		std::string name = pTileBound->Attribute("name");
+		BoundName b_name;
+		assert(name=="Tile");
+		b_name = BoundName::TILE;
+
+		std::string type = pTileBound->Attribute("type");
+		if(type=="BoxBound"){
+			int x, y, width, height;
+			pTileBound->QueryIntAttribute("x", &x);
+			pTileBound->QueryIntAttribute("y", &y);
+			pTileBound->QueryIntAttribute("width", &width);
+			pTileBound->QueryIntAttribute("height", &height);
+
+			m_tilesets.back().tile_bounds.emplace_back(std::make_unique<BoxBound>(sf::Vector2f(x,y), width, height, b_name));
+		}else{
+			std::cout << "Error" << std::endl;
+		}
 	}
-
-	return tileset;	
 }
 
 
@@ -238,7 +246,7 @@ std::vector<long long int> parse_csv_data_to_ints(const char* _data){
 }
 
 
-Tile Level::loadTile(long long int tile_data, int tile_counter){
+void Level::loadTile(long long int tile_data, int tile_counter){
 	//Parse the tile_data. The bits at position 28, 29, 30 represent the following flags.
 	bool horizontalFlip = tile_data & 0x80000000;
 	bool verticalFlip = tile_data & 0x40000000;
@@ -277,5 +285,5 @@ Tile Level::loadTile(long long int tile_data, int tile_counter){
 	int y_offset = getMapSize().y - CONSTANTS::GROUNDHEIGHT;
 	yy -= y_offset;
 
-	return Tile(m_tilesets[tileset_index], tileID, xx, yy, scale, rotation);
+	m_tilemap.emplace_back(Tile(m_tilesets[tileset_index], tileID, xx, yy, scale, rotation));
 }

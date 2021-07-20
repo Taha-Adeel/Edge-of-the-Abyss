@@ -17,6 +17,9 @@ NormalPlayer::~NormalPlayer(){}
  */
 void NormalPlayer::initVariables()
 {
+    this->playerBounds.setPosition(CONSTANTS::PLAYER_CENTER - sf::Vector2f(21,21));
+    this->playerBounds.setWidth(42);
+    this->playerBounds.setHeight(42);
     this->onGround = false;
     this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->setSpriteOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);

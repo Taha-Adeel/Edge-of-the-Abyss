@@ -64,9 +64,9 @@ public:
 	void move(const float dir_x, const float dir_y);
 	virtual void updateMovement(sf::Time elapsedTime);
 	virtual void updateVelocity(sf::Time elapsedTime) = 0; // Physics may change on the mode of the game
-	virtual void resolveTileCollision();
-	virtual void resolveSpikeCollision();
-	virtual void die();
+	// virtual void resolveTileCollision();
+	// virtual void resolveSpikeCollision();
+	// virtual void die();
 	
 	void handleEvent(sf::Event ev);
 	void update(sf::Time elapsedTime);

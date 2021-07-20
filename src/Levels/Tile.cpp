@@ -1,4 +1,7 @@
+#include <iostream>
+
 #include "Tile.h"
+#include "../Util/BoxBound.h"
 #include "../Util/Constants.h"
 
 /**
@@ -22,6 +25,19 @@ Tile::Tile(TileSet& tileset, int gid, float x, float y, sf::Vector2f scale, floa
 	m_sprite.setPosition(m_position);
 	m_sprite.setScale(m_scale);
 	m_sprite.rotate(m_rotation);
+
+	Bound* tile_bound = tileset.tile_bounds.at(gid-tileset.first_gid).get();
+
+	if(tile_bound->b_type == BoundType::BOX){
+		m_pBound = std::make_unique<BoxBound>(sf::Vector2f(tile_bound->getPosition()+m_position)
+			, tile_bound->getWidth(), tile_bound->getHeight());
+	}else{
+		std::cout << "Error in Tile construction" << std::endl;
+	}
+}
+
+const Bound& Tile::getBounds() const {
+	return *(m_pBound.get());
 }
 
 

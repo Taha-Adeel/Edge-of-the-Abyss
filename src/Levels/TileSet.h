@@ -3,8 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
-// class Bound;
+#include "../Util/Bound.h"
 
 /**
  * @brief Container for the tilesets obtained on parsing our Level files(*.tmx files)
@@ -20,7 +21,7 @@ public:
 	int tilecount = 0;
 	int tilespacing = 0;
 
-	// std::vector<Bound> tile_bounds;
+	std::vector<std::unique_ptr<Bound>> tile_bounds;
 
 	void setTexturePath(std::string);
 	const std::string getTexturePath() const;

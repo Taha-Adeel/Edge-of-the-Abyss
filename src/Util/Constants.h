@@ -9,7 +9,6 @@ namespace CONSTANTS{
 	constexpr unsigned int WINDOW_WIDTH = 1280; 
 	constexpr unsigned int WINDOW_HEIGHT = 720;
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
-	constexpr int DEFAULT_PLAYER_SPRITE_INDEX = 29;
 
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
 	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f, -30.f);
@@ -18,6 +17,7 @@ namespace CONSTANTS{
 
 	constexpr float GRAVITY = 2500.f;
 
+	constexpr int DEFAULT_PLAYER_SPRITE_INDEX = 29;
 	constexpr float PLAYER_WIDTH = 42.f;
 	constexpr float PLAYER_HEIGHT = 42.f;
 	constexpr float SPAWNPOINT_X = 0.f;

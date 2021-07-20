@@ -1,22 +1,7 @@
 #include "Bound.h"
 #include "BoxBound.h"
 
-Side getOppositeSide(Side side)
-{
-    if(side == Side::TOP) return Side::BOTTOM;
-    else if(side == Side::LEFT) return Side::RIGHT;
-    else if(side == Side::RIGHT) return Side::LEFT;
-    else if(side == Side::BOTTOM) return Side::RIGHT;
-    else return Side::NONE;
-}
 
-
-
-Bound::Bound()
-{
-    b_type = BoundType::BOX;
-    b_name = BoundName::SPIKE;
-}
 Bound::Bound(BoundType type, BoundName name)
 {
     b_type = type;
@@ -32,11 +17,11 @@ Bound::~Bound(){}
  * @return true if colliding
  * @return false if not colliding
  */
-bool Bound::checkCollision(Bound& b1, Bound& b2)
+bool Bound::checkCollision(const Bound& b1, const Bound& b2)
 {
     if(b1.b_type == BoundType::BOX && b2.b_type == BoundType::BOX)
     {
-        return BoxBound::checkCollision((BoxBound&)b1, (BoxBound&)b2);
+        return BoxBound::checkCollision(static_cast<const BoxBound&>(b1), static_cast<const BoxBound&>(b2));
     }
     return false;
 }

@@ -48,8 +48,8 @@ private:
 	// private member functions
 	void loadMap(std::string mapName);
 	void loadMapData(tinyxml2::XMLElement* pMapNode);
-	TileSet loadTileSet(tinyxml2::XMLElement* pTileSet);
-	Tile loadTile(long long int tile_data, int tile_counter);
+	void loadTileSet(tinyxml2::XMLElement* pTileSet);
+	void loadTile(long long int tile_data, int tile_counter);
 };
 
 // Utility functions
