@@ -1,5 +1,17 @@
 #include "Bound.h"
 #include "BoxBound.h"
+
+Side getOppositeSide(Side side)
+{
+    if(side == Side::TOP) return Side::BOTTOM;
+    else if(side == Side::LEFT) return Side::RIGHT;
+    else if(side == Side::RIGHT) return Side::LEFT;
+    else if(side == Side::BOTTOM) return Side::RIGHT;
+    else return Side::NONE;
+}
+
+
+
 Bound::Bound()
 {
     b_type = BoundType::Box;

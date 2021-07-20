@@ -3,8 +3,10 @@
 #include <SFML/Graphics.hpp>
 enum class BoundType{Box, Triangle};
 enum class BoundName{Spike1, Spike2};
+enum class Side{TOP, LEFT, RIGHT, BOTTOM, NONE};
+Side getOppositeSide(Side side);
 class BoxBound;
-class Bound : sf::Transformable
+class Bound : public sf::Transformable
 {
 protected:
     BoundType b_type;

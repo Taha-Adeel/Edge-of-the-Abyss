@@ -13,10 +13,13 @@ public:
 
     const float getHeight() override;
     const float getWidth() override;
-    const float getHalfHeight();
-    const float getHalfWidth();
-    const sf::Vector2f getCenter();
-
+    const float getHalfHeight() const;
+    const float getHalfWidth() const;
+    const sf::Vector2f getCenter() const;
+    const float getLeft() const;
+    const float getRight() const;
+    const float getTop() const;
+    const float getBottom() const;
     bool static checkCollision(BoxBound& b1, BoxBound& b2);
 };
 #endif
