@@ -8,12 +8,15 @@ class BoxBound : public Bound
 
 public:
     BoxBound(sf::Vector2f center, float width, float height);
-    float getHeight() override;
-    float getWidth() override;
+    BoxBound::BoxBound(sf::Vector2f center, float width, float height, BoundType type, BoundName name);
+    virtual ~BoxBound();
 
-    bool static checkCollision(BoxBound& b1, BoxBound& b2)
-    {
-        float dx = 2;
-    }
+    const float getHeight() override;
+    const float getWidth() override;
+    const float getHalfHeight();
+    const float getHalfWidth();
+    const sf::Vector2f getCenter();
+
+    bool static checkCollision(BoxBound& b1, BoxBound& b2);
 };
 #endif

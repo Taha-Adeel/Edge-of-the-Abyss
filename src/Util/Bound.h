@@ -10,8 +10,12 @@ protected:
     BoundType b_type;
     BoundName b_name;
 public:
-    virtual float getWidth() = 0;
-    virtual float getHeight()=0;
+    Bound();
+    virtual ~Bound();
+    Bound(BoundType, BoundName);
+
+    virtual const float getWidth() = 0;
+    virtual const float getHeight()=0;
 
     static bool checkCollision(Bound& b1, Bound& b2);
 };
