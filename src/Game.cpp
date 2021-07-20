@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Util/Constants.h"
+#include <iostream>
 
 
 /**
@@ -12,7 +13,7 @@ Game::Game(): m_window(sf::VideoMode(CONSTANTS::WINDOW_WIDTH, CONSTANTS::WINDOW_
 							CONSTANTS::WINDOW_TITLE,
 							sf::Style::Titlebar | sf::Style::Close),
 							m_pCurrentState(std::make_unique<PlayingState>(*this)){
-	m_window.setFramerateLimit(30);
+	m_window.setFramerateLimit(60);
 }
 
 
@@ -40,20 +41,21 @@ Game& Game::getGameInstance(){
 void Game::run(){
 	sf::Clock timer;
 	sf::Time elapsedTime;
-
 	while(m_window.isOpen()){
 		// sf::Clock::restart() returns the elapsed time since it was started, i.e elapsedTime holds
 		// the frame time of the last frame.
 		// elapsedTime is used to update our physics properly, so that gameplay is independent of FPS
 		elapsedTime = timer.restart();
+		
+		handleEvent();
 
 		m_pCurrentState->update(elapsedTime);
-
-		m_window.clear(sf::Color(121, 25, 255));
+		
+		m_window.clear(CONSTANTS::BG_COLOR);
 		m_pCurrentState->render(m_window);
         m_window.display();
 
-		handleEvent();
+		// std::cout << "FPS: " << 1/elapsedTime.asSeconds() << '\n';
 	}
 }
 
