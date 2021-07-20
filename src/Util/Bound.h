@@ -1,8 +1,8 @@
 #ifndef BOUNDS_H
 #define BOUNDS_H
 #include <SFML/Graphics.hpp>
-enum class BoundType{Box, Triangle};
-enum class BoundName{Spike1, Spike2};
+enum class BoundType{BOX, TRIANGLE};
+enum class BoundName{TILE, SPIKE, PORTAL};
 enum class Side{TOP, LEFT, RIGHT, BOTTOM, NONE};
 Side getOppositeSide(Side side);
 class BoxBound;

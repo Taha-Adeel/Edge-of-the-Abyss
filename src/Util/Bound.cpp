@@ -14,8 +14,8 @@ Side getOppositeSide(Side side)
 
 Bound::Bound()
 {
-    b_type = BoundType::Box;
-    b_name = BoundName::Spike1;
+    b_type = BoundType::BOX;
+    b_name = BoundName::SPIKE;
 }
 Bound::Bound(BoundType type, BoundName name)
 {
@@ -34,7 +34,7 @@ Bound::~Bound(){}
  */
 bool Bound::checkCollision(Bound& b1, Bound& b2)
 {
-    if(b1.b_type == BoundType::Box && b2.b_type == BoundType::Box)
+    if(b1.b_type == BoundType::BOX && b2.b_type == BoundType::BOX)
     {
         return BoxBound::checkCollision((BoxBound&)b1, (BoxBound&)b2);
     }

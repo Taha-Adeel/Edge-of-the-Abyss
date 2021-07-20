@@ -1,6 +1,6 @@
 #include "BoxBound.h"
 
-BoxBound::BoxBound(sf::Vector2f center, float width, float height):Bound(BoundType::Box, BoundName::Spike1)
+BoxBound::BoxBound(sf::Vector2f center, float width, float height):Bound(BoundType::BOX, BoundName::SPIKE)
 {
     this->center = center;
     this->height = height;
