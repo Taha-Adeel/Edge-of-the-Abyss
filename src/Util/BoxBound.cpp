@@ -39,11 +39,14 @@ const float BoxBound::getBottom() const{return this->getCenter().y + this->halfH
 
 bool BoxBound::checkCollision(const BoxBound& b1, const BoxBound& b2)
 {
-    // check for the collision between two box bounds
-    if(b1.getLeft() <= b2.getRight() && b1.getRight() >= b2.getLeft())
-    {
-        if(b1.getTop() <= b2.getBottom() && b1.getBottom() >= b2.getTop())
-            return true;
-    }
-    return false;
+    // // check for the collision between two box bounds
+    // if(b1.getLeft() <= b2.getRight() && b1.getRight() >= b2.getLeft())
+    // {
+    //     if(b1.getTop() <= b2.getBottom() && b1.getBottom() >= b2.getTop())
+    //         return true;
+    // }
+    // return false;
+    return sf::FloatRect(b1.getLeft(), b1.getTop(), b1.getWidth(), b1.getHeight()).intersects(
+            sf::FloatRect(b2.getLeft(), b2.getTop(), b2.getWidth(), b2.getHeight())
+    );
 }
