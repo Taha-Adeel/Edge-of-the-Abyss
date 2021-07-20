@@ -21,8 +21,8 @@ class Player
 {
 protected:
 	Sprite sprite;
-	BoxBound bounds;
 	PlayingState& m_ref_PlayingState;
+	BoxBound playerBounds;
 
 	//Physics
     // GRAVITY_STATE gravity_state;
