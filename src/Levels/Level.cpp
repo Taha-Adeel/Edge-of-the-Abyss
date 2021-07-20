@@ -213,22 +213,29 @@ void Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 		XMLElement* pTileBound = pTile->FirstChildElement("objectgroup")->FirstChildElement("object");
 
 		std::string name = pTileBound->Attribute("name");
-		BoundName b_name;
-		assert(name=="Tile");
-		b_name = BoundName::TILE;
+		BOUNDNAME bound_name;
+		if(name == "Tile")
+			bound_name = BOUNDNAME::TILE;
+		else if(name == "Spike")
+			bound_name = BOUNDNAME::SPIKE;
+		else
+			throw std::runtime_error("Invalid bounds name");
 
 		std::string type = pTileBound->Attribute("type");
-		if(type=="BoxBound"){
+		if(type == "BoxBound"){
 			int x, y, width, height;
 			pTileBound->QueryIntAttribute("x", &x);
 			pTileBound->QueryIntAttribute("y", &y);
 			pTileBound->QueryIntAttribute("width", &width);
 			pTileBound->QueryIntAttribute("height", &height);
-
-			m_tilesets.back().tile_bounds.emplace_back(std::make_unique<BoxBound>(sf::Vector2f(x,y), width, height, b_name));
-		}else{
-			std::cout << "Error" << std::endl;
+			m_tilesets.back().tile_bounds.emplace_back
+				(std::make_unique<BoxBound>(sf::Vector2f(x,y), width, height, bound_name));
 		}
+		else if(type == "TriangleBound"){
+			std::cout << "Triangle bounds not implemented yet" << std::endl;
+		}
+		else
+			throw std::runtime_error("Invalid bound type");
 	}
 }
 
@@ -277,8 +284,8 @@ void Level::loadTile(long long int tile_data, int tile_counter){
 	}
 	
 	//Get the position of center of the tile in the level
-	int xx = m_tileSize.x/2;
-	int yy = m_tileSize.y/2;
+	int xx = 0;
+	int yy = 0;
 	xx += getTileWidth() * (tile_counter % getMapWidth()) + 1000;
 	yy += getTileHeight() * (tile_counter / getMapWidth());
 	

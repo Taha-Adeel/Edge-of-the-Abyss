@@ -3,22 +3,22 @@
 
 #include <SFML/Graphics.hpp>
 
-enum class BoundType{BOX, TRIANGLE};
-enum class BoundName{TILE, SPIKE, PORTAL};
-
-class BoxBound;
+enum class BOUNDTYPE {BOX, TRIANGLE};
+enum class BOUNDNAME {TILE, SPIKE, PORTAL};
 class Bound : public sf::Transformable
 {
-public:
-    BoundType b_type;
-    BoundName b_name;
+protected:
+    BOUNDTYPE b_type;
+    BOUNDNAME b_name;
 public:
     Bound() = default;
-    Bound(BoundType, BoundName);
+    Bound(BOUNDTYPE, BOUNDNAME);
     virtual ~Bound();
 
-    virtual const float getWidth() = 0;
-    virtual const float getHeight() = 0;
+    virtual const float getWidth() const = 0;
+    virtual const float getHeight() const = 0;
+    const BOUNDTYPE getBoundType() const ;
+    const BOUNDNAME getBoundName() const ;
 
     static bool checkCollision(const Bound& b1, const Bound& b2);
 };

@@ -43,19 +43,15 @@ public:
 
 	//Accessors
 	const sf::Vector2f getTopLeftPosition() const;
-	const sf::Vector2f getSpritePosition() const;
 	const sf::Vector2f getCenter() const;
-	const sf::Vector2f getSpriteOrigin() const;
-	const sf::FloatRect getGlobalBounds() const;
 	const float getRotation() const;
+	const BoxBound& getplayerBounds() const;
 	const float getWidth() const;
 	const float getHeight() const;
 
 	//Modifiers
 	void setTopLeftPosition(const float x, const float y);
-	void setSpritePosition(const float x, const float y);
 	void setCenter(const float x, const float y);
-	void setSpriteOrigin(const float x, const float y);
 	void setRotation(const float angle);
 	void rotate(const float angle);
 	// void flipGravity();

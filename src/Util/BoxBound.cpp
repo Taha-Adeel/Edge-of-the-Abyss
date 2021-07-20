@@ -1,20 +1,20 @@
 #include "BoxBound.h"
 
-Side getOppositeSide(Side side)
+SIDE getOppositeSide(SIDE side)
 {
-    if(side == Side::TOP) return Side::BOTTOM;
-    else if(side == Side::LEFT) return Side::RIGHT;
-    else if(side == Side::RIGHT) return Side::LEFT;
-    else if(side == Side::BOTTOM) return Side::RIGHT;
-    else return Side::NONE;
+    if(side == SIDE::TOP) return SIDE::BOTTOM;
+    else if(side == SIDE::LEFT) return SIDE::RIGHT;
+    else if(side == SIDE::RIGHT) return SIDE::LEFT;
+    else if(side == SIDE::BOTTOM) return SIDE::RIGHT;
+    else return SIDE::NONE;
 }
 
 BoxBound::BoxBound(){
-    this->b_type = BoundType::BOX;
+    this->b_type = BOUNDTYPE::BOX;
 }
 
-BoxBound::BoxBound(sf::Vector2f position, float width, float height, BoundName name):
-    Bound(BoundType::BOX, name)
+BoxBound::BoxBound(sf::Vector2f position, float width, float height, BOUNDNAME name):
+    Bound(BOUNDTYPE::BOX, name)
 {
     sf::Transformable::setPosition(position);
     this->height = height;
@@ -25,8 +25,8 @@ BoxBound::BoxBound(sf::Vector2f position, float width, float height, BoundName n
 BoxBound::~BoxBound(){}
 
 
-const float BoxBound::getWidth(){return this->width;}
-const float BoxBound::getHeight(){return this->height;}
+const float BoxBound::getWidth() const {return this->width;}
+const float BoxBound::getHeight() const {return this->height;}
 void BoxBound::setWidth(float _width){this->width = _width;}
 void BoxBound::setHeight(float _height){this->height = _height;}
 const float BoxBound::getHalfWidth() const{return this->halfWidth;}

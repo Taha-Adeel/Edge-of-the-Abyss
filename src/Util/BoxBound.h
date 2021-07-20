@@ -3,8 +3,8 @@
 
 #include "Bound.h"
 
-enum class Side{TOP, LEFT, RIGHT, BOTTOM, NONE};
-Side getOppositeSide(Side side);
+enum class SIDE{TOP, LEFT, RIGHT, BOTTOM, NONE};
+SIDE getOppositeSide(SIDE side);
 class BoxBound : public Bound
 {
     // sf::Vector2f center;
@@ -12,11 +12,11 @@ class BoxBound : public Bound
 
 public:
     BoxBound();
-    BoxBound(sf::Vector2f position, float width, float height, BoundName name=BoundName::TILE);
+    BoxBound(sf::Vector2f position, float width, float height, BOUNDNAME name = BOUNDNAME::TILE);
     virtual ~BoxBound();
 
-    const float getWidth() override;
-    const float getHeight() override;
+    const float getWidth() const override;
+    const float getHeight() const override;
     void setWidth(float width);
     void setHeight(float weight);
     const float getHalfWidth() const;
