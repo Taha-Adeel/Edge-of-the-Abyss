@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  building Game:
+  building_game:
 
     runs-on: ubuntu-latest
 
