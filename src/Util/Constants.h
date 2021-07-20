@@ -22,6 +22,7 @@ namespace CONSTANTS{
 	constexpr float PLAYER_HEIGHT = 42.f;
 	constexpr float SPAWNPOINT_X = 0.f;
 	constexpr float SPAWNPOINT_Y = GROUNDHEIGHT - PLAYER_HEIGHT/2;
+	const sf::Vector2f PLAYER_CENTER(SPAWNPOINT_X + PLAYER_WIDTH/2, SPAWNPOINT_Y + PLAYER_HEIGHT/2);
 
 	constexpr float PLAYER_SPEED_X = 250.f;
 	constexpr float PLAYER_SPEED_Y = 0.f;

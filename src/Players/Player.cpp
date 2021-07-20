@@ -2,7 +2,8 @@
 #include <iostream>
 
 // Constructors and Destructors
-Player::Player(){}
+Player::Player(PlayingState& context):refPlayingState(context), bound(CONSTANTS::PLAYER_CENTER, CONSTANTS::PLAYER_WIDTH, CONSTANTS::PLAYER_HEIGHT)
+{}
 Player::~Player(){}
 
 // Accessors
@@ -79,6 +80,8 @@ const float Player::getRotation() const
 void Player::setTopLeftPosition(const float x, const float y){
     this->sprite.setPosition(x + this->sprite.getOrigin().x ,
                              y + this->sprite.getOrigin().y);
+    this->bound.setPosition(x + this->bound.getOrigin().x ,
+                             y + this->bound.getOrigin().y);
 }
 /**
  * @brief sets the Position property of sprite
@@ -89,6 +92,7 @@ void Player::setTopLeftPosition(const float x, const float y){
 void Player::setSpritePosition(const float x, const float y)
 {
     this->sprite.setPosition(x, y);
+    this->bound.setPosition(x, y);
 }
 /**
  * @brief Set the new absolute position of the center of the Player Sprite
@@ -108,6 +112,7 @@ void Player::setCenter(const float x, const float y){
 void Player::setSpriteOrigin(const float x, const float y)
 {
     this->sprite.setOrigin(x, y);
+    this->bound.setOrigin(x, y);
 }
 /**
  * @brief Sets the absolute angle of rotation in clockwise direction
@@ -117,6 +122,7 @@ void Player::setSpriteOrigin(const float x, const float y)
 void Player::setRotation(const float angle)
 {
     this->sprite.setRotation(angle);
+    this->bound.setRotation(angle);
 }
 /**
  * @brief Rotates the sprite by given angle clockwise
@@ -126,6 +132,7 @@ void Player::setRotation(const float angle)
 void Player::rotate(const float angle)
 {
     this->sprite.rotate(angle);
+    this->bound.rotate(angle);
 }
 
 //Movement
@@ -138,6 +145,7 @@ void Player::rotate(const float angle)
 void Player::move(const float dir_x, const float dir_y)
 {
     this->sprite.move(dir_x, dir_y);
+    this->bound.move(dir_x, dir_y);
 }
 /**
  * @brief For moving the sprite as per velocity in that instant if no rotation is present.
@@ -152,7 +160,16 @@ void Player::updateMovement(sf::Time elapsedTime)
     float dy = eTime* this->velocity.y;
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
+    
 }
+
+void Player::resolveTileCollision()
+{
+        //
+}
+
+
+
 /**
  * @brief Sets keyHeld to true if space, up arrow, or left mouse button is held
  * 

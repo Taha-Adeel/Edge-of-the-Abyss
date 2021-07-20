@@ -6,7 +6,8 @@
 #include <SFML/Audio.hpp>
 #include "../Util/Sprite.h"
 #include "../Util/Constants.h"
-
+#include "../Util/BoxBound.h"
+#include "../States/PlayingState.h"
 // enum class GRAVITY_STATE {NORMAL = 1, FLIPPED = -1};
 
 /**
@@ -17,7 +18,8 @@ class Player
 {
 protected:
 	Sprite sprite;
-
+	PlayingState& refPlayingState;
+	BoxBound bound;
 	//Physics
     // GRAVITY_STATE gravity_state;
 	sf::Vector2f velocity;
@@ -28,7 +30,7 @@ protected:
 	virtual void initPhysics() = 0;
 
 public:
-	Player();
+	Player(PlayingState& context);
 	virtual ~Player();
 
 	//Accessors
@@ -54,6 +56,9 @@ public:
 	void move(const float dir_x, const float dir_y);
 	virtual void updateMovement(sf::Time elapsedTime);
 	virtual void updateVelocity(sf::Time elapsedTime) = 0; // Physics may change on the mode of the game
+	virtual void resolveTileCollision();
+	virtual void resolveSpikeCollision();
+	virtual void die();
 	
 	void handleEvent(sf::Event ev);
 	void update(sf::Time elapsedTime);

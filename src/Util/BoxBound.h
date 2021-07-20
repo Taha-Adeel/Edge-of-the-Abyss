@@ -7,8 +7,7 @@ class BoxBound : public Bound
     float height, width, halfHeight, halfWidth;
 
 public:
-    BoxBound(sf::Vector2f center, float width, float height);
-    BoxBound::BoxBound(sf::Vector2f center, float width, float height, BoundType type, BoundName name);
+    BoxBound::BoxBound(sf::Vector2f center, float width, float height, BoundType type=BoundType::BOX, BoundName name=BoundName::TILE);
     virtual ~BoxBound();
 
     const float getHeight() override;

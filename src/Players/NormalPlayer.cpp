@@ -1,7 +1,7 @@
 #include "NormalPlayer.h"
 #include <iostream>
 //Constructor
-NormalPlayer::NormalPlayer(int index)
+NormalPlayer::NormalPlayer(PlayingState& context, int index):Player(context)
 {
     this->sprite.setTexture("player/spritesheet", index);
     this->initVariables();
