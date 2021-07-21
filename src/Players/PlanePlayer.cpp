@@ -2,6 +2,7 @@
 #include "../States/PlayingState.h"
 #include<iostream>
 #include<cmath>
+#define PI 3.14
 
 PlanePlayer::PlanePlayer(PlayingState& context):
     Player(context)
@@ -34,7 +35,7 @@ void PlanePlayer::initPhysics()
 void PlanePlayer::updateRotation(sf::Time elapsedTime) // overriding
 {
 
-    //this->setRotation(atan(velocity.y / velocity.x)) ;
+    this->setRotation(180/PI * (atan(velocity.y / velocity.x))) ;
     // Implement rotation
 
 }
