@@ -73,6 +73,18 @@ bool NormalPlayer::resolveGroundCollision()
     return this->onGround;
 }
 
+void NormalPlayer::resolveTileCollision(const BoxBound& tile){
+    SIDE collidingSide = this->playerBounds.getCollisionSide(tile);
+    if(collidingSide == SIDE::BOTTOM){
+        this->resetVelocityY();
+        this->setOnGround();
+        this->snapToSide(tile, collidingSide);
+    }
+    else{
+        std::cout << "You should die" << std::endl;
+    }
+}
+
 /**
  * @brief Rotating the sprite each frame as per the angular velocity
  *         Overridded to implement rotation when jumping
@@ -117,11 +129,4 @@ void NormalPlayer::updateVelocity(sf::Time elapsedTime)
         // this->timeAbove +=eTime;
         this->velocity.y = CONSTANTS::TERMINAL_SPEED;
     }
-}
-void NormalPlayer::snapToSurface(const float heightLevel)
-{
-    this->resetNearestOrientation();
-    this->resetVelocityY();
-    this->setOnGround(true);
-    this->setTopLeftPosition(this->getTopLeftPosition().x, heightLevel);
 }

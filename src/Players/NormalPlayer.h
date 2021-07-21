@@ -13,6 +13,8 @@ private:
 
 	bool resolveGroundCollision() override;
 
+	virtual void resolveTileCollision(const BoxBound& bound) override;
+
 	//Core logic
 	void initVariables() override;
 	void initPhysics() override;
@@ -27,6 +29,5 @@ public:
 	//Functions
     void updateRotation(sf::Time elapsedTime) override;
 	void updateVelocity(sf::Time elapsedTime) override;
-	void snapToSurface(const float heightLevel) override;
 };
 #endif

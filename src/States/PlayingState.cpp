@@ -59,7 +59,7 @@ const Player& PlayingState::getPlayer() const {
  * 
  * @return const Camera& 
  */
-const Camera& PlayingState::getCamera() const {
+Camera& PlayingState::getCamera() {
 	return m_camera;
 }
 

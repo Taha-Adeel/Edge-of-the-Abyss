@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "../States/PlayingState.h"
+
 #include <iostream>
+#include <assert.h>
 #include <cstdlib>
 
 // Constructors and Destructors
@@ -167,48 +169,61 @@ bool Player::resolveGroundCollision()
     return false;
 }
 
-void Player::resolveCollision(const Tile& tile)
-{
-    if(tile.getBounds().getBoundName()==BOUNDNAME::TILE)
-        this->resolveTileCollision(tile);
-    else if(tile.getBounds().getBoundName()==BOUNDNAME::SPIKE)
-        this->resolveSpikeCollision(tile);
-    if(tile.getBounds().getBoundName()==BOUNDNAME::PORTAL)
-        this->resolvePortalCollision(tile);
-    
-}
-void Player::resolveTileCollision(const Tile& tile)
-{
-    //if()
-    //this-
-    // const BoxBound& block = static_cast<const BoxBound&>(tile.getBounds());
-    // if(this->playerBounds.getRight()>=block.getLeft())
-    // {
-    //     if(this->playerBounds.getBottom() <= block.getThresholdTop())
-    //     {
-    //         std::cout<<"Safe landing"<<std::endl;
-    //         this->snapToSurface(block.getTop());
-    //         return ;
-    //     }
-    // }
-    // std::cout<<"Unsafe Collision!! Die!!"<<std::endl;
-    // this->die();
-}
-void Player::resolveSpikeCollision(const Tile& tile)
-{
 
+void Player::resolveCollision(const Bound& bound)
+{
+    switch(bound.getBoundName()){
+        case BOUNDNAME::TILE:
+            assert(bound.getBoundType() == BOUNDTYPE::BOX);
+            resolveTileCollision(static_cast<const BoxBound&>(bound));
+            break;
+        case BOUNDNAME::SPIKE:
+            resolveSpikeCollision(bound);
+            break;
+        case BOUNDNAME::PORTAL:
+            resolvePortalCollision(bound);
+            break;
+    }    
 }
-void Player::resolvePortalCollision(const Tile& tile)
+
+void Player::resolveTileCollision(const BoxBound& bound)
+{
+    SIDE collidingSide = this->playerBounds.getCollisionSide(bound);
+    if(collidingSide == SIDE::BOTTOM){
+        resetVelocityY();
+        this->snapToSide(bound, collidingSide);
+    }
+    else{
+        std::cout << "You should die" << std::endl;
+    }
+}
+
+
+void Player::snapToSide(const BoxBound& tile, SIDE collisionside){
+    assert(collisionside == SIDE::TOP || collisionside == SIDE::BOTTOM);
+
+    if(collisionside == SIDE::BOTTOM){
+        this->setTopLeftPosition(getTopLeftPosition().x, tile.getTop() - this->getHeight());
+    }
+    else if(collisionside == SIDE::TOP){
+        this->setTopLeftPosition(getTopLeftPosition().x, tile.getBottom());
+    }
+}
+
+void Player::resolveSpikeCollision(const Bound& bound)
+{
+    this->die();
+}
+
+void Player::resolvePortalCollision(const Bound& bound)
 {
 
 }
 void Player::die()
 {
-    //Game*  p = this->m_ref_PlayingState.
     std::cout<<"Game over: score : "<<this->score<<std::endl;
-    //close window
-    //this->m_ref_PlayingState.exitGame();
-    exit(0);
+    this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+    this->m_ref_PlayingState.getCamera().reset();
 }
 
 /**
@@ -282,13 +297,13 @@ void Player::handleEvent(sf::Event ev)
  */
 void Player::update(sf::Time elapsedTime)
 {
-    this->score+=elapsedTime.asSeconds();
+    this->score+=elapsedTime.asMilliseconds();
     this->updateMovement(elapsedTime);
     this->resolveGroundCollision();
 	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
 		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
-			std::cout << "Colliding!!" << std::endl;
-            // this->resolveCollision(tile);
+			// std::cout << "Colliding!!" << std::endl;
+            this->resolveCollision(tile.getBounds());
 		}
 	}
     this->updateRotation(elapsedTime);

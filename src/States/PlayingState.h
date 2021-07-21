@@ -29,7 +29,7 @@ public:
     void render(sf::RenderTarget& renderer) override ;
 	// public accessors
 	const Player& getPlayer() const ;
-	const Camera& getCamera() const ;
+	Camera& getCamera();
 	const Level& getCurrentLevel() const ;
 };
 
