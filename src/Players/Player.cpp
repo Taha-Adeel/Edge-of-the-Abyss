@@ -51,7 +51,6 @@ const sf::Vector2f Player::getCenter() const
                          this->getTopLeftPosition().y + this->getHeight()/2.f);
 }
 
-
 /**
  * @brief Returns the angle of rotation (0 <= angle <360)
  * 
@@ -75,7 +74,6 @@ void Player::setTopLeftPosition(const float x, const float y){
     this->playerBounds.setPosition(x + this->playerBounds.getOrigin().x ,
                              y + this->playerBounds.getOrigin().y);
 }
-
 
 /**
  * @brief Set the new absolute position of the center of the Player Sprite
@@ -107,6 +105,15 @@ void Player::rotate(const float angle)
     this->sprite.rotate(angle);
 }
 
+/**
+ * @brief Resets the velocity in y direction back to 0
+ * 
+ */
+void Player::resetVelocityY()
+{
+    this->velocity.y = 0;
+}
+
 //Movement
 /**
  * @brief Moves the sprite by given amount
@@ -119,8 +126,9 @@ void Player::move(const float dir_x, const float dir_y)
     this->sprite.move(dir_x, dir_y);
     this->playerBounds.move(dir_x, dir_y);
 }
+
 /**
- * @brief For moving the sprite as per velocity in that instant if no rotation is present.
+ * @brief For moving the sprite as per velocity in that instant.
  * Derived classes will override this if rotation or some other new mechanishm is required 
  * 
  * @param elapsedTime Time elapsed between the current and last frame in sf::Time
@@ -132,7 +140,29 @@ void Player::updateMovement(sf::Time elapsedTime)
     float dy = eTime* this->velocity.y;
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
-    
+}
+
+void Player::updateRotation(sf::Time elapsedTime){}
+
+/**
+ * @brief If player goes below ground height, its vertical velocity is reset to 0 
+ * and its position is snapped to ground height.
+ * 
+ * @return true If player is colliding with ground
+ * @return false Otherwise
+ */
+bool Player::resolveGroundCollision()
+{
+    // checking for hitting the ground
+    if(this->getTopLeftPosition().y>=CONSTANTS::GROUNDHEIGHT - this->getHeight()) 
+    {
+        // Resolving ground collision
+        this->resetVelocityY();
+        this->setTopLeftPosition(this->getTopLeftPosition().x, 
+            CONSTANTS::GROUNDHEIGHT - this->getHeight());
+        return true;
+    }
+    return false;
 }
 
 // void Player::resolveTileCollision()
@@ -214,11 +244,13 @@ void Player::handleEvent(sf::Event ev)
 void Player::update(sf::Time elapsedTime)
 {
     this->updateMovement(elapsedTime);
+    this->resolveGroundCollision();
 	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
 		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
 			std::cout << "Colliding!!" << std::endl;
 		}
 	}
+    this->updateRotation(elapsedTime);
     this->updateVelocity(elapsedTime);
 }
 

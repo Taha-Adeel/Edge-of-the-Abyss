@@ -1,6 +1,7 @@
 #include "NormalPlayer.h"
 #include "../States/PlayingState.h"
 #include <iostream>
+
 //Constructor
 NormalPlayer::NormalPlayer(PlayingState& context, int index):
     Player(context)
@@ -9,7 +10,9 @@ NormalPlayer::NormalPlayer(PlayingState& context, int index):
     this->initVariables();
     this->initPhysics();
 }
+
 NormalPlayer::~NormalPlayer(){}
+
 //Init Functions
 /**
  * @brief Places the player at the initial position required
@@ -24,6 +27,7 @@ void NormalPlayer::initVariables()
     this->onGround = false;
     this->setRotation(0.f);
 }
+
 /**
  * @brief Initialises the required variables for physics calculation and movement
  * 
@@ -32,29 +36,16 @@ void NormalPlayer::initPhysics()
 {
     this->velocity.x = CONSTANTS::PLAYER_SPEED_X;
     this->velocity.y = CONSTANTS::PLAYER_SPEED_Y;
-    // this->timeAbove = 0.f;
 }
 
 //Functions
-/**
- * @brief Resets the velocity in y direction back to 0
- * 
- */
-void NormalPlayer::resetVelocityY()
-{
-    this->velocity.y = 0.f;
-}
 /**
  * @brief Sets the boolean onGround to true(as the default parameter) to indicate that it is on ground
  * 
  */
 void NormalPlayer::setOnGround(bool _onGround)
 {
-    if(_onGround){
-        // this->timeAbove = 0.f;
-        this->onGround = true;
-    }
-    else this->onGround = false;
+    this->onGround = _onGround;
 }
 /**
  * @brief Sets the player sprite orientation to the nearest 90 degree angle so that it is touching the ground
@@ -69,31 +60,27 @@ void NormalPlayer::resetNearestOrientation()
    else if(angle<=315) this->setRotation(270.f);
    else this->setRotation(0.f);
 }
+
 /**
- * @brief Moving and rotating the sprite each frame as per the velocity and angular velocity
- *         Overridded to implement rotation
+ * @brief Overrides base class method to set onGround to true if its colliding with the ground.
+ * 
+ * @return true 
+ * @return false 
+ */
+bool NormalPlayer::resolveGroundCollision()
+{
+    this->onGround = Player::resolveGroundCollision();
+    return this->onGround;
+}
+
+/**
+ * @brief Rotating the sprite each frame as per the angular velocity
+ *         Overridded to implement rotation when jumping
  * 
  * @param elapsedTime Time elapsed between the current and last frame in sf::Time
  */
-void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
-{
-
-    this->Player::updateMovement(elapsedTime); // for translation
-
-    //std::cout<<this->getRotation()<<std::endl;
-
-    this->onGround = false;
-    // checking for hitting the ground
-    if(this->getTopLeftPosition().y>=CONSTANTS::GROUNDHEIGHT - CONSTANTS::PLAYER_WIDTH) 
-    {
-       // std::cout<<"Touching ground at "<<this->velocity.y<<" speed"<<std::endl;
-        this->resetVelocityY();
-        this->setTopLeftPosition(this->getTopLeftPosition().x, 
-            CONSTANTS::GROUNDHEIGHT - CONSTANTS::PLAYER_WIDTH);
-        // std::cout<<"On air for : "<<this->timeAbove<<std::endl;
-        this->setOnGround();
-    }
-    
+void NormalPlayer::updateRotation(sf::Time elapsedTime) // overriding
+{    
     if(!(this->onGround))
         this->sprite.rotate(CONSTANTS::PLAYER_ANGULAR_VELOCITY* elapsedTime.asSeconds());
 
