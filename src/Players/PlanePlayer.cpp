@@ -7,7 +7,6 @@ PlanePlayer::PlanePlayer(PlayingState& context):
 {
     this->sprite.setTexture("player/spaceship") ;
     this->initVariables() ;
-    std::cout << "Constructor called \n" ;
     this->initPhysics();
 }
 
@@ -45,10 +44,8 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
     if(!(this->keyHeld))
     {
          
-       this->resetVelocityY() ;
-       //std::cout<<"key not held" <<" : " << velocity.y ; 
-       //this->velocity.y = CONSTANTS::PLANE_SPEED_Y;
-       this->velocity.y += CONSTANTS::GRAVITY * elapsedTime.asSeconds() ;
+       //this->resetVelocityY() ;
+       this->velocity.y += CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds() ;
     //    if(this->getSpritePosition().y > CONSTANTS::PLANE_MIN_HEIGHT)//Not needed, but if used, use getTopLeft() instead of getSpritePosition
     //    {
     //       this->resetVelocityY();
@@ -57,10 +54,9 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
     }
     else 
     {   
-        //std::cout<<"Key heled ::" <<velocity.y  ;
-        this->resetVelocityY();
-        //this->velocity.y =  -(CONSTANTS::PLANE_SPEED_Y);
-        this->velocity.y -= (CONSTANTS::GRAVITY * elapsedTime.asSeconds()) ;
+        
+        //this->resetVelocityY();
+        this->velocity.y -= (CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()) ;
         //  if(this->getSpritePosition().y < CONSTANTS::PLANE_MAX_HEIGHT)
         //  {
         //     this->resetVelocityY();
