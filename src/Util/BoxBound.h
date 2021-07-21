@@ -7,26 +7,28 @@ enum class SIDE{TOP, LEFT, RIGHT, BOTTOM, NONE};
 SIDE getOppositeSide(SIDE side);
 class BoxBound : public Bound
 {
-    // sf::Vector2f center;
-    float height, width, halfHeight, halfWidth;
+    float height;
+    float width;
 
 public:
     BoxBound();
     BoxBound(sf::Vector2f position, float width, float height, BOUNDNAME name = BOUNDNAME::TILE);
     virtual ~BoxBound();
 
-    const float getWidth() const override;
-    const float getHeight() const override;
     void setWidth(float width);
     void setHeight(float weight);
-    const float getHalfWidth() const;
-    const float getHalfHeight() const;
-    const sf::Vector2f getCenter() const;
+    const float getWidth() const override;
+    const float getHeight() const override;
+
+    // Deleting the origin setters to ensure Position prperty is always of top left corner;
+    void setOrigin(float, float) = delete;
+    void setOrigin(const sf::Vector2f&) = delete;
+
     const float getLeft() const;
     const float getRight() const;
     const float getTop() const;
     const float getBottom() const;
-    const float getThresholdTop() const;
+
     static bool checkCollision(const BoxBound& b1, const BoxBound& b2);
 };
 #endif

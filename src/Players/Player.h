@@ -66,7 +66,7 @@ public:
 	virtual void updateMovement(sf::Time elapsedTime);
 	virtual void updateRotation(sf::Time elapsedTime);
 	virtual void updateVelocity(sf::Time elapsedTime) = 0; // Physics may change on the mode of the game
-	virtual void snapToSurface(const float heightLevel) = 0;
+	virtual void snapToSurface(const float heightLevel){};
 	virtual void resolveCollision(const Tile& tile);
 	virtual void resolveTileCollision(const Tile& tile);
 	virtual void resolveSpikeCollision(const Tile& tile);

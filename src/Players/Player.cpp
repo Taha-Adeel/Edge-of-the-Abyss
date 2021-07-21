@@ -181,18 +181,18 @@ void Player::resolveTileCollision(const Tile& tile)
 {
     //if()
     //this-
-    const BoxBound& block = static_cast<const BoxBound&>(tile.getBounds());
-    if(this->playerBounds.getRight()>=block.getLeft())
-    {
-        if(this->playerBounds.getBottom() <= block.getThresholdTop())
-        {
-            std::cout<<"Safe landing"<<std::endl;
-            this->snapToSurface(block.getTop());
-            return ;
-        }
-    }
-    std::cout<<"Unsafe Collision!! Die!!"<<std::endl;
-    this->die();
+    // const BoxBound& block = static_cast<const BoxBound&>(tile.getBounds());
+    // if(this->playerBounds.getRight()>=block.getLeft())
+    // {
+    //     if(this->playerBounds.getBottom() <= block.getThresholdTop())
+    //     {
+    //         std::cout<<"Safe landing"<<std::endl;
+    //         this->snapToSurface(block.getTop());
+    //         return ;
+    //     }
+    // }
+    // std::cout<<"Unsafe Collision!! Die!!"<<std::endl;
+    // this->die();
 }
 void Player::resolveSpikeCollision(const Tile& tile)
 {
@@ -288,7 +288,7 @@ void Player::update(sf::Time elapsedTime)
 	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
 		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
 			std::cout << "Colliding!!" << std::endl;
-            this->resolveCollision(tile);
+            // this->resolveCollision(tile);
 		}
 	}
     this->updateRotation(elapsedTime);
