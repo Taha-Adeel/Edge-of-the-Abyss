@@ -35,8 +35,9 @@ protected:
 	virtual void initVariables() = 0;
 	virtual void initPhysics() = 0;
 
-	// bool checkCollision(){};
-	// virtual void resolveCollision() = 0;
+	virtual bool resolveGroundCollision();
+	// virtual void resolveTileCollision();
+	// virtual void resolveSpikeCollision();
 
 
 public:
@@ -56,11 +57,14 @@ public:
 	void setCenter(const float x, const float y);
 	void setRotation(const float angle);
 	void rotate(const float angle);
+	void resetVelocityY();
 	// void flipGravity();
+	// void die();
 
 	//Functions	
 	void move(const float dir_x, const float dir_y);
 	virtual void updateMovement(sf::Time elapsedTime);
+	virtual void updateRotation(sf::Time elapsedTime);
 	virtual void updateVelocity(sf::Time elapsedTime) = 0; // Physics may change on the mode of the game
 	virtual void snapToSurface(const float heightLevel) = 0;
 	virtual void resolveCollision(const Tile& tile);

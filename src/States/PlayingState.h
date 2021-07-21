@@ -3,6 +3,7 @@
 
 #include "StateBase.h"
 #include "../Players/NormalPlayer.h"
+#include "../Players/PlanePlayer.h"
 #include "../Levels/Level.h"
 #include "../Camera.h"
 

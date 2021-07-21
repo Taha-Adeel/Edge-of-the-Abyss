@@ -48,7 +48,7 @@ const Bound& Tile::getBounds() const {
 
 
 /**
- * @brief Updates the Tile Object
+ * @brief Updates the Tile Object     
  * 
  * @param elapsedTime 
  */
