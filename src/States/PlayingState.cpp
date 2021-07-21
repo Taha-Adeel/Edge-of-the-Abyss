@@ -13,7 +13,6 @@ PlayingState::PlayingState(Game& pGame):
 	m_camera(*this)
 {
 }
-
 /**
  * @brief Delegates event handeling to player, camera, etc
  * 

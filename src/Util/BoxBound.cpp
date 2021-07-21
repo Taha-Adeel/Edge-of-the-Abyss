@@ -36,7 +36,14 @@ const float BoxBound::getLeft() const{return this->getCenter().x - this->halfWid
 const float BoxBound::getRight() const{return this->getCenter().x + this->halfWidth;}
 const float BoxBound::getTop() const{return this->getCenter().y - this->halfHeight;}
 const float BoxBound::getBottom() const{return this->getCenter().y + this->halfHeight;}
-
+/**
+ * @brief Returns the y value of the height level 5% below the top level of the bound
+ *          5% since, player may cross the top level betweem frames and we have to distinguish 
+ *          entering from top and from side.
+ * 
+ * @return const float 
+ */
+const float BoxBound::getThresholdTop() const{return this->getTop()*(1.05f);}
 bool BoxBound::checkCollision(const BoxBound& b1, const BoxBound& b2)
 {
     // // check for the collision between two box bounds

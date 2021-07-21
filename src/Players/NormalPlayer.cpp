@@ -84,14 +84,14 @@ void NormalPlayer::updateMovement(sf::Time elapsedTime) // overriding
 
     this->onGround = false;
     // checking for hitting the ground
-    if(this->getTopLeftPosition().y>=CONSTANTS::GROUNDHEIGHT - CONSTANTS::PLAYER_WIDTH) 
+    if(this->getTopLeftPosition().y>=CONSTANTS::GROUNDHEIGHT - CONSTANTS::PLAYER_HEIGHT) 
     {
        // std::cout<<"Touching ground at "<<this->velocity.y<<" speed"<<std::endl;
         this->resetVelocityY();
         this->setTopLeftPosition(this->getTopLeftPosition().x, 
             CONSTANTS::GROUNDHEIGHT - CONSTANTS::PLAYER_WIDTH);
         // std::cout<<"On air for : "<<this->timeAbove<<std::endl;
-        this->setOnGround();
+        this->setOnGround(true);
     }
     
     if(!(this->onGround))
@@ -130,4 +130,11 @@ void NormalPlayer::updateVelocity(sf::Time elapsedTime)
         // this->timeAbove +=eTime;
         this->velocity.y = CONSTANTS::TERMINAL_SPEED;
     }
+}
+void NormalPlayer::snapToSurface(const float heightLevel)
+{
+    this->resetNearestOrientation();
+    this->resetVelocityY();
+    this->setOnGround(true);
+    this->setTopLeftPosition(this->getTopLeftPosition().x, heightLevel);
 }

@@ -26,6 +26,7 @@ public:
     const float getRight() const;
     const float getTop() const;
     const float getBottom() const;
+    const float getThresholdTop() const;
     static bool checkCollision(const BoxBound& b1, const BoxBound& b2);
 };
 #endif

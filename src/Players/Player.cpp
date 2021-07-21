@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "../States/PlayingState.h"
 #include <iostream>
+#include <cstdlib>
 
 // Constructors and Destructors
 /**
@@ -9,7 +10,8 @@
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
 Player::Player(PlayingState& context):
-	m_ref_PlayingState(context)
+	m_ref_PlayingState(context),
+    score(0.f)
 {
 }
 Player::~Player(){}
@@ -135,12 +137,49 @@ void Player::updateMovement(sf::Time elapsedTime)
     
 }
 
-// void Player::resolveTileCollision()
-// {
-//         //
-// }
+void Player::resolveCollision(const Tile& tile)
+{
+    if(tile.getBounds().getBoundName()==BOUNDNAME::TILE)
+        this->resolveTileCollision(tile);
+    else if(tile.getBounds().getBoundName()==BOUNDNAME::SPIKE)
+        this->resolveSpikeCollision(tile);
+    if(tile.getBounds().getBoundName()==BOUNDNAME::PORTAL)
+        this->resolvePortalCollision(tile);
+    
+}
+void Player::resolveTileCollision(const Tile& tile)
+{
+    //if()
+    //this-
+    const BoxBound& block = static_cast<const BoxBound&>(tile.getBounds());
+    if(this->playerBounds.getRight()>=block.getLeft())
+    {
+        if(this->playerBounds.getBottom() <= block.getThresholdTop())
+        {
+            std::cout<<"Safe landing"<<std::endl;
+            this->snapToSurface(block.getTop());
+            return ;
+        }
+    }
+    std::cout<<"Unsafe Collision!! Die!!"<<std::endl;
+    this->die();
+}
+void Player::resolveSpikeCollision(const Tile& tile)
+{
 
+}
+void Player::resolvePortalCollision(const Tile& tile)
+{
 
+}
+void Player::die()
+{
+    //Game*  p = this->m_ref_PlayingState.
+    std::cout<<"Game over: score : "<<this->score<<std::endl;
+    //close window
+    //this->m_ref_PlayingState.exitGame();
+    exit(0);
+}
 
 /**
  * @brief Sets keyHeld to true if space, up arrow, or left mouse button is held
@@ -213,10 +252,12 @@ void Player::handleEvent(sf::Event ev)
  */
 void Player::update(sf::Time elapsedTime)
 {
+    this->score+=elapsedTime.asSeconds();
     this->updateMovement(elapsedTime);
 	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
 		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
 			std::cout << "Colliding!!" << std::endl;
+            this->resolveCollision(tile);
 		}
 	}
     this->updateVelocity(elapsedTime);

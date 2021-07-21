@@ -7,6 +7,7 @@
 #include "../Util/Sprite.h"
 #include "../Util/Constants.h"
 #include "../Util/BoxBound.h"
+#include "../Levels/Tile.h"
 
 // Forward Declared Dependencies
 class PlayingState;
@@ -26,6 +27,7 @@ protected:
 
 	//Physics
     // GRAVITY_STATE gravity_state;
+	float score;
 	sf::Vector2f velocity;
 	bool keyHeld = false;
 
@@ -60,9 +62,12 @@ public:
 	void move(const float dir_x, const float dir_y);
 	virtual void updateMovement(sf::Time elapsedTime);
 	virtual void updateVelocity(sf::Time elapsedTime) = 0; // Physics may change on the mode of the game
-	// virtual void resolveTileCollision();
-	// virtual void resolveSpikeCollision();
-	// virtual void die();
+	virtual void snapToSurface(const float heightLevel) = 0;
+	virtual void resolveCollision(const Tile& tile);
+	virtual void resolveTileCollision(const Tile& tile);
+	virtual void resolveSpikeCollision(const Tile& tile);
+	virtual void resolvePortalCollision(const Tile& tile);
+	virtual void die();
 	
 	void handleEvent(sf::Event ev);
 	void update(sf::Time elapsedTime);

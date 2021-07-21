@@ -26,5 +26,6 @@ public:
 	//Functions
     void updateMovement(sf::Time elapsedTime) override;
 	void updateVelocity(sf::Time elapsedTime) override;
+	void snapToSurface(const float heightLevel) override;
 };
 #endif

@@ -26,7 +26,6 @@ public:
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
-
 	// public accessors
 	const Player& getPlayer() const ;
 	const Camera& getCamera() const ;
