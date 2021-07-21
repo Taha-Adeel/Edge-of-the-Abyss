@@ -1,6 +1,7 @@
 #include "PlanePlayer.h"
 #include "../States/PlayingState.h"
 #include<iostream>
+#include<cmath>
 
 PlanePlayer::PlanePlayer(PlayingState& context):
     Player(context)
@@ -33,6 +34,7 @@ void PlanePlayer::initPhysics()
 void PlanePlayer::updateRotation(sf::Time elapsedTime) // overriding
 {
 
+    //this->setRotation(atan(velocity.y / velocity.x)) ;
     // Implement rotation
 
 }
@@ -43,27 +45,25 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
     
     if(!(this->keyHeld))
     {
-         
-       //this->resetVelocityY() ;
+        
        this->velocity.y += CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds() ;
-    //    if(this->getSpritePosition().y > CONSTANTS::PLANE_MIN_HEIGHT)//Not needed, but if used, use getTopLeft() instead of getSpritePosition
-    //    {
-    //       this->resetVelocityY();
-    //    }
+       if(this->getTopLeftPosition().y > CONSTANTS::PLANE_MIN_HEIGHT)//Not needed, but if used, use getTopLeft() instead of getSpritePosition
+       {
+          this->resetVelocityY();
+       }
        
     }
     else 
     {   
         
-        //this->resetVelocityY();
         this->velocity.y -= (CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()) ;
         //  if(this->getSpritePosition().y < CONSTANTS::PLANE_MAX_HEIGHT)
         //  {
         //     this->resetVelocityY();
         //  }       
     }
-    if(this->velocity.y >= CONSTANTS::TERMINAL_SPEED)
+    if(this->velocity.y >= CONSTANTS::PLANE_TERMINAL_VELOCITY_Y)
     {
-        this->velocity.y = CONSTANTS::TERMINAL_SPEED;
+        this->velocity.y = CONSTANTS::PLANE_TERMINAL_VELOCITY_Y;
     }
 }
