@@ -20,7 +20,7 @@ public:
     const float getWidth() const override;
     const float getHeight() const override;
 
-    // Deleting the origin setters to ensure Position prperty is always of top left corner;
+    // Deleting the origin setters to ensure Position property is always of top left corner;
     void setOrigin(float, float) = delete;
     void setOrigin(const sf::Vector2f&) = delete;
 
@@ -30,5 +30,6 @@ public:
     const float getBottom() const;
 
     static bool checkCollision(const BoxBound& b1, const BoxBound& b2);
+    SIDE getCollisionSide(const BoxBound& tile);
 };
 #endif

@@ -1,13 +1,6 @@
 #include "BoxBound.h"
-
-SIDE getOppositeSide(SIDE side)
-{
-    if(side == SIDE::TOP) return SIDE::BOTTOM;
-    else if(side == SIDE::LEFT) return SIDE::RIGHT;
-    else if(side == SIDE::RIGHT) return SIDE::LEFT;
-    else if(side == SIDE::BOTTOM) return SIDE::RIGHT;
-    else return SIDE::NONE;
-}
+#include <cmath>
+#include <assert.h>
 
 BoxBound::BoxBound(){
     this->b_type = BOUNDTYPE::BOX;
@@ -41,4 +34,29 @@ bool BoxBound::checkCollision(const BoxBound& b1, const BoxBound& b2)
             return true;
 
     return false;
+}
+
+/**
+ * @brief Returns the side of *this which is colliding with tile.
+ * 
+ * precondition - *this and tile are colliding.
+ * 
+ * @param tile 
+ * @return SIDE 
+ */
+SIDE BoxBound::getCollisionSide(const BoxBound& tile){
+    // assert(checkCollision(*this, tile));
+
+	float amtRight = this->getRight() - tile.getLeft();
+	float amtLeft = this->getLeft() - tile.getRight();
+	float amtTop = this->getTop() - tile.getBottom();
+	float amtBottom = this->getBottom() - tile.getTop();
+
+	float lowest =  std::min({fabs(amtRight), fabs(amtLeft), fabs(amtTop), fabs(amtBottom)});
+
+	return
+        lowest == fabs(amtRight) ? SIDE::RIGHT :
+        lowest == fabs(amtLeft) ? SIDE::LEFT :
+        lowest == fabs(amtTop) ? SIDE::TOP :
+        SIDE::BOTTOM;
 }
