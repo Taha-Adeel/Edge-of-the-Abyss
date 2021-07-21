@@ -16,7 +16,7 @@ Background::Background(std::string name, sf::Color bg_color, PlayingState& conte
 	m_bg_texture("backgrounds/"+name),
 	m_bg_color(bg_color),
 	m_bg_velocity(CONSTANTS::BG_VELOCITY),
-	m_bg_top_y_coord(-100.f)
+	m_bg_top_y_coord(-300.f)
 {
 	init_bgSprites();
 }

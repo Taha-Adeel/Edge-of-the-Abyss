@@ -11,6 +11,10 @@ private:
 	// float timeAbove;
 	bool onGround;
 
+	bool resolveGroundCollision() override;
+
+	virtual void resolveTileCollision(const BoxBound& bound) override;
+
 	//Core logic
 	void initVariables() override;
 	void initPhysics() override;
@@ -19,12 +23,11 @@ public:
 	virtual ~NormalPlayer();
 
 	//Modifiers
-	void resetVelocityY();
 	void setOnGround(bool _onGround = true);
     void resetNearestOrientation();
 
 	//Functions
-    void updateMovement(sf::Time elapsedTime) override;
+    void updateRotation(sf::Time elapsedTime) override;
 	void updateVelocity(sf::Time elapsedTime) override;
 };
 #endif

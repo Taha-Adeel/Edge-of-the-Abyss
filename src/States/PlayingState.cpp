@@ -13,7 +13,6 @@ PlayingState::PlayingState(Game& pGame):
 	m_camera(*this)
 {
 }
-
 /**
  * @brief Delegates event handeling to player, camera, etc
  * 
@@ -60,7 +59,7 @@ const Player& PlayingState::getPlayer() const {
  * 
  * @return const Camera& 
  */
-const Camera& PlayingState::getCamera() const {
+Camera& PlayingState::getCamera() {
 	return m_camera;
 }
 

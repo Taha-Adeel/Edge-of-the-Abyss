@@ -42,6 +42,7 @@ const Bound& Tile::getBounds() const {
 
 
 /**
+
  * @brief Constructs a new Bound for the tile.
  * 
  * Constructs it by using information about the untransformed tile from the tileset,
@@ -102,6 +103,7 @@ void Tile::loadTileBounds(){
 
 /**
  * @brief Updates the Tile Object
+
  * 
  * @param elapsedTime 
  */
