@@ -10,7 +10,7 @@ PlanePlayer::PlanePlayer(PlayingState& context):
     this->sprite.setTexture("player/spaceship") ;
     this->initVariables() ;
     this->initPhysics();
-    std::cout << "Constructor called \n" ; 
+    
 }
 
 PlanePlayer::~PlanePlayer()
@@ -48,23 +48,18 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
     {
         
        this->velocity.y += CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds() ;
-       if(this->getTopLeftPosition().y > CONSTANTS::PLANE_MIN_HEIGHT)//Not needed, but if used, use getTopLeft() instead of getSpritePosition
-       {
-          this->resetVelocityY();
-       }
        
     }
     else 
-    {   
-        
-        this->velocity.y -= (CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()) ;
-        //  if(this->getSpritePosition().y < CONSTANTS::PLANE_MAX_HEIGHT)
-        //  {
-        //     this->resetVelocityY();
-        //  }       
+    {       
+        this->velocity.y -= (CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()) ;       
     }
     if(this->velocity.y >= CONSTANTS::PLANE_TERMINAL_VELOCITY_Y)
     {
         this->velocity.y = CONSTANTS::PLANE_TERMINAL_VELOCITY_Y;
+    }
+    if(this->velocity.y <= -(CONSTANTS::PLANE_TERMINAL_VELOCITY_Y))
+    {
+        this->velocity.y = -(CONSTANTS::PLANE_TERMINAL_VELOCITY_Y) ;
     }
 }
