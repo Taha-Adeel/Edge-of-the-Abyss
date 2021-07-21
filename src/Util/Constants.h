@@ -28,7 +28,7 @@ namespace CONSTANTS{
 	constexpr float PLAYER_JUMP_BOOST = -750.f;
 	constexpr float TERMINAL_SPEED = 750.f; 
 	constexpr float PLAYER_ANGULAR_VELOCITY = 290.f;
-	//constexpr float PLAYER_DOWN_ACCELARATION = 5000.f;
+	
 
 	constexpr float PLANE_SPAWN_POINT_X  = 0.f ;
 	constexpr float PLANE_SPAWN_POINT_Y  = SPAWNPOINT_Y - 200.f;
@@ -36,7 +36,7 @@ namespace CONSTANTS{
 	constexpr float PLANE_SPEED_Y = 50.f;
 	constexpr float PLANE_MAX_HEIGHT = 0.f ;
 	constexpr float PLANE_MIN_HEIGHT = SPAWNPOINT_Y - 20.f ;
-
+    constexpr float PLANE_ACCELARATION = 1200.f;
 	
 	constexpr int TILE_WIDTH = 42;
 	constexpr int TILE_HEIGHT = 42;
