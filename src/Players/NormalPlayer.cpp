@@ -20,10 +20,10 @@ NormalPlayer::~NormalPlayer(){}
  */
 void NormalPlayer::initVariables()
 {
-    this->sprite.setOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
-    this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->playerBounds.setWidth(CONSTANTS::PLAYER_WIDTH);
     this->playerBounds.setHeight(CONSTANTS::PLAYER_HEIGHT);
+    this->sprite.setOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
+    this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->onGround = false;
     this->setRotation(0.f);
 }

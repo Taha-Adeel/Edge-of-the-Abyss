@@ -9,6 +9,7 @@ PlanePlayer::PlanePlayer(PlayingState& context):
     this->sprite.setTexture("player/spaceship") ;
     this->initVariables() ;
     this->initPhysics();
+    std::cout << "Constructor called \n" ; 
 }
 
 PlanePlayer::~PlanePlayer()
@@ -16,11 +17,10 @@ PlanePlayer::~PlanePlayer()
 
 void PlanePlayer::initVariables()
 {
+    this->playerBounds.setWidth(CONSTANTS::PLANE_WIDTH);
+    this->playerBounds.setHeight(CONSTANTS::PLANE_HEIGHT);
+    this->sprite.setOrigin(CONSTANTS::PLANE_WIDTH/2, CONSTANTS::TILE_HEIGHT - 19.f/2.f);
     this->setCenter(CONSTANTS::PLANE_SPAWN_POINT_X, CONSTANTS::PLANE_SPAWN_POINT_Y);
-    this->playerBounds.setWidth(CONSTANTS::PLAYER_WIDTH);
-    this->playerBounds.setHeight(CONSTANTS::PLAYER_HEIGHT);
-    //this->setSpriteOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
-    //this->setRotation(0.f);
 }
 
 void PlanePlayer::initPhysics()

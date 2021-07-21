@@ -16,13 +16,13 @@ Player::~Player(){}
 
 // Accessors
 /**
- * @brief Returns the position of the top left corner of the player sprite
+ * @brief Returns the position of the top left corner of the player bounds
  * 
  * @return const sf::Vector2f 
  */
 const sf::Vector2f Player::getTopLeftPosition() const
 {
-    return this->sprite.getPosition() - this->sprite.getOrigin();
+    return this->playerBounds.getPosition() - this->playerBounds.getOrigin() ;
 }
 
 const BoxBound& Player::getplayerBounds() const
@@ -41,7 +41,7 @@ const float Player::getWidth() const
 }
 
 /**
- * @brief Returns the position of the center of the player sprite
+ * @brief Returns the position of the center of the player bounds
  * 
  * @return const sf::Vector2f 
  */
@@ -63,20 +63,20 @@ const float Player::getRotation() const
 
 // Modifier
 /**
- * @brief Set the new absolute position of the top left corner of the Player Sprite
+ * @brief Set the new absolute position of the top left corner of the Player Bounds
  * 
  * @param x new x coordinate
  * @param y new y coordinate
  */
 void Player::setTopLeftPosition(const float x, const float y){
-    this->sprite.setPosition(x + this->sprite.getOrigin().x ,
-                             y + this->sprite.getOrigin().y);
     this->playerBounds.setPosition(x + this->playerBounds.getOrigin().x ,
-                             y + this->playerBounds.getOrigin().y);
+         y + this->playerBounds.getOrigin().y);
+    this->sprite.setPosition(x + this->sprite.getOrigin().x,
+        y + this->sprite.getOrigin().y - (CONSTANTS::TILE_HEIGHT - this->getHeight()));
 }
 
 /**
- * @brief Set the new absolute position of the center of the Player Sprite
+ * @brief Set the new absolute position of the center of the Player bound
  * 
  * @param x new x coordinate
  * @param y new y coordinate
