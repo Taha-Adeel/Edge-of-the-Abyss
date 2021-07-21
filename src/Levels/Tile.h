@@ -29,7 +29,10 @@ private:
 	sf::Vector2f m_scale;/**<Scale of the tile in the level*/
 	float m_rotation;/**<Rotation of the tile in the level*/
 	Sprite m_sprite;/**<The sprite initialized with all the above properties*/
-	std::unique_ptr<Bound> m_pBound;
+	std::unique_ptr<Bound> m_pBound;/**<The tile bounds*/
+
+	//private member functions
+	void loadTileBounds();
 };
 
 #endif
