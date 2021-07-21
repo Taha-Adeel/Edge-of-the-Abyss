@@ -47,7 +47,8 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
          
        this->resetVelocityY() ;
        //std::cout<<"key not held" <<" : " << velocity.y ; 
-       this->velocity.y = CONSTANTS::PLANE_SPEED_Y;
+       //this->velocity.y = CONSTANTS::PLANE_SPEED_Y;
+       this->velocity.y += CONSTANTS::GRAVITY * elapsedTime.asSeconds() ;
     //    if(this->getSpritePosition().y > CONSTANTS::PLANE_MIN_HEIGHT)//Not needed, but if used, use getTopLeft() instead of getSpritePosition
     //    {
     //       this->resetVelocityY();
@@ -56,9 +57,10 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
     }
     else 
     {   
-         //std::cout<<"Key heled ::" <<velocity.y  ;
-         this->resetVelocityY();
-          this->velocity.y =  -(CONSTANTS::PLANE_SPEED_Y);
+        //std::cout<<"Key heled ::" <<velocity.y  ;
+        this->resetVelocityY();
+        //this->velocity.y =  -(CONSTANTS::PLANE_SPEED_Y);
+        this->velocity.y -= (CONSTANTS::GRAVITY * elapsedTime.asSeconds()) ;
         //  if(this->getSpritePosition().y < CONSTANTS::PLANE_MAX_HEIGHT)
         //  {
         //     this->resetVelocityY();
