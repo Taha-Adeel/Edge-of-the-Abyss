@@ -3,12 +3,10 @@
 #include <string>
 #include<fstream>
 #include<iostream>
-#include "../Levels/Level.h"
 #include "../Camera.h"
 #include "Constants.h"
 class ScoreKeeper
 {
-    Level* referenceLevel;
     Camera* referenceCamera;
     std::fstream fio;
     float currentScore;
@@ -18,7 +16,7 @@ class ScoreKeeper
     sf::Text highScoreText;
     
 public:
-    ScoreKeeper(Level& level, Camera& camera):referenceLevel(&level), referenceCamera(&camera)
+    ScoreKeeper(Camera& camera):referenceCamera(&camera)
     {   
         fio.open(CONSTANTS::SCORE_FILE_PATH.c_str(), std::ios::in | std::ios::out);
         //if(!fio)throw std::runtime_error("Could not open scores file");
@@ -43,31 +41,27 @@ public:
 
 
         currentScoreText.setFont(font);
-        currentScoreText.setString(std::to_string(currentScore));
+        currentScoreText.setString(std::string("Score: ")+std::to_string(currentScore));
         currentScoreText.setPosition(referenceCamera->getPosition().x + CONSTANTS::SCOREBOARD_X, referenceCamera->getPosition().y + CONSTANTS::SCOREBOARD_Y);
         currentScoreText.setCharacterSize(15);
         currentScoreText.setStyle(sf::Text::Bold);
         currentScoreText.setFillColor(sf::Color::Yellow);
 
         highScoreText.setFont(font);
-        highScoreText.setString(std::to_string(highScore));
+        highScoreText.setString(std::string("High Score: ")+ std::to_string(highScore));
         highScoreText.setPosition(referenceCamera->getPosition().x + CONSTANTS::HIGHSCORE_X, referenceCamera->getPosition().y + CONSTANTS::HIGHSCORE_Y);
         highScoreText.setCharacterSize(15);
         highScoreText.setStyle(sf::Text::Bold);
         highScoreText.setFillColor(sf::Color::Yellow);
-
     }
     ~ScoreKeeper(){if(fio.is_open())fio.close();}
     const float getCurrentScore() const{return currentScore;}
     const float getHighScore() const{return highScore;}
-    //const std::string getLevelName() const{return referenceLevel->getMapName();}
-
     void updateHighScore()
     {
         if(currentScore >= highScore)
         {
             fio.close();
-            //remove(CONSTANTS::SCORE_FILE_PATH.c_str());
             remove(CONSTANTS::SCORE_FILE_PATH.c_str());
             fio.open(CONSTANTS::SCORE_FILE_PATH.c_str(), std::ios::out);
             fio<<currentScore;
@@ -75,13 +69,16 @@ public:
             highScore = currentScore;
         }
         std::cout<<"Game over. Score: "<<currentScore<<" , High Score: "<<highScore<<std::endl;
+        currentScore = 0.f;
     }
     void updateTextBoxes(float dt)
     {
-        //currentScoreText.move(referenceCamera->getVelocity().x * dt, referenceCamera->getVelocity().y * dt);
-        currentScoreText.setString(std::to_string(currentScore));
-        highScoreText.setString(std::to_string(highScore));
-        std::cout<<currentScore<<"::"<<highScore<<std::endl;
+        currentScoreText.setString(std::string("Score: ")+ std::to_string(currentScore));
+        highScoreText.setString(std::string("High Score: ")+std::to_string(highScore));
+
+        currentScoreText.setPosition(referenceCamera->getPosition().x + CONSTANTS::SCOREBOARD_X, referenceCamera->getPosition().y + CONSTANTS::SCOREBOARD_Y);
+        highScoreText.setPosition(referenceCamera->getPosition().x + CONSTANTS::HIGHSCORE_X, referenceCamera->getPosition().y + CONSTANTS::HIGHSCORE_Y);
+        //std::cout<<currentScore<<"::"<<highScore<<std::endl;
     }
     void update(sf::Time elapsedTime)
     {

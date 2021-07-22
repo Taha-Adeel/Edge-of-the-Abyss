@@ -11,7 +11,7 @@ PlayingState::PlayingState(Game& pGame):
 	m_player(std::make_unique<NormalPlayer>(*this)),
 	m_level("checkmap", *this),
 	m_camera(*this),
-	m_scoreKeeper(m_level, m_camera)
+	m_scoreKeeper(m_camera)
 {
 }
 /**
