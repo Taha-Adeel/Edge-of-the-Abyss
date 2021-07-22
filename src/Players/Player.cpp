@@ -257,6 +257,7 @@ void Player::die()
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     this->m_ref_PlayingState.displayGameEnd();
+    if(this->m_ref_PlayingState.getGameMode()!=GAMEMODE::NORMAL)
     this->m_ref_PlayingState.setNextFrameAction(NEXTFRAMEACTION::NORMAL);
     this->m_ref_PlayingState.getCamera().reset();
 }

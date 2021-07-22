@@ -60,6 +60,9 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	//m_player->setRotation(oldPlayer->getRotation());
 }
 
+const GAMEMODE PlayingState::getGameMode() const{
+	return m_gameMode;
+}
 /**
  * @brief Switches between NORMAL and PLANE gameModes. Uses PlayingState::changeGameMode()
  * 
