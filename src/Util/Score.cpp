@@ -26,14 +26,14 @@ ScoreKeeper::ScoreKeeper(PlayingState& context):referencePlayingState(context), 
     currentScoreText.setPosition(referencePlayingState.getCamera().getPosition().x + CONSTANTS::SCOREBOARD_X, referencePlayingState.getCamera().getPosition().y + CONSTANTS::SCOREBOARD_Y);
     currentScoreText.setCharacterSize(15);
     currentScoreText.setStyle(sf::Text::Bold);
-    currentScoreText.setFillColor(sf::Color::Yellow);
+    currentScoreText.setFillColor(CONSTANTS::SCOREBOARD_COLOR);
 
     highScoreText.setFont(font);
     highScoreText.setString(std::string("High Score: ")+ std::to_string(convertSecondsToScore(highScore)));
     highScoreText.setPosition(referencePlayingState.getCamera().getPosition().x + CONSTANTS::HIGHSCORE_X, referencePlayingState.getCamera().getPosition().y + CONSTANTS::HIGHSCORE_Y);
     highScoreText.setCharacterSize(15);
     highScoreText.setStyle(sf::Text::Bold);
-    highScoreText.setFillColor(sf::Color::Yellow);
+    highScoreText.setFillColor(CONSTANTS::SCOREBOARD_COLOR);
 }
 //Destructor
 ScoreKeeper::~ScoreKeeper(){if(fio.is_open())fio.close();}
@@ -48,7 +48,10 @@ const float ScoreKeeper::getHighScore() const{return highScore;}
 * @param seconds 
 * @return points
 */
-int ScoreKeeper::convertSecondsToScore(float seconds){return static_cast<int>(floor(100*seconds));}
+int ScoreKeeper::convertSecondsToScore(float seconds)
+{
+    return static_cast<int>(floor(100*seconds));
+}
 /**
  * @brief Checks if current score is the best score after game is Over
  * 
@@ -79,7 +82,6 @@ void ScoreKeeper::updateTextBoxes(float dt)
 
     currentScoreText.setPosition(referencePlayingState.getCamera().getPosition().x + CONSTANTS::SCOREBOARD_X, referencePlayingState.getCamera().getPosition().y + CONSTANTS::SCOREBOARD_Y);
     highScoreText.setPosition(referencePlayingState.getCamera().getPosition().x + CONSTANTS::HIGHSCORE_X, referencePlayingState.getCamera().getPosition().y + CONSTANTS::HIGHSCORE_Y);
-    //std::cout<<currentScore<<"::"<<highScore<<std::endl;
 }
 
 void ScoreKeeper::update(sf::Time elapsedTime)

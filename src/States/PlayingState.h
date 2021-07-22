@@ -8,6 +8,7 @@
 #include "../Camera.h"
 #include "../Util/Score.h"
 
+enum class GAMEMODE{NORMAL, PLANE};
 /**
  * @brief Main game play state.
  *  
@@ -19,12 +20,17 @@ private:
 	Level m_level;
 	Camera m_camera;
 	ScoreKeeper m_scoreKeeper;
+	GAMEMODE m_gameMode;
 
 public:
 	// constructors
 	PlayingState(Game& pGame) ;
 
 	// public functions
+	void displayGameEnd();
+	void changeGameMode(GAMEMODE gameMode);
+	void switchGameMode();
+
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
@@ -32,7 +38,7 @@ public:
 	const Player& getPlayer() const ;
 	Camera& getCamera();
 	const Level& getCurrentLevel() const ;
-	void displayGameEnd();
+	
 };
 
 #endif

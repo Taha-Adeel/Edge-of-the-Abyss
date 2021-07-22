@@ -9,6 +9,7 @@ class BoxBound : public Bound
 {
     float height;
     float width;
+    float enclosingRadius;
     float tolerance = 20;
 
 public:
@@ -20,6 +21,7 @@ public:
     void setHeight(float weight);
     const float getWidth() const override;
     const float getHeight() const override;
+    const float getEnclosingRadius() const;
 
     // Deleting the origin setters to ensure Position property is always of top left corner;
     void setOrigin(float, float) = delete;
@@ -29,6 +31,7 @@ public:
     const float getRight() const;
     const float getTop() const;
     const float getBottom() const;
+    const sf::Vector2f getCenter() const;
 
     static bool checkCollision(const BoxBound& b1, const BoxBound& b2);
     SIDE getCollisionSide(const BoxBound& tile);
