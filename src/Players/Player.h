@@ -26,7 +26,7 @@ protected:
 	BoxBound playerBounds;
 
 	//Physics
-  GRAVITY_STATE gravity_state;
+    GRAVITY_STATE gravity_state;
 
 	sf::Vector2f velocity;
 	bool keyHeld = false;

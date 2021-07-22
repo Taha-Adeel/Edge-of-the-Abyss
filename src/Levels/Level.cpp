@@ -297,7 +297,7 @@ void Level::loadTile(long long int tile_data, int tile_counter){
 	//Get the position of center of the tile in the level
 	int xx = 0;
 	int yy = 0;
-	xx += getTileWidth() * (tile_counter % getMapWidth());
+	xx += getTileWidth() * (tile_counter % getMapWidth()) + 1000;
 	yy += getTileHeight() * (tile_counter / getMapWidth());
 	
 	int y_offset = getMapSize().y - CONSTANTS::GROUNDHEIGHT;
