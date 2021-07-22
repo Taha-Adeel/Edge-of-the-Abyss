@@ -220,7 +220,7 @@ void Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 		else if(name == "Spike")
 			bound_name = BOUNDNAME::SPIKE;
 		else if(name == "Portal")
-			bound_name = BOUNDNAME::PORTAL;
+			bound_name = BOUNDNAME::PORTAL_P;
 		else
 			throw std::runtime_error("Invalid bounds name: " + name);
 

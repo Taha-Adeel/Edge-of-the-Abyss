@@ -55,6 +55,10 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	{
 		m_player = std::make_unique<PlanePlayer>(*this);
 	}
+	else if(gameMode == GAMEMODE::REVERSE)
+	{
+		//m_player = std::make_unique<ReversePlayer>(*this);
+	}
 	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
 	
@@ -89,16 +93,22 @@ void PlayingState::handleEvent(sf::Event& ev){
  * @param dt Time for which the last frame ran
  */
 void PlayingState::update(sf::Time dt){
-	if(nextFrameAction == NEXTFRAMEACTION::SWITCH)
+	
+	switch(nextFrameAction)
 	{
-		this->switchGameMode();
-		nextFrameAction = NEXTFRAMEACTION::NOTHING;
+		case NEXTFRAMEACTION::NOTHING:
+			break;
+		case NEXTFRAMEACTION::NORMAL:
+			this->changeGameMode(GAMEMODE::NORMAL);
+			break;
+		case NEXTFRAMEACTION::PLANE:
+			this->changeGameMode(GAMEMODE::PLANE);
+			break;
+		case NEXTFRAMEACTION::REVERSE:
+			this->changeGameMode(GAMEMODE::REVERSE);
+			break;
 	}
-	else if(nextFrameAction == NEXTFRAMEACTION::NORMAL)
-	{
-		this->changeGameMode(GAMEMODE::NORMAL);
-		nextFrameAction = NEXTFRAMEACTION::NOTHING;
-	}
+	nextFrameAction = NEXTFRAMEACTION::NOTHING;
 	m_player->update(dt);
 	m_camera.update(dt);
 	m_level.update(dt);
