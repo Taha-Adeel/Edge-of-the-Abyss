@@ -9,6 +9,7 @@
 #include "../Util/Score.h"
 
 enum class GAMEMODE{NORMAL, PLANE};
+enum class NEXTFRAMEACTION{NOTHING, SWITCH, NORMAL};
 /**
  * @brief Main game play state.
  *  
@@ -21,6 +22,7 @@ private:
 	Camera m_camera;
 	ScoreKeeper m_scoreKeeper;
 	GAMEMODE m_gameMode;
+	NEXTFRAMEACTION nextFrameAction;
 
 public:
 	// constructors
@@ -30,6 +32,8 @@ public:
 	void displayGameEnd();
 	void changeGameMode(GAMEMODE gameMode);
 	void switchGameMode();
+	void setNextFrameAction(NEXTFRAMEACTION _nextFrameAction);
+	void resetGameMode();
 
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
@@ -38,6 +42,7 @@ public:
 	const Player& getPlayer() const ;
 	Camera& getCamera();
 	const Level& getCurrentLevel() const ;
+	const NEXTFRAMEACTION getNextFrameAction() const;
 	
 };
 

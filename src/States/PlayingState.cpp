@@ -12,7 +12,8 @@ PlayingState::PlayingState(Game& pGame):
 	m_level("portaltest", *this),
 	m_camera(*this),
 	m_scoreKeeper(*this),
-	m_gameMode(GAMEMODE::NORMAL)
+	m_gameMode(GAMEMODE::NORMAL),
+	nextFrameAction(NEXTFRAMEACTION::NOTHING)
 {
 }
 
@@ -25,6 +26,14 @@ void PlayingState::displayGameEnd()
 	m_scoreKeeper.updateHighScore();
 }
 
+void PlayingState::setNextFrameAction(NEXTFRAMEACTION flag)
+{
+	nextFrameAction = flag;
+}
+const NEXTFRAMEACTION PlayingState::getNextFrameAction() const
+{
+	return nextFrameAction;
+}
 /**
  * @brief Changes the current game mode to required mode. Called when portal is used.
  * 		  Preserves the position, orientation and velocity of the player through portals
@@ -76,6 +85,16 @@ void PlayingState::handleEvent(sf::Event& ev){
  * @param dt Time for which the last frame ran
  */
 void PlayingState::update(sf::Time dt){
+	if(nextFrameAction == NEXTFRAMEACTION::SWITCH)
+	{
+		this->switchGameMode();
+		nextFrameAction = NEXTFRAMEACTION::NOTHING;
+	}
+	else if(nextFrameAction == NEXTFRAMEACTION::NORMAL)
+	{
+		this->changeGameMode(GAMEMODE::NORMAL);
+		nextFrameAction = NEXTFRAMEACTION::NOTHING;
+	}
 	m_player->update(dt);
 	m_camera.update(dt);
 	m_level.update(dt);
