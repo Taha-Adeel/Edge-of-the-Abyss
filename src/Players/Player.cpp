@@ -1,6 +1,10 @@
 #include "Player.h"
 #include "../States/PlayingState.h"
+
 #include <iostream>
+#include <assert.h>
+#include <cstdlib>
+#include <thread>
 
 // Constructors and Destructors
 /**
@@ -9,20 +13,21 @@
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
 Player::Player(PlayingState& context):
-	m_ref_PlayingState(context)
+	m_ref_PlayingState(context),
+    score(0.f)
 {
 }
 Player::~Player(){}
 
 // Accessors
 /**
- * @brief Returns the position of the top left corner of the player sprite
+ * @brief Returns the position of the top left corner of the player bounds
  * 
  * @return const sf::Vector2f 
  */
 const sf::Vector2f Player::getTopLeftPosition() const
 {
-    return this->sprite.getPosition() - this->sprite.getOrigin();
+    return this->playerBounds.getPosition() - this->playerBounds.getOrigin() ;
 }
 
 const BoxBound& Player::getplayerBounds() const
@@ -41,7 +46,7 @@ const float Player::getWidth() const
 }
 
 /**
- * @brief Returns the position of the center of the player sprite
+ * @brief Returns the position of the center of the player bounds
  * 
  * @return const sf::Vector2f 
  */
@@ -50,7 +55,6 @@ const sf::Vector2f Player::getCenter() const
     return sf::Vector2f(this->getTopLeftPosition().x + this->getWidth()/2.f,
                          this->getTopLeftPosition().y + this->getHeight()/2.f);
 }
-
 
 /**
  * @brief Returns the angle of rotation (0 <= angle <360)
@@ -64,21 +68,20 @@ const float Player::getRotation() const
 
 // Modifier
 /**
- * @brief Set the new absolute position of the top left corner of the Player Sprite
+ * @brief Set the new absolute position of the top left corner of the Player Bounds
  * 
  * @param x new x coordinate
  * @param y new y coordinate
  */
 void Player::setTopLeftPosition(const float x, const float y){
-    this->sprite.setPosition(x + this->sprite.getOrigin().x ,
-                             y + this->sprite.getOrigin().y);
     this->playerBounds.setPosition(x + this->playerBounds.getOrigin().x ,
-                             y + this->playerBounds.getOrigin().y);
+         y + this->playerBounds.getOrigin().y);
+    this->sprite.setPosition(x + this->sprite.getOrigin().x,
+        y + this->sprite.getOrigin().y - (CONSTANTS::TILE_HEIGHT - this->getHeight()));
 }
 
-
 /**
- * @brief Set the new absolute position of the center of the Player Sprite
+ * @brief Set the new absolute position of the center of the Player bound
  * 
  * @param x new x coordinate
  * @param y new y coordinate
@@ -107,6 +110,15 @@ void Player::rotate(const float angle)
     this->sprite.rotate(angle);
 }
 
+/**
+ * @brief Resets the velocity in y direction back to 0
+ * 
+ */
+void Player::resetVelocityY()
+{
+    this->velocity.y = 0;
+}
+
 //Movement
 /**
  * @brief Moves the sprite by given amount
@@ -119,8 +131,9 @@ void Player::move(const float dir_x, const float dir_y)
     this->sprite.move(dir_x, dir_y);
     this->playerBounds.move(dir_x, dir_y);
 }
+
 /**
- * @brief For moving the sprite as per velocity in that instant if no rotation is present.
+ * @brief For moving the sprite as per velocity in that instant.
  * Derived classes will override this if rotation or some other new mechanishm is required 
  * 
  * @param elapsedTime Time elapsed between the current and last frame in sf::Time
@@ -132,15 +145,90 @@ void Player::updateMovement(sf::Time elapsedTime)
     float dy = eTime* this->velocity.y;
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
-    
 }
 
-// void Player::resolveTileCollision()
-// {
-//         //
-// }
+void Player::updateRotation(sf::Time elapsedTime){}
+
+/**
+ * @brief If player goes below ground height, its vertical velocity is reset to 0 
+ * and its position is snapped to ground height.
+ * 
+ * @return true If player is colliding with ground
+ * @return false Otherwise
+ */
+bool Player::resolveGroundCollision()
+{
+    // checking for hitting the ground
+    if(this->getTopLeftPosition().y>=CONSTANTS::GROUNDHEIGHT - this->getHeight()) 
+    {
+        // Resolving ground collision
+        this->resetVelocityY();
+        this->setTopLeftPosition(this->getTopLeftPosition().x, 
+            CONSTANTS::GROUNDHEIGHT - this->getHeight());
+        return true;
+    }
+    return false;
+}
 
 
+void Player::resolveCollision(const Bound& bound)
+{
+    switch(bound.getBoundName()){
+        case BOUNDNAME::TILE:
+            assert(bound.getBoundType() == BOUNDTYPE::BOX);
+            resolveTileCollision(static_cast<const BoxBound&>(bound));
+            break;
+        case BOUNDNAME::SPIKE:
+            resolveSpikeCollision(bound);
+            break;
+        case BOUNDNAME::PORTAL:
+            resolvePortalCollision(bound);
+            break;
+    }    
+}
+
+void Player::resolveTileCollision(const BoxBound& bound)
+{
+    SIDE collidingSide = this->playerBounds.getCollisionSide(bound);
+    if(collidingSide == SIDE::BOTTOM){
+        resetVelocityY();
+        this->snapToSide(bound, collidingSide);
+    }
+    else{
+        this->die();
+    }
+}
+
+
+void Player::snapToSide(const BoxBound& tile, SIDE collisionside){
+    assert(collisionside == SIDE::TOP || collisionside == SIDE::BOTTOM);
+
+    if(collisionside == SIDE::BOTTOM){
+        this->setTopLeftPosition(getTopLeftPosition().x, tile.getTop() - this->getHeight());
+    }
+    else if(collisionside == SIDE::TOP){
+        this->setTopLeftPosition(getTopLeftPosition().x, tile.getBottom());
+    }
+}
+
+void Player::resolveSpikeCollision(const Bound& bound)
+{
+    this->die();
+}
+
+void Player::resolvePortalCollision(const Bound& bound)
+{
+
+}
+void Player::die()
+{
+    std::cout<<"Game over!! Score: "<<this->score<<std::endl;
+    score = 0;
+    this->resetVelocityY();
+    this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    this->m_ref_PlayingState.getCamera().reset();
+}
 
 /**
  * @brief Sets keyHeld to true if space, up arrow, or left mouse button is held
@@ -213,12 +301,16 @@ void Player::handleEvent(sf::Event ev)
  */
 void Player::update(sf::Time elapsedTime)
 {
+    this->score+=elapsedTime.asMilliseconds();
     this->updateMovement(elapsedTime);
+    this->resolveGroundCollision();
 	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
 		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
-			std::cout << "Colliding!!" << std::endl;
+			// std::cout << "Colliding!!" << std::endl;
+            this->resolveCollision(tile.getBounds());
 		}
 	}
+    this->updateRotation(elapsedTime);
     this->updateVelocity(elapsedTime);
 }
 

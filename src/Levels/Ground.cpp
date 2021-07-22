@@ -64,6 +64,13 @@ void Ground::update(sf::Time dt){
 			}
 			ground_tile.setPosition(max_x + ground_tile.getGlobalBounds().width, ground_tile.getPosition().y);
 		}
+		if(ground_tile.getPosition().x-camera.getPosition().x > camera.getSize().x){
+			float min_x = ground_tile.getPosition().x;
+			for(auto& tile: m_groundSprites){
+				min_x = (tile.getPosition().x < min_x) ? tile.getPosition().x : min_x;
+			}
+			ground_tile.setPosition(min_x - ground_tile.getGlobalBounds().width, ground_tile.getPosition().y);
+		}
 	}
 }
 

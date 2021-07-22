@@ -3,6 +3,7 @@
 
 #include "StateBase.h"
 #include "../Players/NormalPlayer.h"
+#include "../Players/PlanePlayer.h"
 #include "../Levels/Level.h"
 #include "../Camera.h"
 
@@ -26,10 +27,9 @@ public:
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
-
 	// public accessors
 	const Player& getPlayer() const ;
-	const Camera& getCamera() const ;
+	Camera& getCamera();
 	const Level& getCurrentLevel() const ;
 };
 

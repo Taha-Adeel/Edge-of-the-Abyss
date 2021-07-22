@@ -9,11 +9,10 @@
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
 	m_player(std::make_unique<NormalPlayer>(*this)),
-	m_level("testmap", *this),
+	m_level("checkmap", *this),
 	m_camera(*this)
 {
 }
-
 /**
  * @brief Delegates event handeling to player, camera, etc
  * 
@@ -60,7 +59,7 @@ const Player& PlayingState::getPlayer() const {
  * 
  * @return const Camera& 
  */
-const Camera& PlayingState::getCamera() const {
+Camera& PlayingState::getCamera() {
 	return m_camera;
 }
 

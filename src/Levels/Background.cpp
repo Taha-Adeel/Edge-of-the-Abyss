@@ -16,7 +16,7 @@ Background::Background(std::string name, sf::Color bg_color, PlayingState& conte
 	m_bg_texture("backgrounds/"+name),
 	m_bg_color(bg_color),
 	m_bg_velocity(CONSTANTS::BG_VELOCITY),
-	m_bg_top_y_coord(-100.f)
+	m_bg_top_y_coord(-300.f)
 {
 	init_bgSprites();
 }
@@ -27,7 +27,7 @@ Background::Background(std::string name, sf::Color bg_color, PlayingState& conte
  */
 void Background::init_bgSprites(){
 	Sprite bg_tile(m_bg_texture);
-	m_bg_scale = (CONSTANTS::GROUNDHEIGHT - m_bg_top_y_coord) / bg_tile.getGlobalBounds().height;
+	m_bg_scale = (CONSTANTS::WINDOW_HEIGHT - m_bg_top_y_coord) / bg_tile.getGlobalBounds().height;
 	bg_tile.setScale(m_bg_scale, m_bg_scale);
 	m_num_of_bgSprites = floor(CONSTANTS::WINDOW_WIDTH / bg_tile.getGlobalBounds().width + 2);
 	
@@ -76,6 +76,13 @@ void Background::update(sf::Time dt){
 				max_x = (tile.getPosition().x > max_x) ? tile.getPosition().x : max_x;
 			}
 			bg_tile.setPosition(max_x + bg_tile.getGlobalBounds().width, bg_tile.getPosition().y);
+		}
+		if(bg_tile.getPosition().x-camera.getPosition().x > camera.getSize().x){
+			float min_x = bg_tile.getPosition().x;
+			for(auto& tile: m_bgSprites){
+				min_x = (tile.getPosition().x < min_x) ? tile.getPosition().x : min_x;
+			}
+			bg_tile.setPosition(min_x - bg_tile.getGlobalBounds().width, bg_tile.getPosition().y);
 		}
 	}
 }
