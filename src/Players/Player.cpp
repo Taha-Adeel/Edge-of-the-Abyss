@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <cstdlib>
 #include <thread>
+#include <cmath>
 
 // Constructors and Destructors
 /**
@@ -13,8 +14,7 @@
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
 Player::Player(PlayingState& context):
-	m_ref_PlayingState(context),
-    score(0.f)
+	m_ref_PlayingState(context)
 {
 }
 Player::~Player(){}
@@ -66,6 +66,16 @@ const float Player::getRotation() const
     return this->sprite.getRotation();
 }
 
+/**
+ * @brief Returns the velocity of the Player
+ * 
+ * @return const sf::Vector2f the velocity of the Player
+ */
+const sf::Vector2f Player::getVelocity() const
+{
+    return this->velocity;
+}
+
 // Modifier
 /**
  * @brief Set the new absolute position of the top left corner of the Player Bounds
@@ -100,6 +110,17 @@ void Player::setRotation(const float angle)
     this->sprite.setRotation(angle);
 }
 
+/**
+ * @brief Sets the velocity of the Player to (x, y)
+ * 
+ * @param x velocity in x direction
+ * @param y velocity in y direction
+ */
+void Player::setVelocity(float x, float y)
+{
+    this->velocity.x = x;
+    this->velocity.y = y;
+}
 /**
  * @brief Rotates the sprite by given angle clockwise
  * 
@@ -182,7 +203,7 @@ void Player::resolveCollision(const Bound& bound)
             resolveSpikeCollision(bound);
             break;
         case BOUNDNAME::PORTAL:
-            resolvePortalCollision(bound);
+            resolvePortalCollision(static_cast<const BoxBound&>(bound));
             break;
     }    
 }
@@ -216,17 +237,25 @@ void Player::resolveSpikeCollision(const Bound& bound)
     this->die();
 }
 
-void Player::resolvePortalCollision(const Bound& bound)
+void Player::resolvePortalCollision(const BoxBound& bound)
 {
-
+    if(fabs(this->getTopLeftPosition().x-bound.getLeft())<CONSTANTS::TILE_WIDTH/2)
+    {
+        // do nothing. Use Portal after passing through half of it.
+        return ;
+    }
+    // Snap to the end of the portal, And change gameMode
+    this->setTopLeftPosition(bound.getRight(), this->getTopLeftPosition().y);
+    this->m_ref_PlayingState.switchGameMode(); // Portal sucks the Player in irrespective of how it touches it.
 }
 void Player::die()
 {
-    std::cout<<"Game over!! Score: "<<this->score<<std::endl;
-    score = 0;
+    //std::cout<<"Game over!! Score: "<<this->score<<std::endl;
+    //score = 0;
     this->resetVelocityY();
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    this->m_ref_PlayingState.displayGameEnd();
     this->m_ref_PlayingState.getCamera().reset();
 }
 
@@ -301,7 +330,7 @@ void Player::handleEvent(sf::Event ev)
  */
 void Player::update(sf::Time elapsedTime)
 {
-    this->score+=elapsedTime.asMilliseconds();
+    //this->score+=elapsedTime.asMilliseconds();
     this->updateMovement(elapsedTime);
     this->resolveGroundCollision();
 	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
