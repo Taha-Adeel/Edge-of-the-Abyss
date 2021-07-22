@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "States/PlayingState.h"
 #include "Util/Constants.h"
+#include "Levels/Level.h"
 #include <iostream>
 
 /**
@@ -158,11 +159,11 @@ void Camera::update(sf::Time elapsedTime){
 
 	// Checks if camera's view goes beyond the map size. If it does, then the camera is 
 	// snapped to be at the maps end.
-// 	if(!x_locked && (*this).getPosition().x + sf::View::getSize().x 
-// 			> m_refPlayingState.getLevel().getMapSize().x){
-// 		float camera_position_x = m_refPlayingState.getLevel().getMapSize().x - sf::View::getSize().x ;
-// 		(*this).setPosition(camera_position_x, (*this).getPosition().y);
-// 	}
+	if(!x_locked && (*this).getPosition().x + sf::View::getSize().x 
+			> m_refPlayingState.getCurrentLevel().getMapSize().x){
+		float camera_position_x = m_refPlayingState.getCurrentLevel().getMapSize().x - sf::View::getSize().x ;
+		(*this).setPosition(camera_position_x, (*this).getPosition().y);
+	}
 
 	//Velocity calculation and update
 	sf::Vector2f cur_pos = this->getPosition();
