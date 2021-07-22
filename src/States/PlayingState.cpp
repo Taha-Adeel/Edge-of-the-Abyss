@@ -10,7 +10,8 @@ PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
 	m_player(std::make_unique<NormalPlayer>(*this)),
 	m_level("checkmap", *this),
-	m_camera(*this)
+	m_camera(*this),
+	m_scoreKeeper(*this)
 {
 }
 /**
@@ -32,6 +33,7 @@ void PlayingState::update(sf::Time dt){
 	m_player->update(dt);
 	m_camera.update(dt);
 	m_level.update(dt);
+	m_scoreKeeper.update(dt);
 }
 
 /**
@@ -42,6 +44,7 @@ void PlayingState::update(sf::Time dt){
 void PlayingState::render(sf::RenderTarget& renderer){
 	m_camera.render(renderer);
 	m_level.render(renderer);
+	m_scoreKeeper.render(renderer);
   	m_player->render(renderer);
 }
 
@@ -70,4 +73,8 @@ Camera& PlayingState::getCamera() {
  */
 const Level& PlayingState::getCurrentLevel() const {
 	return m_level;
+}
+void PlayingState::displayGameEnd()
+{
+	m_scoreKeeper.updateHighScore();
 }

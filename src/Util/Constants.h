@@ -9,6 +9,8 @@ namespace CONSTANTS{
 	constexpr unsigned int WINDOW_WIDTH = 1280; 
 	constexpr unsigned int WINDOW_HEIGHT = 720;
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
+	const std::string SCORE_FILE_PATH = "../scores.txt";
+	const std::string FONT_FILE_PATH = "assets/arial.ttf";
 
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
 	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f, -30.f);
@@ -47,6 +49,11 @@ namespace CONSTANTS{
     constexpr int CAMERA_OFFSET_Y_TOP = 150;
     constexpr int CAMERA_OFFSET_Y_BOTTOM = 400;
     constexpr int CAMERA_OFFSET_GROUND_Y = 0;
+
+	constexpr float SCOREBOARD_X = 900.f;
+	constexpr float SCOREBOARD_Y = 100.f;
+	constexpr float HIGHSCORE_X = SCOREBOARD_X;
+	constexpr float HIGHSCORE_Y = SCOREBOARD_Y + 50.f;
 }
 
 #endif

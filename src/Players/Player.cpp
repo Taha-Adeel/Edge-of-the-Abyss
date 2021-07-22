@@ -13,8 +13,7 @@
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
 Player::Player(PlayingState& context):
-	m_ref_PlayingState(context),
-    score(0.f)
+	m_ref_PlayingState(context)
 {
 }
 Player::~Player(){}
@@ -222,11 +221,12 @@ void Player::resolvePortalCollision(const Bound& bound)
 }
 void Player::die()
 {
-    std::cout<<"Game over!! Score: "<<this->score<<std::endl;
-    score = 0;
+    //std::cout<<"Game over!! Score: "<<this->score<<std::endl;
+    //score = 0;
     this->resetVelocityY();
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    this->m_ref_PlayingState.displayGameEnd();
     this->m_ref_PlayingState.getCamera().reset();
 }
 
@@ -301,7 +301,7 @@ void Player::handleEvent(sf::Event ev)
  */
 void Player::update(sf::Time elapsedTime)
 {
-    this->score+=elapsedTime.asMilliseconds();
+    //this->score+=elapsedTime.asMilliseconds();
     this->updateMovement(elapsedTime);
     this->resolveGroundCollision();
 	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
