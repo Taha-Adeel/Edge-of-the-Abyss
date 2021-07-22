@@ -78,7 +78,7 @@ public:
     }
     void updateTextBoxes(float dt)
     {
-        currentScoreText.move(referenceCamera->getVelocity().x * dt, referenceCamera->getVelocity().y * dt);
+        //currentScoreText.move(referenceCamera->getVelocity().x * dt, referenceCamera->getVelocity().y * dt);
         currentScoreText.setString(std::to_string(currentScore));
         highScoreText.setString(std::to_string(highScore));
         std::cout<<currentScore<<"::"<<highScore<<std::endl;
