@@ -27,7 +27,7 @@ Background::Background(std::string name, sf::Color bg_color, PlayingState& conte
  */
 void Background::init_bgSprites(){
 	Sprite bg_tile(m_bg_texture);
-	m_bg_scale = (CONSTANTS::GROUNDHEIGHT - m_bg_top_y_coord) / bg_tile.getGlobalBounds().height;
+	m_bg_scale = (CONSTANTS::WINDOW_HEIGHT - m_bg_top_y_coord) / bg_tile.getGlobalBounds().height;
 	bg_tile.setScale(m_bg_scale, m_bg_scale);
 	m_num_of_bgSprites = floor(CONSTANTS::WINDOW_WIDTH / bg_tile.getGlobalBounds().width + 2);
 	

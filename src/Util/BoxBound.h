@@ -9,7 +9,7 @@ class BoxBound : public Bound
 {
     float height;
     float width;
-    float tolerance = 10;
+    float tolerance = 20;
 
 public:
     BoxBound();

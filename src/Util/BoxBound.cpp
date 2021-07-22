@@ -55,7 +55,7 @@ SIDE BoxBound::getCollisionSide(const BoxBound& tile){
 	float lowest =  std::min({fabs(amtRight), fabs(amtLeft), fabs(amtTop), fabs(amtBottom)});
 
 	return
-        lowest == fabs(amtBottom) || fabs(amtBottom) < tolerance ? SIDE::BOTTOM :
-        lowest == fabs(amtTop) || fabs(amtTop) < tolerance ? SIDE::TOP :
+        (lowest == fabs(amtBottom) || fabs(amtBottom) < tolerance) ? SIDE::BOTTOM :
+        (lowest == fabs(amtTop) || fabs(amtTop) < tolerance) ? SIDE::TOP :
         lowest == fabs(amtLeft) ? SIDE::LEFT : SIDE::RIGHT;
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <assert.h>
 #include <cstdlib>
+#include <thread>
 
 // Constructors and Destructors
 /**
@@ -221,9 +222,11 @@ void Player::resolvePortalCollision(const Bound& bound)
 }
 void Player::die()
 {
-    std::cout<<"Game over: score : "<<this->score<<std::endl;
+    std::cout<<"Game over!! Score: "<<this->score<<std::endl;
     score = 0;
+    this->resetVelocityY();
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     this->m_ref_PlayingState.getCamera().reset();
 }
 
