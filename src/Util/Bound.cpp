@@ -1,6 +1,6 @@
 #include "Bound.h"
 #include "BoxBound.h"
-
+#include "TriangleBound.h"
 
 Bound::Bound(BOUNDTYPE type, BOUNDNAME name)
 {
@@ -28,8 +28,16 @@ const BOUNDNAME Bound::getBoundName() const {
 bool Bound::checkCollision(const Bound& b1, const Bound& b2)
 {
     if(b1.b_type == BOUNDTYPE::BOX && b2.b_type == BOUNDTYPE::BOX)
-    {
-        return BoxBound::checkCollision(static_cast<const BoxBound&>(b1), static_cast<const BoxBound&>(b2));
-    }
+        return BoxBound::checkCollision(static_cast<const BoxBound&>(b1)
+            , static_cast<const BoxBound&>(b2));
+
+    else if(b1.b_type == BOUNDTYPE::BOX && b2.b_type == BOUNDTYPE::TRIANGLE)
+        return TriangleBound::checkCollision(static_cast<const BoxBound&>(b1)
+            , static_cast<const TriangleBound&>(b2));
+
+    else if(b1.b_type == BOUNDTYPE::TRIANGLE && b2.b_type == BOUNDTYPE::BOX)
+        return TriangleBound::checkCollision(static_cast<const BoxBound&>(b2)
+            , static_cast<const TriangleBound&>(b1));
+  
     return false;
 }

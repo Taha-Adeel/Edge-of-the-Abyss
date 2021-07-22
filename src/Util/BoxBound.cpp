@@ -29,7 +29,7 @@ const float BoxBound::getBottom() const{return this->getTop() + this->height;}
 bool BoxBound::checkCollision(const BoxBound& b1, const BoxBound& b2)
 {
     // check for the collision between two box bounds
-    if(b1.getLeft() <= b2.getRight() && b1.getRight() >= b2.getLeft() 
+    if(b1.getLeft() <= b2.getRight() && b1.getRight() > b2.getLeft() 
         && b1.getTop() <= b2.getBottom() && b1.getBottom() >= b2.getTop())
             return true;
 

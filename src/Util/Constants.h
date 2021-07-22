@@ -47,6 +47,16 @@ namespace CONSTANTS{
     constexpr int CAMERA_OFFSET_Y_TOP = 150;
     constexpr int CAMERA_OFFSET_Y_BOTTOM = 400;
     constexpr int CAMERA_OFFSET_GROUND_Y = 0;
+
+	constexpr float PORTAL_TOLERANCE = 0.20f * TILE_WIDTH; // 20% of the portal width = 8.4f
+
+	const std::string SCORE_FILE_PATH = "scores.txt";
+	const std::string SCORE_FONT = "arial";
+	const sf::Color SCOREBOARD_COLOR = sf::Color::Yellow;
+	constexpr float SCOREBOARD_X = 900.f;
+	constexpr float SCOREBOARD_Y = 100.f;
+	constexpr float HIGHSCORE_X = SCOREBOARD_X;
+	constexpr float HIGHSCORE_Y = SCOREBOARD_Y + 50.f;
 }
 
 #endif
