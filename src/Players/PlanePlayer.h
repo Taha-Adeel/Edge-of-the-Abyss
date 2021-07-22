@@ -19,6 +19,8 @@ public:
 	PlanePlayer(PlayingState& context);
 	virtual ~PlanePlayer();
 
+	void flipGravity() override;
+
 	//Functions
     void updateRotation(sf::Time elapsedTime) override;
 	void updateVelocity(sf::Time elapsedTime) override;
