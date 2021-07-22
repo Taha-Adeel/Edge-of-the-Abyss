@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "../Util/Constants.h"
 #include "../Util/BoxBound.h"
+#include "../Util/TriangleBound.h"
 #include "../Util/tinyxml2.h"
 
 /**
@@ -234,7 +235,9 @@ void Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 				(std::make_unique<BoxBound>(sf::Vector2f(x,y), width, height, bound_name));
 		}
 		else if(type == "TriangleBound"){
-			float x, y;
+			int x, y;
+			pTileBound->QueryIntAttribute("x", &x);
+			pTileBound->QueryIntAttribute("y", &y);
 			XMLElement* pPolygon = pTileBound->FirstChildElement("polygon");
 			auto pts = parse_csv_data_to_ints(pPolygon->Attribute("points"));
 			assert(pts.size()==6);

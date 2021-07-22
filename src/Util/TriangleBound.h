@@ -25,6 +25,7 @@ public:
 	virtual const float getHeight() const override;
 	const sf::Vector2f getCenter() const;
 	const float getEnclosingRadius() const;
+	const std::vector<sf::Vector2f> getCorners() const;
 
 	static bool checkCollision(const BoxBound& playerBound, const TriangleBound& spike);
 };

@@ -1,4 +1,4 @@
-#include "TraingleBound.h"
+#include "TriangleBound.h"
 #include <cmath>
 
 /**
@@ -50,15 +50,15 @@ TriangleBound::TriangleBound():
 TriangleBound::TriangleBound(sf::Vector2f position, sf::Vector2f base_pt_1
 	, sf::Vector2f base_pt_2, sf::Vector2f tip_pt, BOUNDNAME name):
 	Bound(BOUNDTYPE::TRIANGLE, name),
-	sf::Transformable::setPosition(position),
 	m_base_pt_1(base_pt_1),
 	m_base_pt_2(base_pt_2),
 	m_tip_pt(tip_pt),
-	m_base(distance(m_base_pt_1, m_base_pt_2)),
-	m_height(m_tip_pt, m_base_pt_1, m_base_pt_2),
-	m_enclosingRadius(std::max(m_base, m_height)/2.f),
-	m_center((m_base_pt_1 + m_base_pt_2)/2.f + sf::Transformable::getPosition())
+	m_base(distance_btw_pts(m_base_pt_1, m_base_pt_2)),
+	m_height(distance_to_line(m_tip_pt, m_base_pt_1, m_base_pt_2)),
+	m_enclosingRadius(std::max(m_base, m_height)/2.f)
 {
+	sf::Transformable::setPosition(position);
+	m_center = (m_base_pt_1 + m_base_pt_2)/2.f + sf::Transformable::getPosition();
 }
 
 /**
@@ -91,10 +91,19 @@ const sf::Vector2f TriangleBound::getCenter() const {
 /**
  * @brief Get radius of circle enclosing the whole triangle
  * 
- * @return const sf::Vector2f 
+ * @return const float
  */
-const sf::Vector2f TriangleBound::getEnclosingRadius() const {
+const float TriangleBound::getEnclosingRadius() const {
 	return m_enclosingRadius;
+}
+
+/**
+ * @brief Return the positions of the corners relative to this->getPosition()
+ * 
+ * @return const std::vector<sf::Vector2f> 
+ */
+const std::vector<sf::Vector2f> TriangleBound::getCorners() const {
+	return {m_base_pt_1, m_base_pt_2, m_tip_pt};
 }
 
 /**

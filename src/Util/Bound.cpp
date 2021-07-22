@@ -1,6 +1,6 @@
 #include "Bound.h"
 #include "BoxBound.h"
-#include "TraingleBound.h"
+#include "TriangleBound.h"
 
 Bound::Bound(BOUNDTYPE type, BOUNDNAME name)
 {
