@@ -17,13 +17,24 @@ BoxBound::~BoxBound(){}
 
 const float BoxBound::getWidth() const {return this->width;}
 const float BoxBound::getHeight() const {return this->height;}
-void BoxBound::setWidth(float _width){this->width = _width;}
-void BoxBound::setHeight(float _height){this->height = _height;}
+const float BoxBound::getEnclosingRadius() const {return this->enclosingRadius;}
+
+void BoxBound::setWidth(float _width){
+    this->width = _width;
+    this->enclosingRadius = sqrt(width*width + height*height)/2.f;
+}
+void BoxBound::setHeight(float _height){
+    this->height = _height;
+    this->enclosingRadius = sqrt(width*width + height*height)/2.f;    
+}
 
 const float BoxBound::getLeft() const{return this->getPosition().x;}
 const float BoxBound::getRight() const{return this->getLeft() + this->width;}
 const float BoxBound::getTop() const{return this->getPosition().y;}
 const float BoxBound::getBottom() const{return this->getTop() + this->height;}
+const sf::Vector2f BoxBound::getCenter() const {
+    return sf::Vector2f(getLeft() + width/2.f, getTop() + height/2.f);
+}
 
 
 bool BoxBound::checkCollision(const BoxBound& b1, const BoxBound& b2)

@@ -1,15 +1,16 @@
 #include "TriangleBound.h"
+#include <iostream>
 #include <cmath>
 
 /**
- * @brief Returns distance between 2 points
+ * @brief Returns square of distance between 2 points
  * 
  * @param p1 Co-ordinates of first point
  * @param p2 Co-ordinates of second point
  * @return float Distance
  */
-float distance_btw_pts(sf::Vector2f p1, sf::Vector2f p2){
-	return sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
+float distance_sqr(sf::Vector2f p1, sf::Vector2f p2){
+	return (p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y);
 }
 
 /**
@@ -53,9 +54,9 @@ TriangleBound::TriangleBound(sf::Vector2f position, sf::Vector2f base_pt_1
 	m_base_pt_1(base_pt_1),
 	m_base_pt_2(base_pt_2),
 	m_tip_pt(tip_pt),
-	m_base(distance_btw_pts(m_base_pt_1, m_base_pt_2)),
+	m_base(sqrt(distance_sqr(m_base_pt_1, m_base_pt_2))),
 	m_height(distance_to_line(m_tip_pt, m_base_pt_1, m_base_pt_2)),
-	m_enclosingRadius(std::max(m_base, m_height)/2.f)
+	m_enclosingRadius(std::max(m_base/2.f, m_height))
 {
 	sf::Transformable::setPosition(position);
 	m_center = (m_base_pt_1 + m_base_pt_2)/2.f + sf::Transformable::getPosition();
@@ -119,5 +120,61 @@ const std::vector<sf::Vector2f> TriangleBound::getCorners() const {
  * @return false 
  */
 bool TriangleBound::checkCollision(const BoxBound& playerBound, const TriangleBound& spike){
+	if(checkBroadPhaseCollision(playerBound, spike)){
+		// std::cout << "BroadPhase Collision!!" << std::endl;
+		return checkNarrowPhaseCollision(playerBound, spike);
+	}
 	return false;
+}
+
+bool TriangleBound::checkBroadPhaseCollision(const BoxBound& playerBound
+	, const TriangleBound& spike)
+{
+	return distance_sqr(playerBound.getCenter(), spike.getCenter()) 
+		< (playerBound.getEnclosingRadius() + spike.getEnclosingRadius()) 
+			* (playerBound.getEnclosingRadius() + spike.getEnclosingRadius());
+}
+
+std::vector<sf::Vector2f> generate_pts_in_between(sf::Vector2f p1, sf::Vector2f p2, int count);
+
+bool TriangleBound::checkNarrowPhaseCollision(const BoxBound& playerBound
+	, const TriangleBound& spike)
+{
+	sf::FloatRect playerRect(playerBound.getPosition(), sf::Vector2f(playerBound.getWidth()
+		, playerBound.getHeight()));
+
+	auto corners = spike.getCorners();//Positions relative to top left
+	for(auto& corner: corners){
+		corner += spike.getPosition();// Abs position
+	}
+	auto num_of_corners = corners.size();
+	int num_of_inbtw_pts = 7;
+
+	for(long unsigned i = 0; i < num_of_corners; ++i){
+		auto pts = generate_pts_in_between(corners[i], corners[(i+1) % num_of_corners]
+			, num_of_inbtw_pts);
+		for(auto pt: pts){
+			if(playerRect.contains(pt)){
+				// std::cout << "NarrowPhase Collision!!" << std::endl;
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+std::vector<sf::Vector2f> generate_pts_in_between(sf::Vector2f p1, sf::Vector2f p2, int count){
+	std::vector<sf::Vector2f> pts;
+
+	pts.push_back(p1);
+	for(int i = 1; i <= count - 2; ++i){
+		// Section formula (ratio is i : (count - i))
+		sf::Vector2f pt = (static_cast<float>(i)*p2 + static_cast<float>(count-i)*p1)
+			/ static_cast<float>(count);
+		pts.push_back(pt);
+	}
+	pts.push_back(p2);
+
+	return pts;
 }

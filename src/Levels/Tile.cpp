@@ -44,8 +44,8 @@ const Bound& Tile::getBounds() const {
 /**
  * @brief Returns the transformed cordinates of the points
  * 
- * @param untransformed_cords Reletative positions wrt to top left corner of the tile
- * @return std::vector<sf::Vector2f> 
+ * @param untransformed_cords Relative positions wrt to top left corner of the tile
+ * @return std::vector<sf::Vector2f> Relative position wrt to top left corner after transformations
  */
 std::vector<sf::Vector2f> Tile::transformPolygon(std::vector<sf::Vector2f> untransformed_cords){
 	std::vector<sf::Vector2f> transformed_cords;
@@ -61,6 +61,8 @@ std::vector<sf::Vector2f> Tile::transformPolygon(std::vector<sf::Vector2f> untra
 		double theta = m_rotation * 3.14159265 / 180;
 		pt = sf::Vector2f(pt.x*cos(theta) - pt.y*sin(theta)
 			, pt.x*sin(theta) + pt.y*cos(theta));
+
+		pt += tilecenter;
 
 		transformed_cords.push_back(pt);
 	}
@@ -93,7 +95,7 @@ void Tile::loadTileBounds(){
 				return v1.y == v2.y ? v1.x < v2.x : v1.y < v2.y;
 			});
 		
-		sf::Vector2f abs_pos_top_left = m_position + transformed_cords[0] + tilecenter;
+		sf::Vector2f abs_pos_top_left = m_position + transformed_cords[0];
 		float width  = transformed_cords[3].x - transformed_cords[0].x;
 		float height = transformed_cords[3].y - transformed_cords[0].y;
 
