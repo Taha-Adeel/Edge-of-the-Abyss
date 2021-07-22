@@ -12,7 +12,7 @@
 // Forward Declared Dependencies
 class PlayingState;
 
-// enum class GRAVITY_STATE {NORMAL = 1, FLIPPED = -1};
+enum GRAVITY_STATE {NORMAL = 1, FLIPPED = -1};
 
 /**
  * @brief Defines an interface for Player classes. Player class manages the physics.
@@ -26,7 +26,9 @@ protected:
 	BoxBound playerBounds;
 
 	//Physics
-    // GRAVITY_STATE gravity_state;
+
+  GRAVITY_STATE gravity_state;
+	float score;
 	sf::Vector2f velocity;
 	bool keyHeld = false;
 
@@ -64,7 +66,7 @@ public:
 	void setVelocity(const float x, const float y);
 	void rotate(const float angle);
 	void resetVelocityY();
-	// void flipGravity();
+	virtual void flipGravity();
 	void die();
 
 	//Functions	

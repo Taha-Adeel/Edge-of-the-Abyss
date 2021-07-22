@@ -9,7 +9,8 @@
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
 	m_player(std::make_unique<NormalPlayer>(*this)),
-	m_level("portaltest", *this),
+	m_level("testmap", *this),
+//	m_level("portaltest", *this),
 	m_camera(*this),
 	m_scoreKeeper(*this),
 	m_gameMode(GAMEMODE::NORMAL),

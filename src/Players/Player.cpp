@@ -14,7 +14,9 @@
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
 Player::Player(PlayingState& context):
-	m_ref_PlayingState(context)
+    m_ref_PlayingState(context),
+    gravity_state(GRAVITY_STATE::FLIPPED),
+    score(0.f)
 {
 }
 Player::~Player(){}
@@ -138,6 +140,12 @@ void Player::rotate(const float angle)
 void Player::resetVelocityY()
 {
     this->velocity.y = 0;
+}
+
+void Player::flipGravity()
+{
+    this->gravity_state = 
+        (gravity_state == GRAVITY_STATE::NORMAL) ? GRAVITY_STATE::FLIPPED : GRAVITY_STATE::NORMAL;
 }
 
 //Movement
