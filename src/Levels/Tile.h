@@ -2,6 +2,7 @@
 #define TILE_H
 
 #include "../Util/Sprite.h"
+#include "../Util/Bound.h"
 #include "TileSet.h"
 
 /**
@@ -18,14 +19,20 @@ public:
 	virtual void update(sf::Time elapsedTime);
     virtual void render(sf::RenderTarget& renderer);
 
+	const Bound& getBounds() const;
+
 private:
 	//private member variables
-	TileSet& m_tileset;/**<Tile set from which the tile gets its texture*/
+	TileSet& m_tileset;/**<Reference to the tile set from which the tile gets its texture*/
 	int m_gid;/**<gid of the tile in the tileset(Obtained on parsing the *.tmx files)*/
-	sf::Vector2f m_position;/**<Position of the center of the tile in the level*/
+	sf::Vector2f m_position;/**<Position of the top left corner of the tile in the level*/
 	sf::Vector2f m_scale;/**<Scale of the tile in the level*/
 	float m_rotation;/**<Rotation of the tile in the level*/
 	Sprite m_sprite;/**<The sprite initialized with all the above properties*/
+	std::unique_ptr<Bound> m_pBound;/**<The tile bounds*/
+
+	//private member functions
+	void loadTileBounds();
 };
 
 #endif

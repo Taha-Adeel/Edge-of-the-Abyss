@@ -26,6 +26,14 @@ public:
 	void update(sf::Time elapsedTime);
 	void render(sf::RenderTarget& renderer);
 
+	//public accessors
+	const std::vector<Tile>& getTileMap() const ;
+	const sf::Vector2i getMapSize() const ;
+	const int getMapWidth() const ;
+	const int getMapHeight() const ;
+	const int getTileWidth() const ;
+	const int getTileHeight() const ;
+
 private:
 	// private member variables
 	PlayingState& m_refPlayingState;
@@ -40,8 +48,8 @@ private:
 	// private member functions
 	void loadMap(std::string mapName);
 	void loadMapData(tinyxml2::XMLElement* pMapNode);
-	TileSet loadTileSet(tinyxml2::XMLElement* pTileSet);
-	Tile loadTile(long long int tile_data, int tile_counter);
+	void loadTileSet(tinyxml2::XMLElement* pTileSet);
+	void loadTile(long long int tile_data, int tile_counter);
 };
 
 // Utility functions
