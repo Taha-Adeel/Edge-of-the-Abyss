@@ -29,6 +29,7 @@ public:
 	// public functions
 	void displayGameEnd();
 	void changeGameMode(GAMEMODE gameMode);
+	void switchGameMode();
 
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;

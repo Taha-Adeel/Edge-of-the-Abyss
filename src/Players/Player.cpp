@@ -238,7 +238,7 @@ void Player::resolveSpikeCollision(const Bound& bound)
 
 void Player::resolvePortalCollision(const Bound& bound)
 {
-
+    this->m_ref_PlayingState.switchGameMode(); // Portal sucks the Player in irrespective of how it touches it.
 }
 void Player::die()
 {

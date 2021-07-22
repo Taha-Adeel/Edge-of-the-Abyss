@@ -49,6 +49,16 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
 	m_player->setRotation(oldPlayer->getRotation());
 }
+
+/**
+ * @brief Switches between NORMAL and PLANE gameModes. Uses PlayingState::changeGameMode()
+ * 
+ */
+void PlayingState::switchGameMode()
+{
+	if(m_gameMode == GAMEMODE::NORMAL)this->changeGameMode(GAMEMODE::PLANE);
+	else if(m_gameMode == GAMEMODE::PLANE)this->changeGameMode(GAMEMODE::NORMAL);
+}
 /**
  * @brief Delegates event handeling to player, camera, etc
  * 
