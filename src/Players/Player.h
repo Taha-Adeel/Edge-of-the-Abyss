@@ -42,7 +42,7 @@ protected:
 	void snapToSide(const BoxBound& tile,const SIDE collisionside);
 
 	virtual void resolveSpikeCollision(const Bound& bound);
-	virtual void resolvePortalCollision(const Bound& bound);
+	virtual void resolvePortalCollision(const BoxBound& bound);
 	
 public:
 	Player(PlayingState& context);

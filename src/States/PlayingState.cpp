@@ -47,7 +47,8 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	}
 	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
-	m_player->setRotation(oldPlayer->getRotation());
+	
+	//m_player->setRotation(oldPlayer->getRotation());
 }
 
 /**

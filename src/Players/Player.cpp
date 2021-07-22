@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <cstdlib>
 #include <thread>
+#include <cmath>
 
 // Constructors and Destructors
 /**
@@ -202,7 +203,7 @@ void Player::resolveCollision(const Bound& bound)
             resolveSpikeCollision(bound);
             break;
         case BOUNDNAME::PORTAL:
-            resolvePortalCollision(bound);
+            resolvePortalCollision(static_cast<const BoxBound&>(bound));
             break;
     }    
 }
@@ -236,8 +237,15 @@ void Player::resolveSpikeCollision(const Bound& bound)
     this->die();
 }
 
-void Player::resolvePortalCollision(const Bound& bound)
+void Player::resolvePortalCollision(const BoxBound& bound)
 {
+    if(fabs(this->getTopLeftPosition().x-bound.getLeft())<CONSTANTS::TILE_WIDTH/2)
+    {
+        // do nothing. Use Portal after passing through half of it.
+        return ;
+    }
+    // Snap to the end of the portal, And change gameMode
+    this->setTopLeftPosition(bound.getRight(), this->getTopLeftPosition().y);
     this->m_ref_PlayingState.switchGameMode(); // Portal sucks the Player in irrespective of how it touches it.
 }
 void Player::die()
