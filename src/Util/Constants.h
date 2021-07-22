@@ -10,7 +10,7 @@ namespace CONSTANTS{
 	constexpr unsigned int WINDOW_HEIGHT = 720;
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
 	const std::string SCORE_FILE_PATH = "../scores.txt";
-	const std::string FONT_FILE_PATH = "arial.ttf";
+	const std::string FONT_FILE_PATH = "assets/arial.ttf";
 
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
 	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f, -30.f);
