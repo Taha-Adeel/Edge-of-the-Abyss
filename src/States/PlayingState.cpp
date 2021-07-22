@@ -26,17 +26,17 @@ void PlayingState::displayGameEnd()
 }
 
 /**
- * @brief Changes the current game mode to required mode
- * 		  It takes a GAMEMODE as a parameter instead of merely switching between NORMAL and PLAYER
- * 		  based on current GAMEMODE so that when further game modes are used, it is easy to extend
+ * @brief Changes the current game mode to required mode. Called when portal is used.
+ * 		  Preserves the position, orientation and velocity of the player through portals
+ * 		  (It takes a GAMEMODE as a parameter instead of merely switching between NORMAL and PLAYER
+ * 		  based on current GAMEMODE so that when further game modes are used, it is easy to extend)
  * @param gameMode of type GAMEMODE enum class, NORMAL or PLANE
  */
 void PlayingState::changeGameMode(GAMEMODE gameMode)
 {
 	if(m_gameMode == gameMode)return; // No need to change
-	std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Gives a small pause for new map
 	m_gameMode = gameMode;
-	m_camera.reset();
+	std::unique_ptr<Player> oldPlayer = std::move(m_player); // Transfer ownership to new m_player
 	if(gameMode == GAMEMODE::NORMAL)
 	{
 		m_player = std::make_unique<NormalPlayer>(*this);
@@ -45,6 +45,9 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	{
 		m_player = std::make_unique<PlanePlayer>(*this);
 	}
+	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
+	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
+	m_player->setRotation(oldPlayer->getRotation());
 }
 /**
  * @brief Delegates event handeling to player, camera, etc
