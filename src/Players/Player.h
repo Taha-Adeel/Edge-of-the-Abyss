@@ -52,6 +52,7 @@ public:
 	const sf::Vector2f getTopLeftPosition() const;
 	const sf::Vector2f getCenter() const;
 	const float getRotation() const;
+	const sf::Vector2f getVelocity() const;
 	const BoxBound& getplayerBounds() const;
 	const float getWidth() const;
 	const float getHeight() const;
@@ -60,6 +61,7 @@ public:
 	void setTopLeftPosition(const float x, const float y);
 	void setCenter(const float x, const float y);
 	void setRotation(const float angle);
+	void setVelocity(const float x, const float y);
 	void rotate(const float angle);
 	void resetVelocityY();
 	// void flipGravity();

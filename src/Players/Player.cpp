@@ -65,6 +65,16 @@ const float Player::getRotation() const
     return this->sprite.getRotation();
 }
 
+/**
+ * @brief Returns the velocity of the Player
+ * 
+ * @return const sf::Vector2f the velocity of the Player
+ */
+const sf::Vector2f Player::getVelocity() const
+{
+    return this->velocity;
+}
+
 // Modifier
 /**
  * @brief Set the new absolute position of the top left corner of the Player Bounds
@@ -99,6 +109,17 @@ void Player::setRotation(const float angle)
     this->sprite.setRotation(angle);
 }
 
+/**
+ * @brief Sets the velocity of the Player to (x, y)
+ * 
+ * @param x velocity in x direction
+ * @param y velocity in y direction
+ */
+void Player::setVelocity(float x, float y)
+{
+    this->velocity.x = x;
+    this->velocity.y = y;
+}
 /**
  * @brief Rotates the sprite by given angle clockwise
  * 
