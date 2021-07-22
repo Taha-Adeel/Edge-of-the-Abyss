@@ -13,7 +13,7 @@ private:
 
 	bool resolveGroundCollision() override;
 
-	virtual void resolveTileCollision(const BoxBound& bound) override;
+	void resolveTileCollision(const BoxBound& bound) override;
 
 	//Core logic
 	void initVariables() override;

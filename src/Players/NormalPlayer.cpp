@@ -20,8 +20,8 @@ NormalPlayer::~NormalPlayer(){}
  */
 void NormalPlayer::initVariables()
 {
-    this->playerBounds.setWidth(CONSTANTS::PLAYER_WIDTH);
-    this->playerBounds.setHeight(CONSTANTS::PLAYER_HEIGHT);
+    this->playerBounds.setWidth(CONSTANTS::PLAYER_WIDTH - 1.f);
+    this->playerBounds.setHeight(CONSTANTS::PLAYER_HEIGHT - 1.f);
     this->sprite.setOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
     this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->onGround = false;
@@ -81,7 +81,7 @@ void NormalPlayer::resolveTileCollision(const BoxBound& tile){
         this->snapToSide(tile, collidingSide);
     }
     else{
-        std::cout << "You should die" << std::endl;
+        this->die();
     }
 }
 

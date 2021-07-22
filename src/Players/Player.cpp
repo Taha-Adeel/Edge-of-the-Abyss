@@ -194,7 +194,7 @@ void Player::resolveTileCollision(const BoxBound& bound)
         this->snapToSide(bound, collidingSide);
     }
     else{
-        std::cout << "You should die" << std::endl;
+        this->die();
     }
 }
 
@@ -222,6 +222,7 @@ void Player::resolvePortalCollision(const Bound& bound)
 void Player::die()
 {
     std::cout<<"Game over: score : "<<this->score<<std::endl;
+    score = 0;
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     this->m_ref_PlayingState.getCamera().reset();
 }

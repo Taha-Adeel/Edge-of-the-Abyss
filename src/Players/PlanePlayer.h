@@ -12,6 +12,9 @@ private:
 	//Core logic
 	void initVariables() override;
 	void initPhysics() override;
+
+	void resolveTileCollision(const BoxBound& tile) override;
+	
 public:
 	PlanePlayer(PlayingState& context);
 	virtual ~PlanePlayer();

@@ -2,7 +2,7 @@
 #include "../States/PlayingState.h"
 #include<iostream>
 #include<cmath>
-#define PI 3.14
+#define PI 3.141592
 
 PlanePlayer::PlanePlayer(PlayingState& context):
     Player(context)
@@ -10,7 +10,6 @@ PlanePlayer::PlanePlayer(PlayingState& context):
     this->sprite.setTexture("player/spaceship") ;
     this->initVariables() ;
     this->initPhysics();
-    
 }
 
 PlanePlayer::~PlanePlayer()
@@ -31,13 +30,20 @@ void PlanePlayer::initPhysics()
 }
 
 //Functions
+void PlanePlayer::resolveTileCollision(const BoxBound& tile){
+    SIDE collidingSide = this->playerBounds.getCollisionSide(tile);
+    if(collidingSide == SIDE::BOTTOM || collidingSide == SIDE::TOP){
+        resetVelocityY();
+        this->snapToSide(tile, collidingSide);
+    }
+    else{
+        this->die();
+    }
+}
 
-void PlanePlayer::updateRotation(sf::Time elapsedTime) // overriding
+void PlanePlayer::updateRotation(sf::Time elapsedTime)
 {
-
     this->setRotation(180/PI * (atan(velocity.y / velocity.x))) ;
-    // Implement rotation
-
 }
 
 
@@ -46,20 +52,15 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
     
     if(!(this->keyHeld))
     {
-        
        this->velocity.y += CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds() ;
-       
     }
     else 
     {       
         this->velocity.y -= (CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()) ;       
     }
-    if(this->velocity.y >= CONSTANTS::PLANE_TERMINAL_VELOCITY_Y)
+    if(fabs(this->velocity.y) >= CONSTANTS::PLANE_TERMINAL_VELOCITY_Y)
     {
-        this->velocity.y = CONSTANTS::PLANE_TERMINAL_VELOCITY_Y;
-    }
-    if(this->velocity.y <= -(CONSTANTS::PLANE_TERMINAL_VELOCITY_Y))
-    {
-        this->velocity.y = -(CONSTANTS::PLANE_TERMINAL_VELOCITY_Y) ;
+        this->velocity.y = velocity.y > 0 ? CONSTANTS::PLANE_TERMINAL_VELOCITY_Y  
+            : -CONSTANTS::PLANE_TERMINAL_VELOCITY_Y;
     }
 }

@@ -77,6 +77,13 @@ void Background::update(sf::Time dt){
 			}
 			bg_tile.setPosition(max_x + bg_tile.getGlobalBounds().width, bg_tile.getPosition().y);
 		}
+		if(bg_tile.getPosition().x-camera.getPosition().x > camera.getSize().x){
+			float min_x = bg_tile.getPosition().x;
+			for(auto& tile: m_bgSprites){
+				min_x = (tile.getPosition().x < min_x) ? tile.getPosition().x : min_x;
+			}
+			bg_tile.setPosition(min_x - bg_tile.getGlobalBounds().width, bg_tile.getPosition().y);
+		}
 	}
 }
 
