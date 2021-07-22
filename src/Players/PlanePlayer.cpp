@@ -21,15 +21,15 @@ void PlanePlayer::initVariables()
     this->playerBounds.setHeight(CONSTANTS::PLANE_HEIGHT);
     this->sprite.setOrigin(CONSTANTS::PLANE_WIDTH/2, CONSTANTS::TILE_HEIGHT - 19.f/2.f);
     this->setCenter(CONSTANTS::PLANE_SPAWN_POINT_X, CONSTANTS::PLANE_SPAWN_POINT_Y);
-    this->sprite.setScale(1.f,1.f);
+    this->sprite.setScale(1.f,1.f*this->gravity_state);
 }
 
-//if gravity is flipped
-if(gravity_state<0)
+void PlanePlayer::flipGravity()
 {
-    sprite.scale(1f,-1f);
-    sf::Vector2f scale = sprite.getScale();
+    Player::flipGravity();
+    this->sprite.scale(1.f,-1.f);
 }
+
 
 void PlanePlayer::initPhysics()
 {
