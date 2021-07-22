@@ -9,7 +9,7 @@
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
 	m_player(std::make_unique<NormalPlayer>(*this)),
-	m_level("checkmap", *this),
+	m_level("portaltest", *this),
 	m_camera(*this),
 	m_scoreKeeper(*this),
 	m_gameMode(GAMEMODE::NORMAL)
@@ -91,7 +91,7 @@ void PlayingState::render(sf::RenderTarget& renderer){
 	m_camera.render(renderer);
 	m_level.render(renderer);
 	m_scoreKeeper.render(renderer);
-  	m_player->render(renderer);
+  m_player->render(renderer);
 }
 
 /**
