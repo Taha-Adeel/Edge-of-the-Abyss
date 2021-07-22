@@ -75,6 +75,8 @@ bool NormalPlayer::resolveGroundCollision()
 
 void NormalPlayer::resolveTileCollision(const BoxBound& tile){
     SIDE collidingSide = this->playerBounds.getCollisionSide(tile);
+    if(gravity_state>0)
+    {
     if(collidingSide == SIDE::BOTTOM){
         this->resetVelocityY();
         this->setOnGround();
@@ -82,6 +84,17 @@ void NormalPlayer::resolveTileCollision(const BoxBound& tile){
     }
     else{
         this->die();
+    }
+    }
+    else
+    {
+     if(collidingSide == SIDE::TOP){
+        this->resetVelocityY();
+        this->setOnGround();
+        this->snapToSide(tile, collidingSide);
+    }
+    else{
+        this->die();   
     }
 }
 
@@ -109,7 +122,7 @@ void NormalPlayer::updateVelocity(sf::Time elapsedTime)
 {
     // Update velocity due to player input
     if(this->keyHeld && this->onGround){
-        this->velocity.y += CONSTANTS::PLAYER_JUMP_BOOST;
+        this->velocity.y += CONSTANTS::PLAYER_JUMP_BOOST*gravity_state;
         onGround = false;
     }
 
@@ -122,11 +135,29 @@ void NormalPlayer::updateVelocity(sf::Time elapsedTime)
     else if(!(this->onGround))
     {   
         // this->timeAbove +=eTime;
-        this->velocity.y += eTime * CONSTANTS::GRAVITY;
+        this->velocity.y += eTime * CONSTANTS::GRAVITY*gravity_state;
     }
+    /*
+    if(gravity_state>0)
+    {
     if(this->velocity.y > CONSTANTS::TERMINAL_SPEED)
     {
         // this->timeAbove +=eTime;
-        this->velocity.y = CONSTANTS::TERMINAL_SPEED;
+        this->velocity.y = CONSTANTS::TERMINAL_SPEED*gravity_state;
+    }
+    }
+    else
+    {
+    if(this->velocity.y < CONSTANTS::TERMINAL_SPEED)
+    {
+        // this->timeAbove +=eTime;
+        this->velocity.y = CONSTANTS::TERMINAL_SPEED*gravity_state;
+    }
+    }
+    */
+    if(fabs(this->velocity.y) >= CONSTANTS::TERMINAL_SPEED)
+    {
+        this->velocity.y = velocity.y > 0 ? CONSTANTS::TERMINAL_SPEED  
+            : -CONSTANTS::PLANE_TERMINAL_VELOCITY_Y;
     }
 }
