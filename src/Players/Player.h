@@ -28,8 +28,7 @@ protected:
 	//Physics
 
 
-  GRAVITY_STATE gravity_state;
-	float score;
+  	GRAVITY_STATE gravity_state;
 
 	sf::Vector2f velocity;
 	bool keyHeld = false;

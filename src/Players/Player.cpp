@@ -15,8 +15,7 @@
  */
 Player::Player(PlayingState& context):
     m_ref_PlayingState(context),
-    gravity_state(GRAVITY_STATE::NORMAL),
-    score(0.f)
+    gravity_state(GRAVITY_STATE::NORMAL)
 {
 }
 Player::~Player(){}
