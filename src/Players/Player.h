@@ -22,7 +22,7 @@ class Player
 {
 protected:
 	Sprite sprite;
-	PlayingState& m_ref_PlayingState;
+	PlayingState* m_pPlayingState;
 	BoxBound playerBounds;
 
 	//Physics
@@ -46,7 +46,7 @@ protected:
 	virtual void resolvePortalCollision(const Bound& bound);
 	
 public:
-	Player(PlayingState& context);
+	Player(PlayingState* context);
 	virtual ~Player();
 
 	//Accessors

@@ -1,4 +1,7 @@
+#include <iostream>
+
 #include "PlayingState.h"
+#include "../Game.h"
 
 /**
  * @brief Construct a new Playing State object
@@ -8,9 +11,9 @@
  */
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
-	m_player(std::make_unique<PlanePlayer>(*this)),
-	m_level("checkmap", *this),
-	m_camera(*this)
+	m_player(std::make_unique<PlanePlayer>(this)),
+	m_level(CONSTANTS::LEVELS[0], this),
+	m_camera(this)
 {
 }
 /**
@@ -46,7 +49,15 @@ void PlayingState::render(sf::RenderTarget& renderer){
 }
 
 void PlayingState::goToNextLevel(){
-	m_level = Level(CONSTANTS::LEVELS.at(m_level.getLevelNumber()+1), *this);
+	if(m_level.getLevelNumber() < CONSTANTS::LEVELS.size() - 1){
+		m_player->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+		m_camera.reset();
+		m_level = Level(CONSTANTS::LEVELS[m_level.getLevelNumber()+1], this);
+	}
+	else{
+		std::cout << "You win!!" << std::endl;
+		Game::getGameInstance().exitGame();
+	}
 }
 
 /**

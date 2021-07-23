@@ -12,8 +12,8 @@
  * 
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
-Player::Player(PlayingState& context):
-	m_ref_PlayingState(context),
+Player::Player(PlayingState* context):
+	m_pPlayingState(context),
     score(0.f)
 {
 }
@@ -145,6 +145,11 @@ void Player::updateMovement(sf::Time elapsedTime)
     float dy = eTime* this->velocity.y;
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
+
+    if(this->getTopLeftPosition().x > m_pPlayingState->getCurrentLevel().getMapSize().x + 1000){
+        this->resetVelocityY();
+        m_pPlayingState->goToNextLevel();
+    }
 }
 
 void Player::updateRotation(sf::Time elapsedTime){}
@@ -227,7 +232,7 @@ void Player::die()
     this->resetVelocityY();
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    this->m_ref_PlayingState.getCamera().reset();
+    this->m_pPlayingState->getCamera().reset();
 }
 
 /**
@@ -304,7 +309,7 @@ void Player::update(sf::Time elapsedTime)
     this->score+=elapsedTime.asMilliseconds();
     this->updateMovement(elapsedTime);
     this->resolveGroundCollision();
-	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
+	for(auto& tile: m_pPlayingState->getCurrentLevel().getTileMap()){
 		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
 			// std::cout << "Colliding!!" << std::endl;
             this->resolveCollision(tile.getBounds());
