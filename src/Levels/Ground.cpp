@@ -9,10 +9,10 @@
  * 
  * @param name Filename (relative to ./assests/grounds/) of file containing the ground texture.
  * @param ground_bg_color 
- * @param context Reference to the PlayingState object (to access the camera object)
+ * @param context Pointer to the PlayingState object (to access the camera object)
  */
-Ground::Ground(std::string name, sf::Color ground_bg_color, PlayingState& context):
-	m_refPlayingState(context),
+Ground::Ground(std::string name, sf::Color ground_bg_color, PlayingState* context):
+	m_pPlayingState(context),
 	m_ground_texture("grounds/"+name),
 	m_ground_color(ground_bg_color)
 {
@@ -51,7 +51,7 @@ void Ground::init_ground(){
  * @param dt 
  */
 void Ground::update(sf::Time dt){
-	const Camera& camera = m_refPlayingState.getCamera();
+	const Camera& camera = m_pPlayingState->getCamera();
 
 	m_ground_bg.setPosition(camera.getPosition().x, m_ground_bg.getPosition().y);
 	m_ground_line.setPosition(camera.getPosition().x, m_ground_line.getPosition().y);

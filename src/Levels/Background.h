@@ -18,13 +18,13 @@ class PlayingState;
  */
 class Background{
 public:
-	Background(std::string name, sf::Color bg_color, PlayingState& context);
+	Background(std::string name, sf::Color bg_color, PlayingState* context);
 
 	void update(sf::Time dt);
 	void render(sf::RenderTarget& renderer);
 
 private:
-	PlayingState& m_refPlayingState;
+	PlayingState* m_pPlayingState;
 	std::string m_bg_texture;
 	sf::Color m_bg_color;
 	sf::Vector2f m_bg_velocity;

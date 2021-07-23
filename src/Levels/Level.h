@@ -20,7 +20,7 @@ class PlayingState;
 class Level{
 public:
 	// constructors
-	Level(std::string map_name, PlayingState& context);
+	Level(std::string map_name, PlayingState* context);
 
 	// public member functions
 	void update(sf::Time elapsedTime);
@@ -37,7 +37,7 @@ public:
 
 private:
 	// private member variables
-	PlayingState& m_refPlayingState;
+	PlayingState* m_pPlayingState;
 	Background m_bg;
 	Ground m_ground;
 	std::string m_mapName;

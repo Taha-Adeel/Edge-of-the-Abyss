@@ -7,13 +7,13 @@
 /**
  * @brief Construct a new Camera:: Camera object
  * 
- * @param context Reference to the PlayingState object 
+ * @param context Pointer to the PlayingState object 
  * 			(to access the player object)
  */
 
-Camera::Camera(PlayingState& context):
+Camera::Camera(PlayingState* context):
 	sf::View(sf::FloatRect(0.0f, 0.0f, CONSTANTS::WINDOW_WIDTH, CONSTANTS::WINDOW_HEIGHT)),
-	m_refPlayingState(context),
+	m_pPlayingState(context),
 	x_locked(false),
 	y_locked(false)
 {
@@ -119,7 +119,7 @@ void Camera::reset(){
  * @param elapsedTime elapsedTime Time elapsed between the current and last frame in sf::Time
  */
 void Camera::update(sf::Time elapsedTime){
-	const Player& player = m_refPlayingState.getPlayer();
+	const Player& player = m_pPlayingState->getPlayer();
 
 	// Checks whether distance between player and left edge of the screen is greater than
 	// CAMERA_OFFSET_X_LEFT. If it is, then the camera is snapped to be at CAMERA_OFFSET_X_LEFT
@@ -160,8 +160,8 @@ void Camera::update(sf::Time elapsedTime){
 	// Checks if camera's view goes beyond the map size. If it does, then the camera is 
 	// snapped to be at the maps end.
 	if(!x_locked && (*this).getPosition().x + sf::View::getSize().x 
-			> m_refPlayingState.getCurrentLevel().getMapSize().x + 1000){
-		float camera_position_x = m_refPlayingState.getCurrentLevel().getMapSize().x + 1000 - sf::View::getSize().x ;
+			> m_pPlayingState->getCurrentLevel().getMapSize().x + 1000){
+		float camera_position_x = m_pPlayingState->getCurrentLevel().getMapSize().x + 1000 - sf::View::getSize().x ;
 		(*this).setPosition(camera_position_x, (*this).getPosition().y);
 	}
 

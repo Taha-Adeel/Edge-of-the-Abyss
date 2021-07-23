@@ -3,7 +3,7 @@
 #include <iostream>
 
 //Constructor
-NormalPlayer::NormalPlayer(PlayingState& context, int index):
+NormalPlayer::NormalPlayer(PlayingState* context, int index):
     Player(context)
 {
     this->sprite.setTexture("player/spritesheet", index);

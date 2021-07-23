@@ -13,15 +13,15 @@
  * @brief Constructs a new Level::Level object
  * 
  * @param mapName Filename (relative to maps/) of the .tmx file from which the level is loaded.
- * @param context Reference to the PlayingState object that level belongs to so that it can access its contents
+ * @param context Pointer to the PlayingState object that level belongs to so that it can access its contents
  */
-Level::Level(std::string mapName, PlayingState& context):
-	m_refPlayingState(context),
+Level::Level(std::string mapName, PlayingState* context):
+	m_pPlayingState(context),
 	m_bg("bg01-hd", CONSTANTS::BG_COLOR, context),
 	m_ground("ground01", CONSTANTS::GROUND_BG_COLOR, context),
 	m_mapName(mapName),
 	m_currentLevel(std::find(CONSTANTS::LEVELS.begin(), CONSTANTS::LEVELS.end(), m_mapName)
-		- CONSTANTS::LEVELS.begin() + 1)
+		- CONSTANTS::LEVELS.begin())
 {	
 	try{
 		loadMap(m_mapName);
