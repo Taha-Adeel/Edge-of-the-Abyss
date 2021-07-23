@@ -22,4 +22,4 @@ ResourceFactory& ResourceFactory::getResourceFactory(){
  * 
  */
 
-ResourceFactory::ResourceFactory(): textures("png"), fonts("ttf"), sounds("wav"){}
+ResourceFactory::ResourceFactory(): textures("png"), fonts("ttf","./assets/fonts/"), sounds("wav"){}

@@ -4,8 +4,8 @@
  <image source="../../assets/spikes.png" width="176" height="44"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">
-   <object id="4" name="Spike" type="TriangleBound" x="0" y="42">
-    <polygon points="0,0 42,0 21,-41"/>
+   <object id="4" name="Spike" type="TriangleBound" x="4" y="42">
+    <polygon points="0,0 35,0 17,-36"/>
    </object>
   </objectgroup>
  </tile>
