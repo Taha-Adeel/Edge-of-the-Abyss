@@ -13,7 +13,7 @@ namespace CONSTANTS{
 
 	constexpr float GAME_SPEED = 1.f;
 
-	const std::vector<std::string> LEVELS{"Level-1", "testmap", "portaltest", "gamemap", "checkmap"};
+	const std::vector<std::string> LEVELS{"Level-1", "Level-2", "portaltest", "gamemap", "checkmap"};
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
 	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f * GAME_SPEED, -30.f * GAME_SPEED);
 	const sf::Color GROUND_BG_COLOR = sf::Color(65, 0, 156);
