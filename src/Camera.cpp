@@ -160,8 +160,8 @@ void Camera::update(sf::Time elapsedTime){
 	// Checks if camera's view goes beyond the map size. If it does, then the camera is 
 	// snapped to be at the maps end.
 	if(!x_locked && (*this).getPosition().x + sf::View::getSize().x 
-			> m_refPlayingState.getCurrentLevel().getMapSize().x){
-		float camera_position_x = m_refPlayingState.getCurrentLevel().getMapSize().x - sf::View::getSize().x ;
+			> m_refPlayingState.getCurrentLevel().getMapSize().x + 1000){
+		float camera_position_x = m_refPlayingState.getCurrentLevel().getMapSize().x + 1000 - sf::View::getSize().x ;
 		(*this).setPosition(camera_position_x, (*this).getPosition().y);
 	}
 

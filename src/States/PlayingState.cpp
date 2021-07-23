@@ -8,7 +8,7 @@
  */
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
-	m_player(std::make_unique<NormalPlayer>(*this)),
+	m_player(std::make_unique<PlanePlayer>(*this)),
 	m_level("checkmap", *this),
 	m_camera(*this)
 {
@@ -43,6 +43,10 @@ void PlayingState::render(sf::RenderTarget& renderer){
 	m_camera.render(renderer);
 	m_level.render(renderer);
   	m_player->render(renderer);
+}
+
+void PlayingState::goToNextLevel(){
+	m_level = Level(CONSTANTS::LEVELS.at(m_level.getLevelNumber()+1), *this);
 }
 
 /**

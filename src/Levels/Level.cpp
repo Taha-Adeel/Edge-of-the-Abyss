@@ -19,7 +19,9 @@ Level::Level(std::string mapName, PlayingState& context):
 	m_refPlayingState(context),
 	m_bg("bg01-hd", CONSTANTS::BG_COLOR, context),
 	m_ground("ground01", CONSTANTS::GROUND_BG_COLOR, context),
-	m_mapName(mapName)
+	m_mapName(mapName),
+	m_currentLevel(std::find(CONSTANTS::LEVELS.begin(), CONSTANTS::LEVELS.end(), m_mapName)
+		- CONSTANTS::LEVELS.begin() + 1)
 {	
 	try{
 		loadMap(m_mapName);
@@ -27,6 +29,15 @@ Level::Level(std::string mapName, PlayingState& context):
 	catch(std::exception& e){
 		std::cout << e.what() << std::endl;
 	}
+}
+
+/**
+ * @brief Get the level number
+ * 
+ * @return const long unsigned 
+ */
+const long unsigned Level::getLevelNumber() const {
+	return m_currentLevel;
 }
 
 /**

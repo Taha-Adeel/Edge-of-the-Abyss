@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 #include <string>
+#include <vector>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -10,6 +11,7 @@ namespace CONSTANTS{
 	constexpr unsigned int WINDOW_HEIGHT = 720;
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
 
+	const std::vector<std::string> LEVELS{"testmap", "gamemap", "checkmap"};
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
 	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f, -30.f);
 	const sf::Color GROUND_BG_COLOR = sf::Color(65, 0, 156);

@@ -27,6 +27,10 @@ public:
 	void handleEvent(sf::Event&) override ;
     void update(sf::Time) override ;
     void render(sf::RenderTarget& renderer) override ;
+
+	// modifiers
+	void goToNextLevel() ;
+
 	// public accessors
 	const Player& getPlayer() const ;
 	Camera& getCamera();

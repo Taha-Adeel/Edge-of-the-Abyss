@@ -27,6 +27,7 @@ public:
 	void render(sf::RenderTarget& renderer);
 
 	//public accessors
+	const long unsigned getLevelNumber() const;
 	const std::vector<Tile>& getTileMap() const ;
 	const sf::Vector2i getMapSize() const ;
 	const int getMapWidth() const ;
@@ -40,6 +41,7 @@ private:
 	Background m_bg;
 	Ground m_ground;
 	std::string m_mapName;
+	long unsigned m_currentLevel;
 	sf::Vector2i m_mapSize;
 	sf::Vector2i m_tileSize;
 	std::vector<TileSet> m_tilesets;
