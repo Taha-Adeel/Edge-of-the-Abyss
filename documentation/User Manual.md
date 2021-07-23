@@ -1,3 +1,5 @@
+# User Manual
+
 To play the game "Edge of the abyss", once you build it using make, navigate to ./build and run the executable.
 
 The objective of the game is to avoid the obstacles and complete the levels. Watch out for spikes and crashing into the sides of a wall.
