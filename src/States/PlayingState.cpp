@@ -9,10 +9,12 @@
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
 	m_player(std::make_unique<NormalPlayer>(*this)),
-	m_level("portaltest", *this),
+	m_level("testmap", *this),
+//	m_level("portaltest", *this),
 	m_camera(*this),
 	m_scoreKeeper(*this),
-	m_gameMode(GAMEMODE::NORMAL)
+	m_gameMode(GAMEMODE::NORMAL),
+	nextFrameAction(NEXTFRAMEACTION::NOTHING)
 {
 }
 
@@ -25,6 +27,14 @@ void PlayingState::displayGameEnd()
 	m_scoreKeeper.updateHighScore();
 }
 
+void PlayingState::setNextFrameAction(NEXTFRAMEACTION flag)
+{
+	nextFrameAction = flag;
+}
+const NEXTFRAMEACTION PlayingState::getNextFrameAction() const
+{
+	return nextFrameAction;
+}
 /**
  * @brief Changes the current game mode to required mode. Called when portal is used.
  * 		  Preserves the position, orientation and velocity of the player through portals
@@ -45,12 +55,19 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	{
 		m_player = std::make_unique<PlanePlayer>(*this);
 	}
+	else if(gameMode == GAMEMODE::REVERSE)
+	{
+		//m_player = std::make_unique<ReversePlayer>(*this);
+	}
 	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
 	
 	//m_player->setRotation(oldPlayer->getRotation());
 }
 
+const GAMEMODE PlayingState::getGameMode() const{
+	return m_gameMode;
+}
 /**
  * @brief Switches between NORMAL and PLANE gameModes. Uses PlayingState::changeGameMode()
  * 
@@ -76,6 +93,22 @@ void PlayingState::handleEvent(sf::Event& ev){
  * @param dt Time for which the last frame ran
  */
 void PlayingState::update(sf::Time dt){
+	
+	switch(nextFrameAction)
+	{
+		case NEXTFRAMEACTION::NOTHING:
+			break;
+		case NEXTFRAMEACTION::NORMAL:
+			this->changeGameMode(GAMEMODE::NORMAL);
+			break;
+		case NEXTFRAMEACTION::PLANE:
+			this->changeGameMode(GAMEMODE::PLANE);
+			break;
+		case NEXTFRAMEACTION::REVERSE:
+			this->changeGameMode(GAMEMODE::REVERSE);
+			break;
+	}
+	nextFrameAction = NEXTFRAMEACTION::NOTHING;
 	m_player->update(dt);
 	m_camera.update(dt);
 	m_level.update(dt);

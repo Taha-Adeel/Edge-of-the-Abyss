@@ -220,7 +220,7 @@ void Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 		else if(name == "Spike")
 			bound_name = BOUNDNAME::SPIKE;
 		else if(name == "Portal")
-			bound_name = BOUNDNAME::PORTAL;
+			bound_name = BOUNDNAME::PORTAL_P;
 		else
 			throw std::runtime_error("Invalid bounds name: " + name);
 
@@ -295,9 +295,9 @@ void Level::loadTile(long long int tile_data, int tile_counter){
 	}
 	
 	//Get the position of center of the tile in the level
-	int xx = 0;
+	int xx = 1000;
 	int yy = 0;
-	xx += getTileWidth() * (tile_counter % getMapWidth()) + 1000;
+	xx += getTileWidth() * (tile_counter % getMapWidth());
 	yy += getTileHeight() * (tile_counter / getMapWidth());
 	
 	int y_offset = getMapSize().y - CONSTANTS::GROUNDHEIGHT;
