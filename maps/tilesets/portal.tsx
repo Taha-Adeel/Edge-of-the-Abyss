@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.5" tiledversion="1.7.0" name="portal" tilewidth="42" tileheight="42" tilecount="4" columns="2">
+ <transformations hflip="1" vflip="1" rotate="1" preferuntransformed="1"/>
  <image source="../../assets/portal.png" width="84" height="84"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">

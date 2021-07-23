@@ -53,10 +53,12 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	if(gameMode == GAMEMODE::NORMAL)
 	{
 		m_player = std::make_unique<NormalPlayer>(this);
+		m_camera.unlock_y();
 	}
 	else if(gameMode == GAMEMODE::PLANE)
 	{
 		m_player = std::make_unique<PlanePlayer>(this);
+		m_camera.lock_y(m_camera.getPosition().y);
 	}
 	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
@@ -127,11 +129,15 @@ void PlayingState::render(sf::RenderTarget& renderer){
 void PlayingState::goToNextLevel(){
 	if(m_level.getLevelNumber() < CONSTANTS::LEVELS.size() - 1){
 		m_player->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+		if(m_gameMode != GAMEMODE::NORMAL){
+			this->setNextFrameAction(NEXTFRAMEACTION::NORMAL);
+		}
 		m_camera.reset();
 		m_level = Level(CONSTANTS::LEVELS[m_level.getLevelNumber()+1], this);
 	}
 	else{
 		std::cout << "You win!!" << std::endl;
+		this->displayGameEnd();
 		Game::getGameInstance().exitGame();
 	}
 }

@@ -4,7 +4,7 @@ Welcome to the Developer Manual for the game "Edge of the abyss".
 
 This project uses the SFML library for its multimedia capabilities. You can familiarize 
 yourself with SFML through this [simple tutorial.](https://www.sfml-dev.org/tutorials/2.5/). An
-indepth documentation of the code can be read from [here](documentation/html/index.html).
+indepth documentation of the code can be read from [here](html/index.html).
 Below is a high level view on how the classes are related, and possible future contibutions
 you can make.
 

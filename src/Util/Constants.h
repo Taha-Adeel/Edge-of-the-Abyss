@@ -13,7 +13,7 @@ namespace CONSTANTS{
 
 	constexpr float GAME_SPEED = 1.f;
 
-	const std::vector<std::string> LEVELS{"testmap", "portaltest", "gamemap", "checkmap"};
+	const std::vector<std::string> LEVELS{"Level-1", "testmap", "portaltest", "gamemap", "checkmap"};
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
 	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f * GAME_SPEED, -30.f * GAME_SPEED);
 	const sf::Color GROUND_BG_COLOR = sf::Color(65, 0, 156);
@@ -36,7 +36,7 @@ namespace CONSTANTS{
 
 	constexpr float PLANE_WIDTH = 42.f;
 	constexpr float PLANE_HEIGHT = 26.f;
-	constexpr float PLANE_ACCELARATION = GRAVITY * 0.8;
+	constexpr float PLANE_ACCELARATION = GRAVITY * 0.35;
 	constexpr float PLANE_TERMINAL_VELOCITY_Y = 1.2 * PLANE_ACCELARATION;
 	
 	constexpr int TILE_WIDTH = 42;
