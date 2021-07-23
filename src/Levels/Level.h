@@ -20,13 +20,14 @@ class PlayingState;
 class Level{
 public:
 	// constructors
-	Level(std::string map_name, PlayingState& context);
+	Level(std::string map_name, PlayingState* context);
 
 	// public member functions
 	void update(sf::Time elapsedTime);
 	void render(sf::RenderTarget& renderer);
 
 	//public accessors
+	const long unsigned getLevelNumber() const;
 	const std::vector<Tile>& getTileMap() const ;
 	const sf::Vector2i getMapSize() const ;
 	const int getMapWidth() const ;
@@ -36,10 +37,11 @@ public:
 
 private:
 	// private member variables
-	PlayingState& m_refPlayingState;
+	PlayingState* m_pPlayingState;
 	Background m_bg;
 	Ground m_ground;
 	std::string m_mapName;
+	long unsigned m_currentLevel;
 	sf::Vector2i m_mapSize;
 	sf::Vector2i m_tileSize;
 	std::vector<TileSet> m_tilesets;

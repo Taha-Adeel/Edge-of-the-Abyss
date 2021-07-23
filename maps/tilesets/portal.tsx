@@ -3,22 +3,22 @@
  <image source="../../assets/portal.png" width="84" height="84"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="Portal" type="BoxBound" x="0" y="0" width="42" height="42"/>
+   <object id="1" name="Portal_P" type="BoxBound" x="0" y="0" width="42" height="42"/>
   </objectgroup>
  </tile>
  <tile id="1">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="Portal" type="BoxBound" x="0" y="0" width="42" height="42"/>
+   <object id="1" name="Portal_N" type="BoxBound" x="0" y="0" width="42" height="42"/>
   </objectgroup>
  </tile>
  <tile id="2">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="Portal" type="BoxBound" x="0" y="0" width="42" height="42"/>
+   <object id="1" name="Portal_P" type="BoxBound" x="0" y="0" width="42" height="42"/>
   </objectgroup>
  </tile>
  <tile id="3">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="Portal" type="BoxBound" x="0" y="0" width="42" height="42"/>
+   <object id="1" name="Portal_N" type="BoxBound" x="0" y="0" width="42" height="42"/>
   </objectgroup>
  </tile>
 </tileset>

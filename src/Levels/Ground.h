@@ -16,7 +16,7 @@ class PlayingState;
 class Ground{
 public:
 	// constructors
-	Ground(std::string name, sf::Color ground_bg_color, PlayingState& context);
+	Ground(std::string name, sf::Color ground_bg_color, PlayingState* context);
 
 	// public member functions
 	void update(sf::Time dt);
@@ -24,7 +24,7 @@ public:
 
 private:
 	// private member variables
-	PlayingState& m_refPlayingState;
+	PlayingState* m_pPlayingState;
 	std::string m_ground_texture;
 	sf::Color m_ground_color;
 	

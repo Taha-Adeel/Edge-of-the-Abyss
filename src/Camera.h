@@ -20,7 +20,7 @@ class PlayingState ;
 class Camera:public sf::View{
 private:
     // private member variables
-    PlayingState& m_refPlayingState;
+    PlayingState* m_pPlayingState;
     bool x_locked;
     bool y_locked;
 
@@ -29,7 +29,7 @@ private:
 
 public:
     // constructors
-    Camera(PlayingState& context) ;         
+    Camera(PlayingState* context) ;         
 
     // public member functions
     void update(sf::Time elapsedTime);

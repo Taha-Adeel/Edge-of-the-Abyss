@@ -13,8 +13,9 @@
  * 
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
-Player::Player(PlayingState& context):
-    m_ref_PlayingState(context),
+
+Player::Player(PlayingState* context):
+	m_pPlayingState(context),
     gravity_state(GRAVITY_STATE::NORMAL)
 {
 }
@@ -173,6 +174,11 @@ void Player::updateMovement(sf::Time elapsedTime)
     float dy = eTime* this->velocity.y;
     //std::cout<<dx<<" "<<dy<<"::"<<sprite.getPosition().x<<" "<<sprite.getPosition().y<<std::endl;
     this->move(dx, dy);
+
+    if(this->getTopLeftPosition().x > m_pPlayingState->getCurrentLevel().getMapSize().x + 1000){
+        this->resetVelocityY();
+        m_pPlayingState->goToNextLevel();
+    }
 }
 
 void Player::updateRotation(sf::Time elapsedTime){}
@@ -211,7 +217,8 @@ void Player::resolveCollision(const Bound& bound)
             break;
         case BOUNDNAME::PORTAL_N:
         case BOUNDNAME::PORTAL_P:
-        case BOUNDNAME::PORTAL_R:
+        case BOUNDNAME::PORTAL_GN:
+        case BOUNDNAME::PORTAL_GR:
             resolvePortalCollision(static_cast<const BoxBound&>(bound));
             break;
     }    
@@ -253,19 +260,24 @@ void Player::resolvePortalCollision(const BoxBound& bound)
         // do nothing. Use Portal after passing through half of it.
         return ;
     }
-    // Snap to the end of the portal, And change gameMode
-    this->setTopLeftPosition(bound.getRight(), this->getTopLeftPosition().y);
-   // this->m_ref_PlayingState.switchGameMode(); // Portal sucks the Player in irrespective of how it touches it.
+
     switch(bound.getBoundName())
     {
         case BOUNDNAME::PORTAL_N:
-            this->m_ref_PlayingState.setNextFrameAction(NEXTFRAMEACTION::NORMAL);
+            if(this->m_pPlayingState->getGameMode() != GAMEMODE::NORMAL)
+                this->m_pPlayingState->setNextFrameAction(NEXTFRAMEACTION::NORMAL);
             break;
         case BOUNDNAME::PORTAL_P:
-            this->m_ref_PlayingState.setNextFrameAction(NEXTFRAMEACTION::PLANE);
+            if(this->m_pPlayingState->getGameMode() != GAMEMODE::PLANE)
+                this->m_pPlayingState->setNextFrameAction(NEXTFRAMEACTION::PLANE);
             break;
-        case BOUNDNAME::PORTAL_R:
-            this->flipGravity();
+        case BOUNDNAME::PORTAL_GN:
+            if(this->gravity_state != GRAVITY_STATE::NORMAL)
+                this->flipGravity();
+            break;
+        case BOUNDNAME::PORTAL_GR:
+            if(this->gravity_state != GRAVITY_STATE::FLIPPED)
+                this->flipGravity();
             break;
         default:
             break;
@@ -279,10 +291,10 @@ void Player::die()
     this->resetVelocityY();
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    this->m_ref_PlayingState.displayGameEnd();
-    if(this->m_ref_PlayingState.getGameMode()!=GAMEMODE::NORMAL)
-    this->m_ref_PlayingState.setNextFrameAction(NEXTFRAMEACTION::NORMAL);
-    this->m_ref_PlayingState.getCamera().reset();
+    this->m_pPlayingState->displayGameEnd();
+    if(this->m_pPlayingState->getGameMode()!=GAMEMODE::NORMAL)
+    this->m_pPlayingState->setNextFrameAction(NEXTFRAMEACTION::NORMAL);
+    this->m_pPlayingState->getCamera().reset();
 }
 
 /**
@@ -362,7 +374,7 @@ void Player::update(sf::Time elapsedTime)
     //this->score+=elapsedTime.asMilliseconds();
     this->updateMovement(elapsedTime);
     this->resolveGroundCollision();
-	for(auto& tile: m_ref_PlayingState.getCurrentLevel().getTileMap()){
+	for(auto& tile: m_pPlayingState->getCurrentLevel().getTileMap()){
 		if(Bound::checkCollision(this->playerBounds, tile.getBounds())){
 			// std::cout << "Colliding!!" << std::endl;
             this->resolveCollision(tile.getBounds());

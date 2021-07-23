@@ -22,15 +22,13 @@ class Player
 {
 protected:
 	Sprite sprite;
-	PlayingState& m_ref_PlayingState;
+	PlayingState* m_pPlayingState;
 	BoxBound playerBounds;
 
 	//Physics
-
-
-  	GRAVITY_STATE gravity_state;
-
+	GRAVITY_STATE gravity_state;
 	sf::Vector2f velocity;
+	
 	bool keyHeld = false;
 
 	//Core
@@ -48,7 +46,7 @@ protected:
 	virtual void resolvePortalCollision(const BoxBound& bound);
 	
 public:
-	Player(PlayingState& context);
+	Player(PlayingState* context);
 	virtual ~Player();
 
 	//Accessors

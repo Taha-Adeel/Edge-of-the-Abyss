@@ -16,7 +16,7 @@ private:
 	void resolveTileCollision(const BoxBound& tile) override;
 	
 public:
-	PlanePlayer(PlayingState& context);
+	PlanePlayer(PlayingState* context);
 	virtual ~PlanePlayer();
 
 	void flipGravity() override;

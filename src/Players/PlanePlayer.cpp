@@ -4,7 +4,7 @@
 #include<cmath>
 #define PI 3.141592
 
-PlanePlayer::PlanePlayer(PlayingState& context):
+PlanePlayer::PlanePlayer(PlayingState* context):
     Player(context)
 {
     this->sprite.setTexture("player/spaceship") ;

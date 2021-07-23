@@ -10,7 +10,7 @@ class PlayingState;
 class ScoreKeeper
 {
     //Camera* referenceCamera;
-    PlayingState& referencePlayingState;
+    PlayingState* pointerPlayingState;
     sf::Font& font;
     std::fstream fio;
     float currentScore;
@@ -19,7 +19,7 @@ class ScoreKeeper
     sf::Text highScoreText;
     
 public:
-    ScoreKeeper(PlayingState& context);
+    ScoreKeeper(PlayingState* context);
     ~ScoreKeeper();
 
     //Accessors

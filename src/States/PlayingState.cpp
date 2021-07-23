@@ -1,5 +1,9 @@
-#include "PlayingState.h"
+#include <iostream>
 #include <thread>
+
+#include "PlayingState.h"
+#include "../Game.h"
+
 /**
  * @brief Construct a new Playing State object
  * 
@@ -8,11 +12,10 @@
  */
 PlayingState::PlayingState(Game& pGame):
 	StateBase(pGame),
-	m_player(std::make_unique<NormalPlayer>(*this)),
-	m_level("portaltest", *this),
-//	m_level("portaltest", *this),
-	m_camera(*this),
-	m_scoreKeeper(*this),
+	m_player(std::make_unique<NormalPlayer>(this)),
+	m_level(CONSTANTS::LEVELS[0], this),
+	m_camera(this),
+	m_scoreKeeper(this),
 	m_gameMode(GAMEMODE::NORMAL),
 	nextFrameAction(NEXTFRAMEACTION::NOTHING)
 {
@@ -49,11 +52,11 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	std::unique_ptr<Player> oldPlayer = std::move(m_player); // Transfer ownership to new m_player
 	if(gameMode == GAMEMODE::NORMAL)
 	{
-		m_player = std::make_unique<NormalPlayer>(*this);
+		m_player = std::make_unique<NormalPlayer>(this);
 	}
 	else if(gameMode == GAMEMODE::PLANE)
 	{
-		m_player = std::make_unique<PlanePlayer>(*this);
+		m_player = std::make_unique<PlanePlayer>(this);
 	}
 	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
@@ -102,6 +105,7 @@ void PlayingState::update(sf::Time dt){
 			break;
 	}
 	nextFrameAction = NEXTFRAMEACTION::NOTHING;
+
 	m_player->update(dt);
 	m_camera.update(dt);
 	m_level.update(dt);
@@ -118,6 +122,18 @@ void PlayingState::render(sf::RenderTarget& renderer){
 	m_level.render(renderer);
 	m_scoreKeeper.render(renderer);
   m_player->render(renderer);
+}
+
+void PlayingState::goToNextLevel(){
+	if(m_level.getLevelNumber() < CONSTANTS::LEVELS.size() - 1){
+		m_player->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
+		m_camera.reset();
+		m_level = Level(CONSTANTS::LEVELS[m_level.getLevelNumber()+1], this);
+	}
+	else{
+		std::cout << "You win!!" << std::endl;
+		Game::getGameInstance().exitGame();
+	}
 }
 
 /**

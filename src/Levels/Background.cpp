@@ -9,14 +9,14 @@
  * 
  * @param name Filename (relative to ./assests/backgrounds/) of file containing the background texture.
  * @param bg_color 
- * @param context Reference to the PlayingState object (to access the camera object)
+ * @param context Pointer to the PlayingState object (to access the camera object)
  */
-Background::Background(std::string name, sf::Color bg_color, PlayingState& context):
-	m_refPlayingState(context),
+Background::Background(std::string name, sf::Color bg_color, PlayingState* context):
+	m_pPlayingState(context),
 	m_bg_texture("backgrounds/"+name),
 	m_bg_color(bg_color),
 	m_bg_velocity(CONSTANTS::BG_VELOCITY),
-	m_bg_top_y_coord(-300.f)
+	m_bg_top_y_coord(-200.f)
 {
 	init_bgSprites();
 }
@@ -47,7 +47,7 @@ void Background::init_bgSprites(){
  * @param dt 
  */
 void Background::update(sf::Time dt){
-	const Camera& camera = m_refPlayingState.getCamera();
+	const Camera& camera = m_pPlayingState->getCamera();
 	sf::Vector2f camera_velocity = camera.getVelocity();
 
 	if(camera_velocity.x > 1.f){
@@ -82,7 +82,7 @@ void Background::update(sf::Time dt){
 			for(auto& tile: m_bgSprites){
 				min_x = (tile.getPosition().x < min_x) ? tile.getPosition().x : min_x;
 			}
-			bg_tile.setPosition(min_x - bg_tile.getGlobalBounds().width, bg_tile.getPosition().y);
+			bg_tile.setPosition(min_x - bg_tile.getGlobalBounds().width, m_bg_top_y_coord);
 		}
 	}
 }

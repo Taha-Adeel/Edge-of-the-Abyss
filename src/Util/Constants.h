@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 #include <string>
+#include <vector>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -10,6 +11,7 @@ namespace CONSTANTS{
 	constexpr unsigned int WINDOW_HEIGHT = 720;
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
 
+	const std::vector<std::string> LEVELS{"testmap", "portaltest", "gamemap", "checkmap"};
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
 	const sf::Vector2f BG_VELOCITY = sf::Vector2f(-30.f, -30.f);
 	const sf::Color GROUND_BG_COLOR = sf::Color(65, 0, 156);
@@ -36,19 +38,17 @@ namespace CONSTANTS{
 	constexpr float PLANE_SPAWN_POINT_Y  = SPAWNPOINT_Y - 200.f;
 	constexpr float PLANE_SPEED_X = PLAYER_SPEED_X ;//500.f;
 	constexpr float PLANE_SPEED_Y = 50.f;
-    constexpr float PLANE_ACCELARATION = 600.f;
+  constexpr float PLANE_ACCELARATION = 600.f;
 	constexpr float PLANE_TERMINAL_VELOCITY_Y = 350.f;
 	
 	constexpr int TILE_WIDTH = 42;
 	constexpr int TILE_HEIGHT = 42;
 	constexpr int TILE_SPACING = 2;
 
-    constexpr int CAMERA_OFFSET_X_LEFT = 300;
-    constexpr int CAMERA_OFFSET_Y_TOP = 150;
-    constexpr int CAMERA_OFFSET_Y_BOTTOM = 400;
-    constexpr int CAMERA_OFFSET_GROUND_Y = 0;
-
-	constexpr float PORTAL_TOLERANCE = 0.20f * TILE_WIDTH; // 20% of the portal width = 8.4f
+  constexpr int CAMERA_OFFSET_X_LEFT = 300;
+  constexpr int CAMERA_OFFSET_Y_TOP = 150;
+  constexpr int CAMERA_OFFSET_Y_BOTTOM = 400;
+  constexpr int CAMERA_OFFSET_GROUND_Y = 0;
 
 	const std::string SCORE_FILE_PATH = "scores.txt";
 	const std::string SCORE_FONT = "arial";
