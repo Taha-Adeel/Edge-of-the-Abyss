@@ -289,6 +289,7 @@ void Player::die()
     //std::cout<<"Game over!! Score: "<<this->score<<std::endl;
     //score = 0;
     this->resetVelocityY();
+    this->gravity_state = GRAVITY_STATE::NORMAL;
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     this->m_pPlayingState->displayGameEnd();
