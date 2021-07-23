@@ -265,7 +265,7 @@ void Player::resolvePortalCollision(const BoxBound& bound)
             this->m_ref_PlayingState.setNextFrameAction(NEXTFRAMEACTION::PLANE);
             break;
         case BOUNDNAME::PORTAL_R:
-            this->m_ref_PlayingState.setNextFrameAction(NEXTFRAMEACTION::REVERSE);
+            this->flipGravity();
             break;
         default:
             break;

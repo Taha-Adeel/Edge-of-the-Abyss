@@ -8,8 +8,8 @@
 #include "../Camera.h"
 #include "../Util/Score.h"
 
-enum class GAMEMODE{NORMAL, PLANE, REVERSE};
-enum class NEXTFRAMEACTION{NOTHING, NORMAL, PLANE, REVERSE};
+enum class GAMEMODE{NORMAL, PLANE};
+enum class NEXTFRAMEACTION{NOTHING, NORMAL, PLANE};
 /**
  * @brief Main game play state.
  *  

@@ -55,10 +55,6 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	{
 		m_player = std::make_unique<PlanePlayer>(*this);
 	}
-	else if(gameMode == GAMEMODE::REVERSE)
-	{
-		//m_player = std::make_unique<ReversePlayer>(*this);
-	}
 	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
 	
@@ -103,9 +99,6 @@ void PlayingState::update(sf::Time dt){
 			break;
 		case NEXTFRAMEACTION::PLANE:
 			this->changeGameMode(GAMEMODE::PLANE);
-			break;
-		case NEXTFRAMEACTION::REVERSE:
-			this->changeGameMode(GAMEMODE::REVERSE);
 			break;
 	}
 	nextFrameAction = NEXTFRAMEACTION::NOTHING;
