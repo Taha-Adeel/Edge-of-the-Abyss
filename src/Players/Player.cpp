@@ -13,6 +13,7 @@
  * 
  * @param context Reference to the PlayingState object that player belongs to so that it can access its contents
  */
+
 Player::Player(PlayingState* context):
 	m_pPlayingState(context),
     gravity_state(GRAVITY_STATE::NORMAL)

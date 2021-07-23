@@ -3,6 +3,7 @@
 
 #include "PlayingState.h"
 #include "../Game.h"
+
 /**
  * @brief Construct a new Playing State object
  * 
@@ -120,7 +121,7 @@ void PlayingState::render(sf::RenderTarget& renderer){
 	m_camera.render(renderer);
 	m_level.render(renderer);
 	m_scoreKeeper.render(renderer);
-    m_player->render(renderer);
+  m_player->render(renderer);
 }
 
 void PlayingState::goToNextLevel(){

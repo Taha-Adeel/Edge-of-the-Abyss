@@ -5,6 +5,7 @@
 
 enum class BOUNDTYPE {BOX, TRIANGLE};
 enum class BOUNDNAME {TILE, SPIKE, PORTAL_N, PORTAL_P, PORTAL_GN, PORTAL_GR};// PORTAL_N = portal to normal mode
+
 class Bound : public sf::Transformable
 {
 protected:
