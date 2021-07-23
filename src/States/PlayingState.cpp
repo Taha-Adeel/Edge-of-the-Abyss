@@ -53,12 +53,12 @@ void PlayingState::changeGameMode(GAMEMODE gameMode)
 	if(gameMode == GAMEMODE::NORMAL)
 	{
 		m_player = std::make_unique<NormalPlayer>(this);
-		m_camera.unlock_y();
+		// m_camera.unlock_y();
 	}
 	else if(gameMode == GAMEMODE::PLANE)
 	{
 		m_player = std::make_unique<PlanePlayer>(this);
-		m_camera.lock_y(m_camera.getPosition().y);
+		// m_camera.lock_y(oldPlayer->getTopLeftPosition().y + 21 - m_camera.getSize().y/2.f);
 	}
 	m_player->setTopLeftPosition(oldPlayer->getTopLeftPosition().x, oldPlayer->getTopLeftPosition().y);
 	m_player->setVelocity(oldPlayer->getVelocity().x, oldPlayer->getVelocity().y);
