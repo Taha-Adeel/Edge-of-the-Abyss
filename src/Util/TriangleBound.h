@@ -16,6 +16,9 @@ private:
 	float m_enclosingRadius;
 	sf::Vector2f m_center;
 
+	static bool checkBroadPhaseCollision(const BoxBound& playerBound, const TriangleBound& spike);
+	static bool checkNarrowPhaseCollision(const BoxBound& playerBound, const TriangleBound& spike);
+
 public:
 	TriangleBound();
 	TriangleBound(sf::Vector2f position, sf::Vector2f base_pt_1
