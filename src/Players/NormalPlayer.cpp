@@ -1,6 +1,7 @@
 #include "NormalPlayer.h"
 #include "../States/PlayingState.h"
 #include <iostream>
+#include <cmath>
 
 //Constructor
 NormalPlayer::NormalPlayer(PlayingState* context, int index):
@@ -24,7 +25,7 @@ void NormalPlayer::initVariables()
     this->playerBounds.setHeight(CONSTANTS::PLAYER_HEIGHT - 1.f);
     this->sprite.setOrigin(CONSTANTS::PLAYER_WIDTH/2, CONSTANTS::PLAYER_HEIGHT/2);
     this->setCenter(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
-    this->onGround = false;
+    this->onSurface = false;
     this->setRotation(0.f);
 }
 
@@ -43,9 +44,9 @@ void NormalPlayer::initPhysics()
  * @brief Sets the boolean onGround to true(as the default parameter) to indicate that it is on ground
  * 
  */
-void NormalPlayer::setOnGround(bool _onGround)
+void NormalPlayer::setOnSurface(bool _onSurface)
 {
-    this->onGround = _onGround;
+    this->onSurface = _onSurface;
 }
 /**
  * @brief Sets the player sprite orientation to the nearest 90 degree angle so that it is touching the ground
@@ -69,19 +70,31 @@ void NormalPlayer::resetNearestOrientation()
  */
 bool NormalPlayer::resolveGroundCollision()
 {
-    this->onGround = Player::resolveGroundCollision();
-    return this->onGround;
+    this->onSurface = Player::resolveGroundCollision();
+    return this->onSurface;
 }
 
 void NormalPlayer::resolveTileCollision(const BoxBound& tile){
     SIDE collidingSide = this->playerBounds.getCollisionSide(tile);
-    if(collidingSide == SIDE::BOTTOM){
-        this->resetVelocityY();
-        this->setOnGround();
-        this->snapToSide(tile, collidingSide);
+    if(gravity_state == GRAVITY_STATE::NORMAL)    {
+        if(collidingSide == SIDE::BOTTOM){
+            this->resetVelocityY();
+            this->setOnSurface();
+            this->snapToSide(tile, collidingSide);
+        }
+        else{
+            this->die();
+        }
     }
-    else{
-        this->die();
+    else if(gravity_state == GRAVITY_STATE::FLIPPED)    {
+        if(collidingSide == SIDE::TOP){
+            this->resetVelocityY();
+            this->setOnSurface();
+            this->snapToSide(tile, collidingSide);
+        }
+        else{
+            this->die();   
+        }
     }
 }
 
@@ -93,10 +106,10 @@ void NormalPlayer::resolveTileCollision(const BoxBound& tile){
  */
 void NormalPlayer::updateRotation(sf::Time elapsedTime) // overriding
 {    
-    if(!(this->onGround))
-        this->sprite.rotate(CONSTANTS::PLAYER_ANGULAR_VELOCITY* elapsedTime.asSeconds());
+    if(!(this->onSurface))
+        this->sprite.rotate(CONSTANTS::PLAYER_ANGULAR_VELOCITY* elapsedTime.asSeconds()*gravity_state);
 
-    if(this->onGround)
+    if(this->onSurface)
         this->resetNearestOrientation();
 }
 
@@ -108,25 +121,21 @@ void NormalPlayer::updateRotation(sf::Time elapsedTime) // overriding
 void NormalPlayer::updateVelocity(sf::Time elapsedTime)
 {
     // Update velocity due to player input
-    if(this->keyHeld && this->onGround){
-        this->velocity.y += CONSTANTS::PLAYER_JUMP_BOOST;
-        onGround = false;
+    if(this->keyHeld && this->onSurface){
+        this->velocity.y = CONSTANTS::PLAYER_JUMP_BOOST*gravity_state;
+        onSurface = false;
     }
 
     // Update velocity due to acceleration
     float eTime = elapsedTime.asSeconds();
-    if(this->onGround){
-        // do nothing
-        return ;
-    }
-    else if(!(this->onGround))
+    if(!(this->onSurface))
     {   
         // this->timeAbove +=eTime;
-        this->velocity.y += eTime * CONSTANTS::GRAVITY;
+        this->velocity.y += eTime * CONSTANTS::GRAVITY*gravity_state;
     }
-    if(this->velocity.y > CONSTANTS::TERMINAL_SPEED)
+    if(fabs(this->velocity.y) >= CONSTANTS::TERMINAL_SPEED)
     {
-        // this->timeAbove +=eTime;
-        this->velocity.y = CONSTANTS::TERMINAL_SPEED;
+        this->velocity.y = velocity.y > 0 ? CONSTANTS::TERMINAL_SPEED  
+            : - CONSTANTS::TERMINAL_SPEED;
     }
 }

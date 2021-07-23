@@ -21,7 +21,15 @@ void PlanePlayer::initVariables()
     this->playerBounds.setHeight(CONSTANTS::PLANE_HEIGHT);
     this->sprite.setOrigin(CONSTANTS::PLANE_WIDTH/2, CONSTANTS::TILE_HEIGHT - 19.f/2.f);
     this->setCenter(CONSTANTS::PLANE_SPAWN_POINT_X, CONSTANTS::PLANE_SPAWN_POINT_Y);
+    this->sprite.setScale(1.f,1.f*this->gravity_state);
 }
+
+void PlanePlayer::flipGravity()
+{
+    Player::flipGravity();
+    this->sprite.scale(1.f,-1.f);
+}
+
 
 void PlanePlayer::initPhysics()
 {
@@ -52,11 +60,11 @@ void PlanePlayer::updateVelocity(sf::Time elapsedTime)
     
     if(!(this->keyHeld))
     {
-       this->velocity.y += CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds() ;
+       this->velocity.y += CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()*gravity_state ;
     }
     else 
     {       
-        this->velocity.y -= (CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()) ;       
+        this->velocity.y -= (CONSTANTS::PLANE_ACCELARATION * elapsedTime.asSeconds()*gravity_state) ;       
     }
     if(fabs(this->velocity.y) >= CONSTANTS::PLANE_TERMINAL_VELOCITY_Y)
     {

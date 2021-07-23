@@ -16,7 +16,7 @@ Background::Background(std::string name, sf::Color bg_color, PlayingState* conte
 	m_bg_texture("backgrounds/"+name),
 	m_bg_color(bg_color),
 	m_bg_velocity(CONSTANTS::BG_VELOCITY),
-	m_bg_top_y_coord(-300.f)
+	m_bg_top_y_coord(-200.f)
 {
 	init_bgSprites();
 }
@@ -82,7 +82,7 @@ void Background::update(sf::Time dt){
 			for(auto& tile: m_bgSprites){
 				min_x = (tile.getPosition().x < min_x) ? tile.getPosition().x : min_x;
 			}
-			bg_tile.setPosition(min_x - bg_tile.getGlobalBounds().width, bg_tile.getPosition().y);
+			bg_tile.setPosition(min_x - bg_tile.getGlobalBounds().width, m_bg_top_y_coord);
 		}
 	}
 }

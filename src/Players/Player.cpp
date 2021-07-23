@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <cstdlib>
 #include <thread>
+#include <cmath>
 
 // Constructors and Destructors
 /**
@@ -14,7 +15,7 @@
  */
 Player::Player(PlayingState* context):
 	m_pPlayingState(context),
-    score(0.f)
+    gravity_state(GRAVITY_STATE::NORMAL)
 {
 }
 Player::~Player(){}
@@ -66,6 +67,16 @@ const float Player::getRotation() const
     return this->sprite.getRotation();
 }
 
+/**
+ * @brief Returns the velocity of the Player
+ * 
+ * @return const sf::Vector2f the velocity of the Player
+ */
+const sf::Vector2f Player::getVelocity() const
+{
+    return this->velocity;
+}
+
 // Modifier
 /**
  * @brief Set the new absolute position of the top left corner of the Player Bounds
@@ -101,6 +112,17 @@ void Player::setRotation(const float angle)
 }
 
 /**
+ * @brief Sets the velocity of the Player to (x, y)
+ * 
+ * @param x velocity in x direction
+ * @param y velocity in y direction
+ */
+void Player::setVelocity(float x, float y)
+{
+    this->velocity.x = x;
+    this->velocity.y = y;
+}
+/**
  * @brief Rotates the sprite by given angle clockwise
  * 
  * @param angle angle to rotate the sprite by (clockwise)
@@ -117,6 +139,12 @@ void Player::rotate(const float angle)
 void Player::resetVelocityY()
 {
     this->velocity.y = 0;
+}
+
+void Player::flipGravity()
+{
+    this->gravity_state = 
+        (gravity_state == GRAVITY_STATE::NORMAL) ? GRAVITY_STATE::FLIPPED : GRAVITY_STATE::NORMAL;
 }
 
 //Movement
@@ -186,8 +214,11 @@ void Player::resolveCollision(const Bound& bound)
         case BOUNDNAME::SPIKE:
             resolveSpikeCollision(bound);
             break;
-        case BOUNDNAME::PORTAL:
-            resolvePortalCollision(bound);
+        case BOUNDNAME::PORTAL_N:
+        case BOUNDNAME::PORTAL_P:
+        case BOUNDNAME::PORTAL_GN:
+        case BOUNDNAME::PORTAL_GR:
+            resolvePortalCollision(static_cast<const BoxBound&>(bound));
             break;
     }    
 }
@@ -221,17 +252,47 @@ void Player::resolveSpikeCollision(const Bound& bound)
     this->die();
 }
 
-void Player::resolvePortalCollision(const Bound& bound)
+void Player::resolvePortalCollision(const BoxBound& bound)
 {
+    if(fabs(this->getTopLeftPosition().x-bound.getLeft())<CONSTANTS::TILE_WIDTH/2)
+    {
+        // do nothing. Use Portal after passing through half of it.
+        return ;
+    }
+
+    switch(bound.getBoundName())
+    {
+        case BOUNDNAME::PORTAL_N:
+            if(this->m_pPlayingState->getGameMode() != GAMEMODE::NORMAL)
+                this->m_pPlayingState->setNextFrameAction(NEXTFRAMEACTION::NORMAL);
+            break;
+        case BOUNDNAME::PORTAL_P:
+            if(this->m_pPlayingState->getGameMode() != GAMEMODE::PLANE)
+                this->m_pPlayingState->setNextFrameAction(NEXTFRAMEACTION::PLANE);
+            break;
+        case BOUNDNAME::PORTAL_GN:
+            if(this->gravity_state != GRAVITY_STATE::NORMAL)
+                this->flipGravity();
+            break;
+        case BOUNDNAME::PORTAL_GR:
+            if(this->gravity_state != GRAVITY_STATE::FLIPPED)
+                this->flipGravity();
+            break;
+        default:
+            break;
+    }
 
 }
 void Player::die()
 {
-    std::cout<<"Game over!! Score: "<<this->score<<std::endl;
-    score = 0;
+    //std::cout<<"Game over!! Score: "<<this->score<<std::endl;
+    //score = 0;
     this->resetVelocityY();
     this->setTopLeftPosition(CONSTANTS::SPAWNPOINT_X, CONSTANTS::SPAWNPOINT_Y);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    this->m_pPlayingState->displayGameEnd();
+    if(this->m_pPlayingState->getGameMode()!=GAMEMODE::NORMAL)
+    this->m_pPlayingState->setNextFrameAction(NEXTFRAMEACTION::NORMAL);
     this->m_pPlayingState->getCamera().reset();
 }
 
@@ -267,6 +328,9 @@ void Player::handleEvent(sf::Event ev)
                     break;
                 case sf::Keyboard::Up:
                     upArrowHeld = false;
+                    break;
+                case sf::Keyboard::F:
+                    this->flipGravity();
                     break;        
                 default:
                     break;
@@ -306,7 +370,7 @@ void Player::handleEvent(sf::Event ev)
  */
 void Player::update(sf::Time elapsedTime)
 {
-    this->score+=elapsedTime.asMilliseconds();
+    //this->score+=elapsedTime.asMilliseconds();
     this->updateMovement(elapsedTime);
     this->resolveGroundCollision();
 	for(auto& tile: m_pPlayingState->getCurrentLevel().getTileMap()){

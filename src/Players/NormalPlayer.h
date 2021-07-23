@@ -9,7 +9,7 @@ class NormalPlayer : public Player
 {
 private:
 	// float timeAbove;
-	bool onGround;
+	bool onSurface;
 
 	bool resolveGroundCollision() override;
 
@@ -23,7 +23,7 @@ public:
 	virtual ~NormalPlayer();
 
 	//Modifiers
-	void setOnGround(bool _onGround = true);
+	void setOnSurface(bool _onSurface = true);
     void resetNearestOrientation();
 
 	//Functions

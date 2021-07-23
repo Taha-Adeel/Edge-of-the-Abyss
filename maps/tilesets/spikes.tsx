@@ -19,7 +19,7 @@
  <tile id="2">
   <objectgroup draworder="index" id="2">
    <object id="1" name="Spike" type="TriangleBound" x="10.5" y="42">
-    <polygon points="0,0 21,0 10.5,-21"/>
+    <polygon points="0,0 21,0 10,-21"/>
    </object>
   </objectgroup>
  </tile>

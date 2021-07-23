@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "../Util/Constants.h"
 #include "../Util/BoxBound.h"
+#include "../Util/TriangleBound.h"
 #include "../Util/tinyxml2.h"
 
 /**
@@ -229,8 +230,16 @@ void Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 			bound_name = BOUNDNAME::TILE;
 		else if(name == "Spike")
 			bound_name = BOUNDNAME::SPIKE;
+		else if(name == "Portal_N")
+			bound_name = BOUNDNAME::PORTAL_N;
+		else if(name == "Portal_P")
+			bound_name = BOUNDNAME::PORTAL_P;
+		else if(name == "Portal_GN")
+			bound_name = BOUNDNAME::PORTAL_GN;
+		else if(name == "Portal_GR")
+			bound_name = BOUNDNAME::PORTAL_GR;
 		else
-			throw std::runtime_error("Invalid bounds name");
+			throw std::runtime_error("Invalid bounds name: " + name);
 
 		std::string type = pTileBound->Attribute("type");
 		if(type == "BoxBound"){
@@ -243,10 +252,18 @@ void Level::loadTileSet(tinyxml2::XMLElement* pTileset){
 				(std::make_unique<BoxBound>(sf::Vector2f(x,y), width, height, bound_name));
 		}
 		else if(type == "TriangleBound"){
-			std::cout << "Triangle bounds not implemented yet" << std::endl;
+			int x, y;
+			pTileBound->QueryIntAttribute("x", &x);
+			pTileBound->QueryIntAttribute("y", &y);
+			XMLElement* pPolygon = pTileBound->FirstChildElement("polygon");
+			auto pts = parse_csv_data_to_ints(pPolygon->Attribute("points"));
+			assert(pts.size()==6);
+			m_tilesets.back().tile_bounds.emplace_back(std::make_unique<TriangleBound>
+				(sf::Vector2f(0,0), sf::Vector2f(x+pts[0], y+pts[1])
+				,sf::Vector2f(x+pts[2], y+pts[3]), sf::Vector2f(x+pts[4], y+pts[5]), bound_name));
 		}
 		else
-			throw std::runtime_error("Invalid bound type");
+			throw std::runtime_error("Invalid bound type: " + type);
 	}
 }
 
@@ -295,9 +312,9 @@ void Level::loadTile(long long int tile_data, int tile_counter){
 	}
 	
 	//Get the position of center of the tile in the level
-	int xx = 0;
+	int xx = 1000;
 	int yy = 0;
-	xx += getTileWidth() * (tile_counter % getMapWidth()) + 1000;
+	xx += getTileWidth() * (tile_counter % getMapWidth());
 	yy += getTileHeight() * (tile_counter / getMapWidth());
 	
 	int y_offset = getMapSize().y - CONSTANTS::GROUNDHEIGHT;

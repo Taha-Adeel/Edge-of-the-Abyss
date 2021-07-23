@@ -33,6 +33,7 @@ private:
 
 	//private member functions
 	void loadTileBounds();
+	std::vector<sf::Vector2f> transformPolygon(std::vector<sf::Vector2f> untransformed_cords);
 };
 
 #endif
