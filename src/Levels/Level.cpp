@@ -18,7 +18,7 @@
  */
 Level::Level(std::string mapName, PlayingState* context):
 	m_pPlayingState(context),
-	m_bg("bg01-hd", CONSTANTS::BG_COLOR, context),
+	m_bg("bg02-hd", CONSTANTS::BG_COLOR, context),
 	m_ground("ground01", CONSTANTS::GROUND_BG_COLOR, context),
 	m_mapName(mapName),
 	m_currentLevel(std::find(CONSTANTS::LEVELS.begin(), CONSTANTS::LEVELS.end(), m_mapName)
