@@ -5,6 +5,12 @@
 #include "BoxBound.h"
 #include <vector>
 
+/**
+ * @brief Class for bounds for spikes
+ * 
+ * Provides collision detection between a boxBound and TriangleBound
+ * 
+ */
 class TriangleBound: public Bound{
 private:
 	sf::Vector2f m_base_pt_1;/**<Co-ordinates of base corner wrt the top left corner of the 42x42 tile it is in*/

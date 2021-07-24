@@ -1,0 +1,13 @@
+<map id="ScoreKeeper" name="ScoreKeeper">
+<area shape="rect" id="node1" title=" " alt="" coords="287,171,389,197"/>
+<area shape="rect" id="node2" href="$classPlayingState.html" title="Main game play state." alt="" coords="354,260,458,287"/>
+<area shape="rect" id="node7" href="$classCamera.html" title="Camera class is wrapper for sf::view." alt="" coords="49,349,123,376"/>
+<area shape="rect" id="node9" href="$classLevel.html" title="Defines the level to be played." alt="" coords="499,439,556,465"/>
+<area shape="rect" id="node10" href="$classGround.html" title="Draws an &quot;infinite&quot; Ground at CONSTANTS::GROUNDHEIGHT." alt="" coords="569,349,638,376"/>
+<area shape="rect" id="node11" href="$classBackground.html" title="Creates an &quot;infinite&quot; parallax background." alt="" coords="662,349,761,376"/>
+<area shape="rect" id="node3" href="$classStateBase.html" title="Defines an interface through which Game class interacts with current state." alt="" coords="515,171,603,197"/>
+<area shape="rect" id="node4" href="$classGame.html" title="Main game class." alt="" coords="529,81,590,108"/>
+<area shape="rect" id="node5" href="$structNonCopyable.html" title="Utility class. Inheriting from it deletes the copy constructor and copy assignment." alt="" coords="439,5,549,32"/>
+<area shape="rect" id="node6" href="$structNonMovable.html" title="Utility class. Inheriting from it deletes the move constructor and move assignment." alt="" coords="573,5,677,32"/>
+<area shape="rect" id="node8" title=" " alt="" coords="5,260,79,287"/>
+</map>

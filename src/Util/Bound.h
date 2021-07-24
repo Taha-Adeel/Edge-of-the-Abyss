@@ -6,6 +6,12 @@
 enum class BOUNDTYPE {BOX, TRIANGLE};
 enum class BOUNDNAME {TILE, SPIKE, PORTAL_N, PORTAL_P, PORTAL_GN, PORTAL_GR};// PORTAL_N = portal to normal mode
 
+/**
+ * @brief Base class for boxBounds and TriangleBounds.
+ * 
+ * Provides interface to check for collisions betweeen bounds
+ * 
+ */
 class Bound : public sf::Transformable
 {
 protected:

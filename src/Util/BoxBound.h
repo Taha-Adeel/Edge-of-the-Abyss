@@ -5,6 +5,13 @@
 
 enum class SIDE{TOP, LEFT, RIGHT, BOTTOM, NONE};
 SIDE getOppositeSide(SIDE side);
+
+/**
+ * @brief Class for rectangular bounds.
+ * 
+ * Provides collision detection between two boxBounds, and the side they are colliding on.
+ * 
+ */
 class BoxBound : public Bound
 {
     float height;

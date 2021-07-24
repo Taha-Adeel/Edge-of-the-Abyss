@@ -13,7 +13,7 @@
  */
 Ground::Ground(std::string name, sf::Color ground_bg_color, PlayingState* context):
 	m_pPlayingState(context),
-	m_ground_texture("grounds/"+name),
+	m_ground_texture(name),
 	m_ground_color(ground_bg_color)
 {
 	init_ground();

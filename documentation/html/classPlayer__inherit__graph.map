@@ -1,0 +1,5 @@
+<map id="Player" name="Player">
+<area shape="rect" id="node1" title="Defines an interface for Player classes. Player class manages the physics." alt="" coords="93,5,156,32"/>
+<area shape="rect" id="node2" href="$classNormalPlayer.html" title="Player class for the normal game mode." alt="" coords="5,80,116,107"/>
+<area shape="rect" id="node3" href="$classPlanePlayer.html" title="Player class for the plane game mode." alt="" coords="141,80,239,107"/>
+</map>

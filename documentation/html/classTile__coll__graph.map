@@ -1,0 +1,6 @@
+<map id="Tile" name="Tile">
+<area shape="rect" id="node1" title="Defines the elements of the tile map(Level)" alt="" coords="67,171,113,197"/>
+<area shape="rect" id="node2" href="$classSprite.html" title="class Sprite is a wrapper class for sf::sprite" alt="" coords="15,81,75,108"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,84,32"/>
+<area shape="rect" id="node4" href="$classTileSet.html" title="Container for the tilesets obtained on parsing our Level files(*.tmx files)" alt="" coords="103,81,170,108"/>
+</map>

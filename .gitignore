@@ -38,7 +38,7 @@
 build
 
 #Documentation
-documentation/html
+# documentation/html
 
 #savefile
 ./scores.txt
