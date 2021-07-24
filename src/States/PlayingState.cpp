@@ -85,6 +85,10 @@ void PlayingState::switchGameMode()
  */
 void PlayingState::handleEvent(sf::Event& ev){
 	//Event handeling to change state can be done here.
+	if(ev.type == sf::Event::KeyPressed && ev.key.code == sf::Keyboard::N)
+	{
+		this->goToNextLevel();
+	}
 	m_player->handleEvent(ev);
 }
 
