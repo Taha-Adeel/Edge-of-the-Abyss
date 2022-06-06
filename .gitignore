@@ -41,4 +41,4 @@ build
 # documentation/html
 
 #savefile
-./scores.txt
+scores.txt

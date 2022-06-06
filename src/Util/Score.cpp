@@ -15,7 +15,7 @@ ScoreKeeper::ScoreKeeper(PlayingState* context):pointerPlayingState(context), fo
     if (fio.peek() == std::ifstream::traits_type::eof() )
     {
         // Empty File
-        std::cout<<"Creating score file"<<std::endl;
+        // std::cout<<"Creating score file"<<std::endl;
         highScore = 0.f;
     } 
     else fio>>highScore;
@@ -67,7 +67,7 @@ void ScoreKeeper::updateHighScore()
         fio.close();
         highScore = currentScore;
     }
-    std::cout<<"Game over. Score: "<<currentScore<<" , High Score: "<<highScore<<std::endl;
+    std::cout<<"Game over. Score: "<<convertSecondsToScore(currentScore)<<" , High Score: "<<convertSecondsToScore(highScore)<<std::endl;
     currentScore = 0.f;
 }
 /**
