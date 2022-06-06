@@ -1,12 +1,9 @@
-#SFMLDIR = /usr/include/SFML
-#INCLUDEDIR = $(SFMLDIR)
-#LIBDIR = $(SFMLDIR)
 CC = g++
-CFLAGS = -g -std=c++17 -Wall -Werror -pedantic -pedantic-errors -fsanitize=address #-I $(INCLUDEDIR)
-LFLAGS = -fsanitize=address -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+CFLAGS = -std=c++17
+LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # Final executable
-EXE = Edge_of_abyss
+EXE = Edge_of_the_Abyss
 # Put all auto generated files to this build dir.
 BUILD_DIR = ./build
 
@@ -19,16 +16,21 @@ OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 # Gcc/Clang will create these .d files containing dependencies.
 DEPS = $(OBJS:%.o=%.d)
 
-.PHONY : clean all run documentation
+.PHONY : clean all run run_debug documentation debug release
 
 # Default target
-all : $(EXE)
+all : release
 
-$(EXE) : $(BUILD_DIR)/$(EXE)
+release : CFLAGS +=-O3
+release : $(EXE)
 
-# Actual target of the executable - depends on all .o files.
+debug : CFLAGS += -g -Wall -Werror -pedantic -pedantic-errors -fsanitize=address
+debug : LFLAGS += -fsanitize=address
+debug : $(EXE)
+
+# Depends on all .o files.
 # Create build directories - same structure as sources and link all the object files.
-$(BUILD_DIR)/$(EXE) : $(OBJS)
+$(EXE) : $(OBJS)
 	mkdir -p $(@D)
 	$(CC) -o $@ $^ $(LFLAGS)
 
@@ -45,8 +47,11 @@ $(BUILD_DIR)/%.o : %.cpp
 	$(CC) -o $@ -MMD -c $< $(CFLAGS)
 
 # Runs the executable after building it.
-run : all
-	$(BUILD_DIR)/$(EXE)
+run : release
+	./$(EXE)
+
+run_debug : debug
+	./$(EXE)
 
 # Creates and opens the doxygen documentation
 documentation :
@@ -55,4 +60,4 @@ documentation :
 
 # This should remove all generated files.
 clean :
-	-rm $(BUILD_DIR)/$(EXE) $(OBJS) $(DEPS)
+	-rm -rf $(BUILD_DIR) *.d *.o ./scores.txt ./$(EXE)
