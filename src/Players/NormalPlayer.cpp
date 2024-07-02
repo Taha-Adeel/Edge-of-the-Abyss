@@ -46,21 +46,21 @@ void NormalPlayer::initPhysics()
  */
 void NormalPlayer::setOnSurface(bool _onSurface)
 {
-    // this->onSurface = _onSurface;
+    this->onSurface = _onSurface;
 }
 /**
  * @brief Sets the player sprite orientation to the nearest 90 degree angle so that it is touching the ground
  * 
  */
 void NormalPlayer::resetNearestOrientation()
-// {
-//    const float angle = this->getRotation(); // get the angle between 0 and 360
-//    if(angle>=0&&angle<=45)this->setRotation(0.f);
-//    else if(angle<=135) this->setRotation(90.f);
-//    else if(angle<=225) this->setRotation(180.f);
-//    else if(angle<=315) this->setRotation(270.f);
-//    else this->setRotation(0.f);
-// }
+{
+   const float angle = this->getRotation(); // get the angle between 0 and 360
+   if(angle>=0&&angle<=45)this->setRotation(0.f);
+   else if(angle<=135) this->setRotation(90.f);
+   else if(angle<=225) this->setRotation(180.f);
+   else if(angle<=315) this->setRotation(270.f);
+   else this->setRotation(0.f);
+}
 
 /**
  * @brief Overrides base class method to set onGround to true if its colliding with the ground.
@@ -121,7 +121,7 @@ void NormalPlayer::updateRotation(sf::Time elapsedTime) // overriding
 void NormalPlayer::updateVelocity(sf::Time elapsedTime)
 {
     // Update velocity due to player input
-    if(this->keyHeld){
+    if(this->keyHeld and this->onSurface){
         this->velocity.y = CONSTANTS::PLAYER_JUMP_BOOST*gravity_state;
         onSurface = false;
     }
