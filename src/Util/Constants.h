@@ -11,7 +11,7 @@ namespace CONSTANTS{
 	constexpr unsigned int WINDOW_HEIGHT = 720;
 	const std::string WINDOW_TITLE = "Edge of the Abyss";
 
-	constexpr float GAME_SPEED = 1.f;
+	constexpr float GAME_SPEED = 1.0f;
 
 	const std::vector<std::string> LEVELS{"Level-1", "Level-2", "Level-3", "Level-4"};//, "gamemap"};
 	const sf::Color BG_COLOR = sf::Color(121, 25, 255);
@@ -19,7 +19,7 @@ namespace CONSTANTS{
 	const sf::Color GROUND_BG_COLOR = sf::Color(65, 0, 156);
 	constexpr float GROUNDHEIGHT = 546.f;
 
-	constexpr float GRAVITY = 1244.f * (GAME_SPEED * GAME_SPEED);
+	constexpr float GRAVITY = 1224.f * (GAME_SPEED * GAME_SPEED);
 
 	constexpr int DEFAULT_PLAYER_SPRITE_INDEX = 39;
 	constexpr float PLAYER_WIDTH = 42.f;

@@ -44,9 +44,9 @@ void PlanePlayer::resolveTileCollision(const BoxBound& tile){
         resetVelocityY();
         this->snapToSide(tile, collidingSide);
     }
-    else{
-        this->die();
-    }
+    // else{
+    //     this->die();
+    // }
 }
 
 void PlanePlayer::updateRotation(sf::Time elapsedTime)
